@@ -1,0 +1,27 @@
+{
+  "packages": [
+    "@sketchpixy/rubix",
+    "@sketchpixy/rubix/lib/L20n",
+    "@sketchpixy/rubix/lib/node/router",
+    "classnames",
+    "history",
+    "immutable",
+    "isomorphic-fetch",
+    "lodash",
+    "react",
+    "react-dom",
+    "react-modal",
+    "react-redux",
+    "react-router",
+    "react-router-redux",
+    "redux",
+    "redux-actions",
+    "redux-devtools",
+    "redux-devtools-dock-monitor",
+    "redux-devtools-log-monitor",
+    "redux-form",
+    "redux-promise",
+    "redux-thunk",
+    "url"
+  ]
+}

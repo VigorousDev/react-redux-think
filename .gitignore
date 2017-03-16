@@ -1,0 +1,16 @@
+*~
+*.swp
+*.swo
+.DS_Store
+*.log
+node_modules
+build
+*.node
+coverage
+*.orig
+.idea
+sandbox
+dist/
+rubix_assets/
+test/out-fixtures/*
+test/watch-*.txt
