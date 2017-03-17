@@ -89,13 +89,13 @@ class SettingsMenu extends React.Component {
 
   render() {
     const cogIcon = (
-      <Icon bundle='fontello' glyph='cog-7' style={{position: 'relative', top: 2}} />
+      <Icon bundle='fontello' glyph='cog-7' />
     );
 
     let { fluidLayout } = this.state;
 
     return (
-      <NavDropdownHover noCaret eventKey={4} title={cogIcon} id='settings-menu' className='header-menu small-font collapse-left' onSelect={::this.handleViewportChange}>
+      <NavDropdownHover noCaret eventKey={4} title={cogIcon} id='settings-menu' className='header-menu collapse-left' onSelect={::this.handleViewportChange}>
         <MenuItem eventKey='dimension' header>
           <Entity entity='settingsMenuHeading' defaultValue='dimension' />
         </MenuItem>
@@ -223,7 +223,7 @@ class HeaderNavigation extends React.Component {
           <DirectNavItem glyph='mail-3' eventKey={5} path={::this.getPath('mailbox/inbox')} />
           <NotificationsMenu />
           <NavItem divider />
-          <DirectNavItem glyph='user-female' eventKey={3} path={::this.getPath('social')} className='small-font' style={{position: 'relative', top: 2}} />
+          <DirectNavItem glyph='user-female' eventKey={3} path={::this.getPath('social')}/>
           <SettingsMenu />
         </Nav>
       </Nav>

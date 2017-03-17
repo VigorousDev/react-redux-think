@@ -84,12 +84,11 @@ import Lock from './rubix/routes/Lock';
  */
 const routes = (
   <Route>
-    <Route path='dashboard' component={Dashboard} />
+    <Route path='dashboard' component={Social} />
     <Route path='mailbox/inbox' component={Inbox} />
     <Route path='mailbox/mail' component={Mail} />
     <Route path='mailbox/compose' component={Compose} />
     <Route path='gallery' component={Gallery} />
-    <Route path='social' component={Social} />
     <Route path='blog/posts' component={Posts} />
     <Route path='blog/post' component={Post} />
     <Route path='panels' component={Panels} />
@@ -140,6 +139,7 @@ const combinedRoutes = (
 export default function({dispatch, getState}) {
   return (    
     <Route path='/' component={Root}>
+      <IndexRoute component={Social}/>
 	    <Route path='/ltr'>
 	      {combinedRoutes}
 	    </Route>
