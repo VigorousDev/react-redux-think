@@ -129,24 +129,10 @@ const routes = (
   </Route>
 );
 
-/**
- * No Sidebar, Header or Footer. Only the Body is rendered.
- */
-const basicRoutes = (
-  <Route>
-    <Route path='lock' component={Lock} />
-    <Route path='login' component={Login} />
-    <Route path='signup' component={Signup} />
-  </Route>
-);
-
 const combinedRoutes = (
   <Route>
     <Route>
       {routes}
-    </Route>
-    <Route>
-      {basicRoutes}
     </Route>
   </Route>
 );
