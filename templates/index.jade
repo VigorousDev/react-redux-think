@@ -1,19 +1,40 @@
-doctype html
+extends ./layout.jade
 
-<!--[if IE 9]> <html lang="en" class="lte-ie9"> <![endif]-->
-<!--[if gt IE 9]> <html lang="en"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en" class="purple">
-<!--<![endif]-->
-head
-  meta(charset="utf-8")
-  meta(http-equiv="X-UA-Compatible", content="IE=edge")
-  title ThinkCrew-Tool React Version
-  meta(content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", name="viewport")    
-  
-  script(type="text/javascript", src="ASSET{bower_components/PACE/pace.min.js}")
-  link(rel="stylesheet", href="ASSET{css/pace.css}")
+//- optional (PACE loader)
+block pace-loader
+  link(rel='stylesheet', href='/css/pace.css')
+  script(type='text/javascript', src='/bower_components/PACE/pace.min.js')
 
+block header
+  link(rel="stylesheet", href="ASSET{main.css,min}")  
+
+block content
+  div#app-preloader
+  div#app-container
+  //- blueimp-gallery snippet (optional)
+  div#blueimp-gallery.blueimp-gallery.blueimp-gallery-controls
+    div.slides
+    h3.title
+    p.description
+    a.prev ‹
+    a.next ›
+    a.close ×
+    a.play-pause
+    ol.indicator
+
+block stylesheets
+  link(rel='stylesheet', href='/bower_components/codemirror/theme/ambiance.css')
+
+block thinkcrew
+  link(rel="stylesheet", href="ASSET{assets/styles/style.css,min}")
+  script(type="text/javascript", src="ASSET{assets/scripts/vendors.js,min}")
+  <!--[if lt IE 10]>
+  <script src="ASSET{assets/extras/jquery.xdr-transport.js}"></script>
+  <script src="ASSET{assets/extras/jquery.iframe-transport.js}"></script>
+  <![endif]-->
+  script(type="text/javascript", src="ASSET{assets/scripts/app.js,min}")
+
+block plugins
   script(type="text/javascript", src="//maps.google.com/maps/api/js?key=AIzaSyC17i__cWhjxmtwJJjgLA8rmXWqRI5baJI")
   script(type="text/javascript", src="ASSET{js/jquery.js}")
   script(type="text/javascript", src="ASSET{js/modernizr.js}")  
@@ -56,35 +77,9 @@ head
   script(type="text/javascript", src="ASSET{bower_components/x-editable/dist/inputs-ext/typeaheadjs/typeaheadjs.js}")
   script(type="text/javascript", src="ASSET{bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js}")
   script(type="text/javascript", src="ASSET{bower_components/datatables/media/js/jquery.dataTables.js}")
-  
+
   script(type="text/javascript", src="ASSET{js/vendor/fullcalendar/fullcalendar.js}")
   script(type="text/javascript", src="ASSET{js/vendor/datatables/responsive.js}")
   script(type="text/javascript", src="ASSET{js/vendor/jcrop/color.js}")
   script(type="text/javascript", src="ASSET{js/vendor/jcrop/jcrop.js}")
   script(type="text/javascript", src="ASSET{js/rubix.js}")
-
-  link(rel='stylesheet', href='ASSET{bower_components/codemirror/theme/ambiance.css}')
-  link(rel="stylesheet", href="ASSET{main.css,min}")
-
-  link(rel="shortcut icon", href="ASSET{assets/images/favicon.ico}")  
-  link(rel="stylesheet", href="ASSET{assets/styles/style.css,min}")
-body
-  <div id='pace-loader' class='pace-big'></div>
-  <div id='app-preloader'></div>
-  div#blueimp-gallery.blueimp-gallery.blueimp-gallery-controls
-    div.slides
-    h3.title
-    p.description
-    a.prev ‹
-    a.next ›
-    a.close ×
-    a.play-pause
-    ol.indicator
-  #app
-  script(type="text/javascript", src="ASSET{assets/scripts/vendors.js,min}")
-
-  <!--[if lt IE 10]>
-  <script src="ASSET{assets/extras/jquery.xdr-transport.js}"></script>
-  <script src="ASSET{assets/extras/jquery.iframe-transport.js}"></script>
-  <![endif]-->
-  script(type="text/javascript", src="ASSET{assets/scripts/app.js,min}")
