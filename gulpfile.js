@@ -50,9 +50,16 @@ var tasks = gtasks.buildSpec({
     src: path.join('assets', 'images'),
     pattern: path.join('**', '*'),
   },
-  styles: {
-    src: path.join('assets', 'styles'),
+  styles_less: {
+    src: path.join('assets', 'styles', 'less'),
     pattern: 'style.less',
+    dest: 'dist',
+    watch: path.join('**', '*'),
+  },
+  styles_sass: {
+    src: path.join('assets', 'styles', 'sass'),
+    pattern: 'rubix.scss',
+    dest: 'dist',
     watch: path.join('**', '*'),
   },
   lint: {
@@ -131,8 +138,25 @@ gulp.task('images', function() {
     .pipe(hasher())
 })
 
-gulp.task('styles', ['images'], function() {
-  return gulp.src(tasks.styles.src)
+gulp.task('styles_sass', function() {
+  return gulp.src(tasks.styles_sass.src)
+    .pipe(sass({
+      includePaths: [
+        path.join(__dirname, 'node_modules')
+      ]
+    }))
+    .pipe(autoprefixer())
+    .pipe(buster())
+    .pipe(gulp.dest(tasks.styles_sass.dest))
+    .pipe(hasher())
+    .pipe(minifyCss({restructuring: false}))
+    .pipe(rename({extname: '.min.css'}))
+    .pipe(gulp.dest(tasks.styles_sass.dest))
+    .pipe(hasher())
+})
+
+gulp.task('styles_less', ['images'], function() {
+  return gulp.src(tasks.styles_less.src)
     .pipe(less({
       paths: [
         path.join(__dirname, 'node_modules')
@@ -140,11 +164,11 @@ gulp.task('styles', ['images'], function() {
     }))
     .pipe(autoprefixer())
     .pipe(buster())
-    .pipe(gulp.dest(tasks.styles.dest))
+    .pipe(gulp.dest(tasks.styles_less.dest))
     .pipe(hasher())
     .pipe(minifyCss({restructuring: false}))
     .pipe(rename({extname: '.min.css'}))
-    .pipe(gulp.dest(tasks.styles.dest))
+    .pipe(gulp.dest(tasks.styles_less.dest))
     .pipe(hasher())
 })
 
@@ -200,7 +224,8 @@ gulp.task('default', function(done) {
   runSequence(
     [
       'images',
-      'styles',
+      'styles_sass',
+      'styles_less',
       'vendors',
       'lint',
       'scripts',
