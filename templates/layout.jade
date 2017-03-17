@@ -32,10 +32,10 @@ html.default(dir=dir)
     meta(name='msapplication-TileImage', content='/favicons/mstile-144x144.png')
 
     block pace-loader
+  body.pace-big
+    script(id='preloadedData', type='application/json')!=data
     block header
     block plugins
-  body.pace-big(data-version='4.1.0')
-    script(id='preloadedData', type='application/json')!=data
     block content
     block stylesheets
     block thinkcrew

@@ -152,12 +152,9 @@ const combinedRoutes = (
 );
 
 export default function({dispatch, getState}) {
-  return (
+  return (    
     <Route path='/' component={Root}>
 	    <Route path='/ltr'>
-	      {combinedRoutes}
-	    </Route>
-	    <Route path='/rtl'>
 	      {combinedRoutes}
 	    </Route>
 	 </Route>
