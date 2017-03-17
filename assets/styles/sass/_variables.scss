@@ -1,32 +1,38 @@
-$img-path: '/imgs/common';
+$img-path: "/imgs/common";
 $bootstrap-sass-asset-helper: true;
-$icon-font-path: '/fonts/glyphicon/'; // only for glyphicon
+$icon-font-path: "/fonts/glyphicon/";
+
+// only for glyphicon
 $grid-gutter-width: 50px;
 
 $font-size-base: 14px;
-$line-height-base: 1.785714289; // 25/14
-$line-height-computed: floor(($font-size-base * $line-height-base)); // ~25px
+$line-height-base: 1.78571;
+
+// 25/14
+$line-height-computed: floor($font-size-base * $line-height-base);
+
+// ~25px
 
 $padding-base-vertical: 6px;
-$input-height-base: ($line-height-computed + ($padding-base-vertical * 2) + 1);
+$input-height-base: $line-height-computed + $padding-base-vertical * 2 + 1;
 
-$nav-link-padding: 4px ($line-height-computed);
-$panel-heading-padding: ($line-height-computed / 2) ($line-height-computed);
+$nav-link-padding: 4px $line-height-computed;
+$panel-heading-padding: ($line-height-computed / 2) $line-height-computed;
 $panel-body-padding: $line-height-computed;
 
-$navbar-height: 75px;
+$navbar-height: 45px;
 $sidebar-controls-visibility: visible;
 
-$font-family-sans-serif:  Lato, sans-serif;
+$font-family-sans-serif: Lato, sans-serif;
 $headings-font-family: Lato, sans-serif;
 
 $screen-sm-min: 990px;
 $screen-md-min: 1152px;
 $screen-lg-min: 1366px;
 
-$screen-xs-max: ($screen-sm-min - 1);
-$screen-sm-max: ($screen-md-min - 1);
-$screen-md-max: ($screen-lg-min - 1);
+$screen-xs-max: $screen-sm-min - 1;
+$screen-sm-max: $screen-md-min - 1;
+$screen-md-max: $screen-lg-min - 1;
 
 $primary-color: #89949B;
 $brand-primary: #428bca;
