@@ -84,7 +84,7 @@ import Lock from './rubix/routes/Lock';
  */
 const routes = (
   <Route>
-    <Route path='dashboard' component={Social} />
+    <Route path='dashboard' component={Dashboard} />
     <Route path='mailbox/inbox' component={Inbox} />
     <Route path='mailbox/mail' component={Mail} />
     <Route path='mailbox/compose' component={Compose} />
@@ -137,9 +137,26 @@ const combinedRoutes = (
 );
 
 export default function({dispatch, getState}) {
+  const requireLogin = (nextState, replace, cb) => {
+    const check = () => {
+      // const {session} = getState()
+      // if (!session.has('user')) {
+      //   replace({pathname: '/signin', query: {next: '/events'}})
+      // }
+      replace({pathname: '/ltr/dashboard'})
+      cb()
+    }
+    check()
+    // const session = getState().session
+    // if (session.get('initialized')) {
+    //   check()
+    // } else {
+    //   dispatch(FETCH_SESSION()).then(check, check)
+    // }
+  }
   return (    
     <Route path='/' component={Root}>
-      <IndexRoute component={Social}/>
+      <IndexRoute component={Dashboard} onEnter={requireLogin}/>
 	    <Route path='/ltr'>
 	      {combinedRoutes}
 	    </Route>
