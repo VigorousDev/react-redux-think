@@ -35,7 +35,7 @@ class ApplicationSidebar extends React.Component {
               <div className='sidebar-nav-container'>
                 <SidebarNav style={{marginBottom: 0}} ref={(c) => this._nav = c}>
                   <SidebarNavItem glyph='icon-fontello-home' name='Home' href={::this.getPath('dashboard')} />
-                  <SidebarNavItem glyph='icon-pixelvicon-film' name={<span>Project</span>}>
+                  <SidebarNavItem glyph='icon-flatline-film' name={<span>Project</span>}>
                     <SidebarNav>
                       <SidebarNavItem name='Projects' href={::this.getPath('projects')} />
                       <SidebarNavItem name='Users' href={::this.getPath('users')} />
@@ -80,7 +80,7 @@ export default class SidebarContainer extends React.Component {
         </div>
         <SidebarControls>
           <SidebarControlBtn bundle='fontello' glyph='docs' sidebar={0} />
-          <SidebarControlBtn bundle='fontello' glyph='chat-1' sidebar={1} />
+          <SidebarControlBtn bundle='fontello' glyph='users-1' sidebar={1} />
           <SidebarControlBtn bundle='fontello' glyph='bell-5' sidebar={2} />
         </SidebarControls>
         <div id='sidebar-container'>
