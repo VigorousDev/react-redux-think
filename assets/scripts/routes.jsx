@@ -23,61 +23,64 @@ import Inbox from './rubix/routes/Inbox';
 import Mail from './rubix/routes/Mail';
 import Compose from './rubix/routes/Compose';
 
-import Gallery from './rubix/routes/Gallery';
+import Projects from './rubix/routes/Projects';
 
 
-import Posts from './rubix/routes/Posts';
-import Post from './rubix/routes/Post';
+import Gallery from './rubix/routes/backup/Gallery';
 
-import Panels from './rubix/routes/Panels';
 
-import LineSeries from './rubix/routes/LineSeries';
-import AreaSeries from './rubix/routes/AreaSeries';
-import BarColSeries from './rubix/routes/BarColSeries';
-import MixedSeries from './rubix/routes/MixedSeries';
-import PieDonutSeries from './rubix/routes/PieDonutSeries';
+import Posts from './rubix/routes/backup/Posts';
+import Post from './rubix/routes/backup/Post';
 
-import Chartjs from './rubix/routes/Chartjs';
-import C3js from './rubix/routes/C3js';
-import Morrisjs from './rubix/routes/Morrisjs';
+import Panels from './rubix/routes/backup/Panels';
 
-import StaticTimeline from './rubix/routes/StaticTimeline';
-import InteractiveTimeline from './rubix/routes/InteractiveTimeline';
+import LineSeries from './rubix/routes/backup/LineSeries';
+import AreaSeries from './rubix/routes/backup/AreaSeries';
+import BarColSeries from './rubix/routes/backup/BarColSeries';
+import MixedSeries from './rubix/routes/backup/MixedSeries';
+import PieDonutSeries from './rubix/routes/backup/PieDonutSeries';
 
-import Codemirrorjs from './rubix/routes/Codemirrorjs';
-import Maps from './rubix/routes/Maps';
-import Editor from './rubix/routes/Editor';
+import Chartjs from './rubix/routes/backup/Chartjs';
+import C3js from './rubix/routes/backup/C3js';
+import Morrisjs from './rubix/routes/backup/Morrisjs';
 
-import Buttons from './rubix/routes/Buttons';
-import Dropdowns from './rubix/routes/Dropdowns';
-import TabsAndNavs from './rubix/routes/TabsAndNavs';
-import Sliders from './rubix/routes/Sliders';
-import Knobs from './rubix/routes/Knobs';
-import Modals from './rubix/routes/Modals';
-import Messengerjs from './rubix/routes/Messengerjs';
+import StaticTimeline from './rubix/routes/backup/StaticTimeline';
+import InteractiveTimeline from './rubix/routes/backup/InteractiveTimeline';
 
-import Controls from './rubix/routes/Controls';
-import XEditable from './rubix/routes/XEditable';
-import Wizard from './rubix/routes/Wizard';
+import Codemirrorjs from './rubix/routes/backup/Codemirrorjs';
+import Maps from './rubix/routes/backup/Maps';
+import Editor from './rubix/routes/backup/Editor';
 
-import Tables from './rubix/routes/Tables';
-import Datatablesjs from './rubix/routes/Datatablesjs';
-import Tablesawjs from './rubix/routes/Tablesawjs';
+import Buttons from './rubix/routes/backup/Buttons';
+import Dropdowns from './rubix/routes/backup/Dropdowns';
+import TabsAndNavs from './rubix/routes/backup/TabsAndNavs';
+import Sliders from './rubix/routes/backup/Sliders';
+import Knobs from './rubix/routes/backup/Knobs';
+import Modals from './rubix/routes/backup/Modals';
+import Messengerjs from './rubix/routes/backup/Messengerjs';
 
-import Grids from './rubix/routes/Grids';
-import Calendar from './rubix/routes/Calendar';
+import Controls from './rubix/routes/backup/Controls';
+import XEditable from './rubix/routes/backup/XEditable';
+import Wizard from './rubix/routes/backup/Wizard';
 
-import Dropzonejs from './rubix/routes/Dropzonejs';
-import Cropjs from './rubix/routes/Cropjs';
+import Tables from './rubix/routes/backup/Tables';
+import Datatablesjs from './rubix/routes/backup/Datatablesjs';
+import Tablesawjs from './rubix/routes/backup/Tablesawjs';
 
-import Fonts from './rubix/routes/Fonts';
+import Grids from './rubix/routes/backup/Grids';
+import Calendar from './rubix/routes/backup/Calendar';
 
-import Login from './rubix/routes/Login';
-import Signup from './rubix/routes/Signup';
-import Invoice from './rubix/routes/Invoice';
-import Pricing from './rubix/routes/Pricing';
+import Dropzonejs from './rubix/routes/backup/Dropzonejs';
+import Cropjs from './rubix/routes/backup/Cropjs';
 
-import Lock from './rubix/routes/Lock';
+import Fonts from './rubix/routes/backup/Fonts';
+
+import Login from './rubix/routes/backup/Login';
+import Signup from './rubix/routes/backup/Signup';
+import Invoice from './rubix/routes/backup/Invoice';
+import Pricing from './rubix/routes/backup/Pricing';
+
+import Lock from './rubix/routes/backup/Lock';
 
 /**
  * Includes Sidebar, Header and Footer.
@@ -89,6 +92,8 @@ const routes = (
     <Route path='mailbox/inbox' component={Inbox} />
     <Route path='mailbox/mail' component={Mail} />
     <Route path='mailbox/compose' component={Compose} />
+    <Route path='projects' component={Projects} />
+
     <Route path='gallery' component={Gallery} />
     <Route path='blog/posts' component={Posts} />
     <Route path='blog/post' component={Post} />
