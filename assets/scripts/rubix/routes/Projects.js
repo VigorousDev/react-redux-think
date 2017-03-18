@@ -6,6 +6,7 @@ import {
   Row,
   Col,
   Grid,
+  Icon,
   Label,
   Panel,
   Table,
@@ -21,25 +22,38 @@ class DatatableComponent extends React.Component {
         var table = $(ReactDOM.findDOMNode(this.example))
         .DataTable({
             'columnDefs': [{
-                'targets': 0,
-                'searchable': false,
-                'orderable': false,
-                'width': '1%',
-                'className': 'dt-body-center',
-                'render': function (data, type, full, meta){
-                    return '<input type="checkbox">';
+                    'targets': 0,
+                    'searchable': false,
+                    'orderable': false,
+                    'width': '1%',
+                    'className': 'dt-body-center',
+                    'render': function (data, type, full, meta){
+                        return '<input type="checkbox">';
+                    }
+                },
+                {
+                    'className': 'dt-body-center',
+                    'targets': 3,
+                    "type": "num-html",
+                    'searchable': false,
+                    'orderable': false
+                },
+                {
+                    'targets': 5,
+                    'searchable': false,
+                    'orderable': false
                 }
-            }],
+            ],
             'order': [[1, 'asc']],
             'rowCallback': function(row, data, dataIndex){
                 // Get row ID
-                var rowId = data[0];
+                // var rowId = data[0];
 
-                // If row ID is in the list of selected row IDs
-                if($.inArray(rowId, rows_selected) !== -1){
-                    $(row).find('input[type="checkbox"]').prop('checked', true);
-                    $(row).addClass('selected');
-                }
+                // // If row ID is in the list of selected row IDs
+                // if($.inArray(rowId, rows_selected) !== -1){
+                //     $(row).find('input[type="checkbox"]').prop('checked', true);
+                //     $(row).addClass('selected');
+                // }
             }
         });
 
@@ -80,9 +94,9 @@ class DatatableComponent extends React.Component {
         });
 
         // Handle click on table cells with checkboxes
-        $('#example').on('click', 'tbody td, thead th:first-child', function(e){
-            $(this).parent().find('input[type="checkbox"]').trigger('click');
-        });
+        // $('#example').on('click', 'tbody td, thead th:first-child', function(e){
+        //     $(this).parent().find('input[type="checkbox"]').trigger('click');
+        // });
 
         // Handle click on "Select all" control
         $('#example thead input[name="select_all"]').on('click', function(e){
@@ -171,9 +185,9 @@ class DatatableComponent extends React.Component {
                 <td>{index+1}</td>
                 <td><Label className={p.current=='Active' ? 'bg-darkgreen45 fg-white' : 'bg-darkgray25 fg-black'}>{p.current}</Label></td>
                 <td><strong>{p.name}</strong><br/><small>{p.time}</small></td>
-                <td>{p.users} users</td>
+                <td>{p.users} Users</td>
                 <td>
-                    <Row className='fg-white'>
+                    <Row>
                         <Col xs={3} collapseRight>
                             <img src={p.owner.picture} width='30' height='30' />
                         </Col>
@@ -183,7 +197,7 @@ class DatatableComponent extends React.Component {
                     </Row>
                 </td>
                 <td>
-                    
+                    <button type="button"><Icon style={{fontSize: 12}} glyph={'icon-fontello-pencil-1'} />Edit</button>
                 </td>
             </tr>
         )
