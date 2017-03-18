@@ -34,8 +34,7 @@ class DatatableComponent extends React.Component {
                 {
                     'className': 'dt-body-center',
                     'targets':1,
-                    'searchable': false,
-                    'orderable': false
+                    'searchable': false
                 },
                 {
                     'className': 'dt-body-center',
