@@ -24,7 +24,7 @@ export default class Footer extends React.Component {
         <Grid id='footer' className='text-center'>
           <Row>
             <Col xs={12}>
-              <div>© {year} SketchPixy Creative - v{this.state.version}</div>
+              <div>© {year} Think Crew (React) - v{this.state.version}</div>
             </Col>
           </Row>
         </Grid>
