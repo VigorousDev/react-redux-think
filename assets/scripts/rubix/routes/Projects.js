@@ -33,8 +33,13 @@ class DatatableComponent extends React.Component {
                 },
                 {
                     'className': 'dt-body-center',
+                    'targets':1,
+                    'searchable': false,
+                    'orderable': false
+                },
+                {
+                    'className': 'dt-body-center',
                     'targets': 3,
-                    "type": "num-html",
                     'searchable': false,
                     'orderable': false
                 },
