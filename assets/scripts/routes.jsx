@@ -17,6 +17,7 @@ import Footer from './rubix/common/footer';
 import Homepage from './rubix/routes/Homepage';
 
 import Dashboard from './rubix/routes/Dashboard';
+import Social from './rubix/routes/Social';
 
 import Inbox from './rubix/routes/Inbox';
 import Mail from './rubix/routes/Mail';
@@ -24,7 +25,6 @@ import Compose from './rubix/routes/Compose';
 
 import Gallery from './rubix/routes/Gallery';
 
-import Social from './rubix/routes/Social';
 
 import Posts from './rubix/routes/Posts';
 import Post from './rubix/routes/Post';
@@ -85,6 +85,7 @@ import Lock from './rubix/routes/Lock';
 const routes = (
   <Route>
     <Route path='dashboard' component={Dashboard} />
+    <Route path='social' component={Social} />
     <Route path='mailbox/inbox' component={Inbox} />
     <Route path='mailbox/mail' component={Mail} />
     <Route path='mailbox/compose' component={Compose} />

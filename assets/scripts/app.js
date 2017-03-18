@@ -12,11 +12,16 @@ import render from '@sketchpixy/rubix/lib/node/router'
 // import l20n from '@sketchpixy/rubix/lib/L20n'
 
 
-import './preloader'
-
-Pace.once('hide', () => {
-  $('#pace-loader').removeClass('pace-big').addClass('pace-small')
-})
+// import './preloader'
+// Pace.on("done", function(){
+//     console.log('pace is done');
+//     $(document.body).removeClass('pace-small');
+//     Pace.stop();
+// });
+// Pace.stop();
+// Pace.once('hide', () => {
+//   $('#pace-loader').removeClass('pace-big').addClass('pace-small')
+// })
 
 
 

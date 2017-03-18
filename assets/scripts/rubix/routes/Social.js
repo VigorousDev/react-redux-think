@@ -61,7 +61,7 @@ class SocialBanner extends React.Component {
         <div className='social-avatar'>
           <Image src='/imgs/app/avatars/avatar.jpg' height='100' width='100' style={{display: 'block', borderRadius: 100, border: '2px solid #fff', margin: 'auto', marginTop: 50}} />
           <h4 className='fg-white text-center'>Anna Sanchez</h4>
-          <h5 className='fg-white text-center' style={{opacity: 0.8}}>DevOps Engineer, NY</h5>
+          <h5 className='fg-white text-center' style={{opacity: 0.8}}>Asistant Director</h5>
           <hr className='border-black75' style={{borderWidth: 2}}/>
           <div className='text-center'>
             <Button outlined inverse retainBackground active={this.state.followActive} bsStyle='brightblue' onClick={::this.handleFollow}>
