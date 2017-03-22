@@ -204,9 +204,11 @@ class DatatableComponent extends React.Component {
             content: 'djflkd',
             placeholder: projects[index].name,
             callback: (value) => {
-                projects[index].name = value;
-                this.setState({projects: projects});
-                datatable.rows().invalidate().draw();
+                if(value){
+                    projects[index].name = value;
+                    this.setState({projects: projects});
+                    datatable.rows().invalidate().draw();
+                }
             }
         });
     }
