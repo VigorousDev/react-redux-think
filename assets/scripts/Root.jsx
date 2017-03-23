@@ -25,8 +25,7 @@ class Root extends React.Component {
   static contextTypes = {store: React.PropTypes.object.isRequired}
   render() {
     const {navigation} = this.props
-    console.log('navi = ', navigation)
-    
+    // console.log('navi = ', navigation)
     return (
       <MainContainer {...this.props}>
         <Sidebar/>
