@@ -30,16 +30,19 @@ import {
 class Brand extends React.Component {
   render() {
     return (
-      <div className='navbar-control'>
-        <img src={asset('/assets/images/logo.svg')} alt='thinkcrew' width='30' height='30' />
-        <div className='navbar-projects'>
-          <FormControl componentClass="select" placeholder="select">
-            <option value='1'>It's A Wonderful Life</option>
-            <option value='2'>Casablanca</option>
-            <option value='3'>Citizen Kane</option>
-            <option value='4'>The Wizard of Oz</option>
-            <option value='5'>Manage Projects...</option>
-          </FormControl>
+      <div style={{display:'flex'}}>
+        <SidebarBtn visible/>
+        <div className='navbar-control'>        
+          <img src={asset('/assets/images/logo.svg')} alt='thinkcrew' width='30' height='30' />
+          <div className='navbar-projects'>
+            <FormControl componentClass="select" placeholder="select">
+              <option value='1'>It's A Wonderful Life</option>
+              <option value='2'>Casablanca</option>
+              <option value='3'>Citizen Kane</option>
+              <option value='4'>The Wizard of Oz</option>
+              <option value='5'>Manage Projects...</option>
+            </FormControl>
+          </div>
         </div>
       </div>
     );
@@ -247,13 +250,10 @@ export default class Header extends React.Component {
           <Col xs={12}>
             <Navbar fixedTop fluid id='rubix-nav-header'>
               <Row>
-                <Col xs={1} visible='xs'>
-                  <SidebarBtn />
-                </Col>
                 <Col xs={8} sm={4}>
                   <Brand />
                 </Col>
-                <Col xs={3} sm={8} collapseRight className='text-right'>
+                <Col xs={4} sm={8} collapseRight className='text-right'>
                   <HeaderNavigation />
                 </Col>
               </Row>

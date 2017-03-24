@@ -44,7 +44,7 @@ class UsersComponent extends React.Component {
                 name: 'Lionel Mcmillan',
                 email: 'pacheco@manga.com',
                 phone: '(323) 555-1212',
-                photo: '/imgs/app/avatars/avatar1.png'
+                photo: '/imgs/app/avatars/avatar2.png'
             },
             {
                 uid: '104',
@@ -52,7 +52,7 @@ class UsersComponent extends React.Component {
                 name: 'Edan Randall',
                 email: 'rooney@proin.com',
                 phone: '(323) 555-1212',
-                photo: '/imgs/app/avatars/avatar1.png'
+                photo: '/imgs/app/avatars/avatar3.png'
             }
         ];
         this.state = {
@@ -135,7 +135,7 @@ class UsersComponent extends React.Component {
                     </div>
                     <div className='right'>
                         <Button outlined bsStyle='primary' onClick={self.launchModal.bind(self, false, 0)}>
-                            <Icon style={{fontSize: 14}} glyph={'icon-flatline-film'} />
+                            <Icon style={{fontSize: 14}} glyph={'icon-feather-mail'} />
                             Invite More Users
                         </Button>
                     </div>
@@ -159,7 +159,7 @@ export default class Users extends React.Component {
   render() {
     return (
       <Row>
-        <Col xs={12}>
+        <Col sm={8}>
           <PanelContainer controls={false}>
             <Panel>
               <PanelBody>
@@ -168,12 +168,28 @@ export default class Users extends React.Component {
                     <Col xs={12}>
                       <UsersComponent />
                       <br/><br/><br/>
-                    </Col>
+                    </Col>                    
                   </Row>
                 </Grid>
               </PanelBody>
             </Panel>
           </PanelContainer>
+        </Col>
+        <Col sm={4}>
+            <PanelContainer controls={false}>
+                <Panel>
+                <PanelBody>
+                    <Grid>
+                    <Row>
+                        <Col xs={12} style={{height: 500}}>
+                            sdfasdf
+                            
+                        </Col>                    
+                    </Row>
+                    </Grid>
+                </PanelBody>
+                </Panel>
+            </PanelContainer>
         </Col>
       </Row>
     );
