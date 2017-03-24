@@ -30,7 +30,7 @@ import {
 class Brand extends React.Component {
   render() {
     return (
-      <div style={{display:'flex'}}>
+      <div style={{display:'flex', marginLeft:10}}>
         <SidebarBtn visible/>
         <div className='navbar-control'>        
           <img src={asset('/assets/images/logo.svg')} alt='thinkcrew' width='30' height='30' />

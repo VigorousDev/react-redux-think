@@ -18,6 +18,7 @@ import {
   PanelHeader,
   PanelContainer,
 } from '@sketchpixy/rubix';
+import { withRouter } from 'react-router';
 class UsersComponent extends React.Component {  
     constructor(props){
         super(props);        
@@ -37,12 +38,16 @@ class UsersComponent extends React.Component {
         this.props.onUsersChange(users);
     }
 
+    selectUser(user){
+        this.props.onUserClick(user);
+    }
+
     onAfterDeleteRow(rowKeys) {
-        var {users} = this.state;        
-        _.map(rowKeys, function(item){            
+        var {users} = this.state;
+        _.map(rowKeys, function(item){
             _.remove(users, {uid: item});
         });
-        this.updateUsers.bind(this, users);        
+        this.updateUsers.bind(this, users);
     }
 
     launchModal(isEdit, pID) {
@@ -59,7 +64,7 @@ class UsersComponent extends React.Component {
             // Find item index using indexOf+find
             var index = _.indexOf(users, _.find(users, {uid: userID}));
             // Replace item at index using native splice
-            users.splice(index, 1, data);            
+            users.splice(index, 1, data);
         }else{
             users.push(data);
         }
@@ -84,7 +89,7 @@ class UsersComponent extends React.Component {
             return (
                 <div className='owner'>
                     <img className='ownerPicture' src={row.photo}/>
-                    <div className='ownerName'>{row.name}</div>
+                    <div className='ownerName' onClick={self.selectUser.bind(self, row)}>{row.name}</div>
                 </div>
             );
         }
@@ -119,6 +124,73 @@ class UsersComponent extends React.Component {
                     <TableHeaderColumn dataField='status' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_status}>Status</TableHeaderColumn>
                 </BootstrapTable>
                 <div className='space-for-pagination'/>
+            </div>
+        );
+    }
+}
+@withRouter
+class UserComponent extends React.Component {  
+    constructor(props){
+        super(props);        
+        this.state = {
+            user: this.props.user
+        };
+    }
+
+    componentWillReceiveProps(){
+        this.setState({user: this.props.user});
+    }
+
+    sendMessage(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.props.router.push('/ltr/mailbox/compose');
+    }
+    
+    render() {
+        let self = this;
+        var {user} = this.state;        
+        return (
+            <div className='page-user'>
+                {!!user &&
+                    <div>
+                        <div className='text-center'>
+                            <h2>{user.name}</h2>
+                            <div><img className='ownerPicture' src={user.photo}/></div>                        
+                        </div>
+                        <div>
+                            <strong>About</strong>
+                            <div>
+                                {user.about}
+                            </div>
+                            <div className='text-center'>
+                                <Button bsStyle='green' onClick={::this.sendMessage} block>
+                                    <Icon style={{fontSize: 14}} glyph={'icon-feather-mail'} />&nbsp;&nbsp;Send Message
+                                </Button>
+                            </div>
+                            <br/>
+                        </div>
+                        <div>
+                            <strong>Permissions</strong>
+                            <hr/>
+                            <Icon style={{fontSize: 16}} glyph={'icon-feather-align-justify'}/> Schedule
+                            <div className='text-center'>
+                                <Button bsStyle='danger' block>
+                                    <Icon style={{fontSize: 14}} glyph={'icon-fontello-warning-empty'} />&nbsp;&nbsp;Remove From Schedule
+                                </Button>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div>
+                            <strong>Also a member of</strong>                            
+                            <div>
+                                
+                            </div>
+                        </div>
+                        <hr/>
+                    </div>
+                }
             </div>
         );
     }
@@ -166,7 +238,8 @@ export default class Users extends React.Component {
             }
         ];
         this.state = {
-            users: users
+            users: users,
+            user: users[0]
         };
     }
 
@@ -175,8 +248,13 @@ export default class Users extends React.Component {
         this.setState({users: users});
     }
 
+    selectUser(user){
+        // console.log('user fetched = ', user);
+        this.setState({user: user});
+    }
+
     render() {
-        let {users} = this.state
+        let {users, user} = this.state
         return (
             <Row>
                 <Col sm={8}>
@@ -186,7 +264,7 @@ export default class Users extends React.Component {
                                 <Grid>
                                     <Row>
                                         <Col xs={12}>
-                                            <UsersComponent users={users} onUsersChange={::this.updateUsers}/>
+                                            <UsersComponent users={users} onUsersChange={::this.updateUsers} onUserClick={::this.selectUser}/>
                                         </Col>
                                     </Row>
                                 </Grid>
@@ -201,6 +279,7 @@ export default class Users extends React.Component {
                                 <Grid>
                                     <Row>
                                         <Col xs={12}>
+                                            <UserComponent user={user}/>
                                         </Col>                    
                                     </Row>
                                 </Grid>
