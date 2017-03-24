@@ -115,7 +115,7 @@ class ProjectsComponent extends React.Component {
         var {projects} = this.state;        
         this.setState({modalOpened: true, modalEdit: isEdit, projectID: pID});
         var project = isEdit ? _.find(projects, function(obj) {return obj.pid === pID}) : null;
-        this.projectModal.open('Project', isEdit, project);
+        this.modalDialog.open('Projects', isEdit, project);
     }
 
     callbackModal(data){
@@ -176,11 +176,11 @@ class ProjectsComponent extends React.Component {
                     <div className='right'>
                         <Button outlined bsStyle='primary' onClick={self.launchModal.bind(self, false, 0)}>
                             <Icon style={{fontSize: 14}} glyph={'icon-flatline-film'} />
-                            Create New project
+                            Create New Project
                         </Button>
                     </div>
                 </div>
-                <ModalDialog ref={(c) => self.projectModal = c} callbackModal={::self.callbackModal}/>
+                <ModalDialog ref={(c) => self.modalDialog = c} callbackModal={::self.callbackModal}/>
                 <BootstrapTable data={projects} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow>
                     <TableHeaderColumn isKey dataField='pid' hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='current' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_current}>Current</TableHeaderColumn>
@@ -207,6 +207,7 @@ export default class Projects extends React.Component {
                   <Row>
                     <Col xs={12}>
                       <ProjectsComponent />
+                      <br/><br/><br/>
                     </Col>
                   </Row>
                 </Grid>

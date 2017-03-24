@@ -28,7 +28,7 @@ export class ModalDialog extends React.Component {
         let {newID} = this.state
         if(!data){
             switch(type){
-                case 'Project':
+                case 'Projects':
                     data = {
                         pid: 'newID' + (newID++),
                         current: 'Switch',
@@ -39,7 +39,7 @@ export class ModalDialog extends React.Component {
                         owner_name: ''
                     }
                     break;
-                case 'User':
+                case 'Users':
                     break;
                 default:
                     break;
@@ -81,7 +81,7 @@ export class ModalDialog extends React.Component {
         let title = '', description='';
         let formContent = null;
         switch(type){
-            case 'Project':
+            case 'Projects':
                 title = isEdit ? 'Edit Project' : 'New Project';
                 description = isEdit ? 'Would you like to rename your project?' : 'What would you like to call your new project?';
                 let name = data ? data.name : '';
