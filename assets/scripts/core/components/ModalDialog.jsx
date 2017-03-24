@@ -117,14 +117,25 @@ export class ModalDialog extends React.Component {
                         {formOwnerName}
                     </Form>;                
                 break;
-            case 'User':
-                
+            case 'Users':
+                title = 'Invite Users';
+                description = 'Invite as many users to your project as you wish.';
+                let formEmails = 
+                    <FormGroup controlId="frmEmails">
+                        <ControlLabel>Emails</ControlLabel>
+                        <FormControl componentClass="textarea" placeholder="" />
+                    </FormGroup>
+                formContent = 
+                    <Form>
+                        <div>Enter email addresses below, separating them with a comma. You'll be notified when they've accepted.</div>
+                        {formEmails}
+                    </Form>;
                 break;
             default:
                 break;
         }
         return (
-            <Modal show={this.state.showModal} onHide={::this.close}>
+            <Modal show={this.state.showModal} bsSize={type == 'Users' ? 'lg' : 'small'} onHide={::this.close}>
                 <Modal.Header closeButton>
                     <div className="text-center">
                         <h2 className="modal-title">{title}</h2>
@@ -136,7 +147,7 @@ export class ModalDialog extends React.Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={::this.close} bsStyle='danger'>Cancel</Button>
-                    <Button onClick={::this.save} bsStyle='primary'>{isEdit ? 'Save' : 'Create'}</Button>
+                    <Button onClick={::this.save} bsStyle='primary'>{type == 'Users' ? 'Invite' : (isEdit ? 'Save' : 'Create')}</Button>
                 </Modal.Footer>
             </Modal>
         );

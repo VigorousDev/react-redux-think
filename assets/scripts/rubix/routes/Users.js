@@ -24,15 +24,15 @@ class UsersComponent extends React.Component {
         var users = [
             {
                 uid: '101',
-                current: 'Online',
+                status: 'Online',
                 name: 'Anthony Jackson',
                 email: 'gravida@rbisit.com',
-                phone: '(323) 555-1212',
+                phone: '(323) 555-1211',
                 photo: '/imgs/app/avatars/avatar0.png'
             },
             {
                 uid: '102',
-                current: 'Offline',
+                status: 'Offline',
                 name: 'Rooney Lindsay',
                 email: 'rooney@proin.com',
                 phone: '(323) 555-1212',
@@ -40,18 +40,18 @@ class UsersComponent extends React.Component {
             },
             {
                 uid: '103',
-                current: 'Offline',
+                status: 'Offline',
                 name: 'Lionel Mcmillan',
                 email: 'pacheco@manga.com',
-                phone: '(323) 555-1212',
+                phone: '(323) 555-1213',
                 photo: '/imgs/app/avatars/avatar2.png'
             },
             {
                 uid: '104',
-                current: 'Offline',
+                status: 'Offline',
                 name: 'Edan Randall',
                 email: 'rooney@proin.com',
-                phone: '(323) 555-1212',
+                phone: '(323) 555-1214',
                 photo: '/imgs/app/avatars/avatar3.png'
             }
         ];
@@ -105,28 +105,24 @@ class UsersComponent extends React.Component {
             clickToSelect: false,
             customComponent: customMultiSelect
         };
-        
-        var formatter_current = function(current, row){
-            return <Label style={{fontSize:11}} className={current=='Active' ? 'bg-darkgreen45 fg-white' : 'bg-darkgray25 fg-black'}>{current}</Label>;
-        }
-        var formatter_users = function(user){
-            return user + ' Users';
-        }
-        var formatter_owner = function (owner, row) {
+
+        var formatter_name = function (name, row) {
             return (
                 <div className='owner'>
-                    <img className='ownerPicture' src={row.owner_picture}/>
-                    <div className='ownerName'>{row.owner_name}</div>
+                    <img className='ownerPicture' src={row.photo}/>
+                    <div className='ownerName'>{row.name}</div>
                 </div>
             );
         }
-        var formatter_edit = function (uid, row){
-            return (
-                <Button outlined bsStyle='primary' onClick={self.launchModal.bind(self, true, uid)}>
-                    <Icon style={{fontSize: 12}} glyph={'icon-fontello-pencil-1'} /> Edit
-                </Button>
-            );
-        }        
+        var formatter_email = function(email, row){
+            return <div className='email'><Icon style={{fontSize: 16}} glyph={'icon-feather-mail'}/>&nbsp;&nbsp;&nbsp;<a href='#'>{email}</a></div>;
+        }
+        var formatter_phone = function(phone, row){
+            return <div className='phone'><Icon style={{fontSize: 16}} glyph={'icon-fontello-call'}/>&nbsp;&nbsp;&nbsp;{phone}</div>;
+        }
+        var formatter_status = function(status, row){
+            return <Label style={{fontSize:11}} className={status=='Online' ? 'bg-darkgreen45 fg-white' : 'bg-darkgray25 fg-black'}>{status}</Label>;
+        }
         return (
             <div className='page-users'>
                 <div className='controlpanel'>
@@ -143,12 +139,10 @@ class UsersComponent extends React.Component {
                 <ModalDialog ref={(c) => self.modalDialog = c} callbackModal={::self.callbackModal}/>
                 <BootstrapTable data={users} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow>
                     <TableHeaderColumn isKey dataField='uid' hidden>ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='current' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_current}>Current</TableHeaderColumn>
-                    <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField='time' width='180' dataSort={true}>Created</TableHeaderColumn>
-                    <TableHeaderColumn dataField='users' width='80' dataSort={true} dataAlign='center' dataFormat={formatter_users}>Users</TableHeaderColumn>
-                    <TableHeaderColumn dataField='owner_name' width='250' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
-                    <TableHeaderColumn dataField='uid' width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
+                    <TableHeaderColumn dataField='name' width='250' dataSort={true} dataFormat={formatter_name}>Name</TableHeaderColumn>
+                    <TableHeaderColumn dataField='email' width='180' dataSort={true} dataFormat={formatter_email}>Email</TableHeaderColumn>
+                    <TableHeaderColumn dataField='phone' width='180' dataSort={true} dataFormat={formatter_phone}>Phone</TableHeaderColumn>
+                    <TableHeaderColumn dataField='status' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_status}>Status</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         );
@@ -182,7 +176,6 @@ export default class Users extends React.Component {
                     <Grid>
                     <Row>
                         <Col xs={12} style={{height: 500}}>
-                            sdfasdf
                             
                         </Col>                    
                     </Row>
