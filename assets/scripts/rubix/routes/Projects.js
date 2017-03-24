@@ -181,7 +181,7 @@ class ProjectsComponent extends React.Component {
                     </div>
                 </div>
                 <ModalDialog ref={(c) => self.modalDialog = c} callbackModal={::self.callbackModal}/>
-                <BootstrapTable data={projects} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow>
+                <BootstrapTable data={projects} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow pagination>
                     <TableHeaderColumn isKey dataField='pid' hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='current' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_current}>Current</TableHeaderColumn>
                     <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>

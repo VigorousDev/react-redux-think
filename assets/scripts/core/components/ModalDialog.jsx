@@ -135,7 +135,7 @@ export class ModalDialog extends React.Component {
                 break;
         }
         return (
-            <Modal show={this.state.showModal} bsSize={type == 'Users' ? 'lg' : 'small'} onHide={::this.close}>
+            <Modal show={this.state.showModal} bsSize={type == 'Users' ? 'lg' : 'md'} onHide={::this.close}>
                 <Modal.Header closeButton>
                     <div className="text-center">
                         <h2 className="modal-title">{title}</h2>

@@ -28,7 +28,8 @@ class UsersComponent extends React.Component {
                 name: 'Anthony Jackson',
                 email: 'gravida@rbisit.com',
                 phone: '(323) 555-1211',
-                photo: '/imgs/app/avatars/avatar0.png'
+                photo: '/imgs/app/avatars/avatar0.png',
+                about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
             },
             {
                 uid: '102',
@@ -36,7 +37,8 @@ class UsersComponent extends React.Component {
                 name: 'Rooney Lindsay',
                 email: 'rooney@proin.com',
                 phone: '(323) 555-1212',
-                photo: '/imgs/app/avatars/avatar1.png'
+                photo: '/imgs/app/avatars/avatar1.png',
+                about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
             },
             {
                 uid: '103',
@@ -44,7 +46,8 @@ class UsersComponent extends React.Component {
                 name: 'Lionel Mcmillan',
                 email: 'pacheco@manga.com',
                 phone: '(323) 555-1213',
-                photo: '/imgs/app/avatars/avatar2.png'
+                photo: '/imgs/app/avatars/avatar2.png',
+                about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
             },
             {
                 uid: '104',
@@ -52,7 +55,8 @@ class UsersComponent extends React.Component {
                 name: 'Edan Randall',
                 email: 'rooney@proin.com',
                 phone: '(323) 555-1214',
-                photo: '/imgs/app/avatars/avatar3.png'
+                photo: '/imgs/app/avatars/avatar3.png',
+                about: 'User104 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
             }
         ];
         this.state = {
@@ -176,7 +180,7 @@ export default class Users extends React.Component {
                     <Grid>
                     <Row>
                         <Col xs={12} style={{height: 500}}>
-                            
+
                         </Col>                    
                     </Row>
                     </Grid>
