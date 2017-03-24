@@ -32,14 +32,23 @@ export class ModalDialog extends React.Component {
                     data = {
                         pid: 'newID' + (newID++),
                         current: 'Switch',
-                        name: '',
+                        name: 'New Project-' + newID,
                         time: 'newTime',
                         users: 0,
-                        owner_picture: '/imgs/app/avatars/avatar8.png',
-                        owner_name: ''
+                        owner_picture: '/imgs/app/avatars/avatar' + newID + '.png',
+                        owner_name: 'New Owner' + newID
                     }
                     break;
                 case 'Users':
+                    data = {
+                        uid: 'newID' + (newID++),
+                        status: 'Offline',
+                        name: 'New User-' + newID,
+                        email: 'rooney@proin.com',
+                        phone: '(323) 555-1214',
+                        photo: '/imgs/app/avatars/avatar' + newID + '.png',
+                        about: 'Invited'
+                    }
                     break;
                 default:
                     break;
@@ -135,7 +144,7 @@ export class ModalDialog extends React.Component {
                 break;
         }
         return (
-            <Modal show={this.state.showModal} bsSize={type == 'Users' ? 'lg' : 'md'} onHide={::this.close}>
+            <Modal show={this.state.showModal} onHide={::this.close}>
                 <Modal.Header closeButton>
                     <div className="text-center">
                         <h2 className="modal-title">{title}</h2>

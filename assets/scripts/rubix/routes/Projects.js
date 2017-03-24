@@ -190,6 +190,7 @@ class ProjectsComponent extends React.Component {
                     <TableHeaderColumn dataField='owner_name' width='250' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
                     <TableHeaderColumn dataField='pid' width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
                 </BootstrapTable>
+                <div className='space-for-pagination'/>
             </div>
         );
     }
@@ -198,24 +199,23 @@ class ProjectsComponent extends React.Component {
 export default class Projects extends React.Component {
   render() {
     return (
-      <Row>
-        <Col xs={12}>
-          <PanelContainer controls={false}>
-            <Panel>
-              <PanelBody>
-                <Grid>
-                  <Row>
-                    <Col xs={12}>
-                      <ProjectsComponent />
-                      <br/><br/><br/>
-                    </Col>
-                  </Row>
-                </Grid>
-              </PanelBody>
-            </Panel>
-          </PanelContainer>
-        </Col>
-      </Row>
+        <Row>
+            <Col xs={12}>
+                <PanelContainer controls={false}>
+                    <Panel>
+                        <PanelBody>
+                            <Grid>
+                                <Row>
+                                    <Col xs={12}>
+                                        <ProjectsComponent />
+                                    </Col>
+                                </Row>
+                            </Grid>
+                        </PanelBody>
+                    </Panel>
+                </PanelContainer>
+            </Col>
+        </Row>
     );
   }
 }

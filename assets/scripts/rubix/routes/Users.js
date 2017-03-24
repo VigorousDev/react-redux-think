@@ -20,51 +20,21 @@ import {
 } from '@sketchpixy/rubix';
 class UsersComponent extends React.Component {  
     constructor(props){
-        super(props);
-        var users = [
-            {
-                uid: '101',
-                status: 'Online',
-                name: 'Anthony Jackson',
-                email: 'gravida@rbisit.com',
-                phone: '(323) 555-1211',
-                photo: '/imgs/app/avatars/avatar0.png',
-                about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-            },
-            {
-                uid: '102',
-                status: 'Offline',
-                name: 'Rooney Lindsay',
-                email: 'rooney@proin.com',
-                phone: '(323) 555-1212',
-                photo: '/imgs/app/avatars/avatar1.png',
-                about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-            },
-            {
-                uid: '103',
-                status: 'Offline',
-                name: 'Lionel Mcmillan',
-                email: 'pacheco@manga.com',
-                phone: '(323) 555-1213',
-                photo: '/imgs/app/avatars/avatar2.png',
-                about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-            },
-            {
-                uid: '104',
-                status: 'Offline',
-                name: 'Edan Randall',
-                email: 'rooney@proin.com',
-                phone: '(323) 555-1214',
-                photo: '/imgs/app/avatars/avatar3.png',
-                about: 'User104 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-            }
-        ];
+        super(props);        
         this.state = {
-            users: users,
+            users: this.props.users,
             modalOpened: false,
             modalEdit: false,
             userID: null,
         };
+    }
+
+    componentDidUpdate(){
+        // this.setState({users: this.props.users});
+    }
+
+    updateUsers(users){
+        this.props.onUsersChange(users);
     }
 
     onAfterDeleteRow(rowKeys) {
@@ -72,7 +42,7 @@ class UsersComponent extends React.Component {
         _.map(rowKeys, function(item){            
             _.remove(users, {uid: item});
         });
-        this.setState({users: users});
+        this.updateUsers.bind(this, users);        
     }
 
     launchModal(isEdit, pID) {
@@ -80,7 +50,7 @@ class UsersComponent extends React.Component {
         this.setState({modalOpened: true, modalEdit: isEdit, userID: pID});
         var project = isEdit ? _.find(users, function(obj) {return obj.uid === pID}) : null;
         this.modalDialog.open('Users', isEdit, project);
-    }
+    }    
 
     callbackModal(data){
         let {modalEdit, userID, users} = this.state;
@@ -93,7 +63,7 @@ class UsersComponent extends React.Component {
         }else{
             users.push(data);
         }
-        this.setState({users: users});
+        this.updateUsers(users);
     }
     
     render() {
@@ -141,54 +111,104 @@ class UsersComponent extends React.Component {
                     </div>
                 </div>
                 <ModalDialog ref={(c) => self.modalDialog = c} callbackModal={::self.callbackModal}/>
-                <BootstrapTable data={users} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow>
+                <BootstrapTable data={users} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow pagination>
                     <TableHeaderColumn isKey dataField='uid' hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='name' width='250' dataSort={true} dataFormat={formatter_name}>Name</TableHeaderColumn>
                     <TableHeaderColumn dataField='email' width='180' dataSort={true} dataFormat={formatter_email}>Email</TableHeaderColumn>
                     <TableHeaderColumn dataField='phone' width='180' dataSort={true} dataFormat={formatter_phone}>Phone</TableHeaderColumn>
                     <TableHeaderColumn dataField='status' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_status}>Status</TableHeaderColumn>
                 </BootstrapTable>
+                <div className='space-for-pagination'/>
             </div>
         );
     }
 }
 
 export default class Users extends React.Component {
-  render() {
-    return (
-      <Row>
-        <Col sm={8}>
-          <PanelContainer controls={false}>
-            <Panel>
-              <PanelBody>
-                <Grid>
-                  <Row>
-                    <Col xs={12}>
-                      <UsersComponent />
-                      <br/><br/><br/>
-                    </Col>                    
-                  </Row>
-                </Grid>
-              </PanelBody>
-            </Panel>
-          </PanelContainer>
-        </Col>
-        <Col sm={4}>
-            <PanelContainer controls={false}>
-                <Panel>
-                <PanelBody>
-                    <Grid>
-                    <Row>
-                        <Col xs={12} style={{height: 500}}>
+    constructor(props){
+        super(props);
+        var users = [
+            {
+                uid: '101',
+                status: 'Online',
+                name: 'Anthony Jackson',
+                email: 'gravida@rbisit.com',
+                phone: '(323) 555-1211',
+                photo: '/imgs/app/avatars/avatar0.png',
+                about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            },
+            {
+                uid: '102',
+                status: 'Offline',
+                name: 'Rooney Lindsay',
+                email: 'rooney@proin.com',
+                phone: '(323) 555-1212',
+                photo: '/imgs/app/avatars/avatar1.png',
+                about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            },
+            {
+                uid: '103',
+                status: 'Offline',
+                name: 'Lionel Mcmillan',
+                email: 'pacheco@manga.com',
+                phone: '(323) 555-1213',
+                photo: '/imgs/app/avatars/avatar2.png',
+                about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            },
+            {
+                uid: '104',
+                status: 'Offline',
+                name: 'Edan Randall',
+                email: 'rooney@proin.com',
+                phone: '(323) 555-1214',
+                photo: '/imgs/app/avatars/avatar3.png',
+                about: 'User104 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            }
+        ];
+        this.state = {
+            users: users
+        };
+    }
 
-                        </Col>                    
-                    </Row>
-                    </Grid>
-                </PanelBody>
-                </Panel>
-            </PanelContainer>
-        </Col>
-      </Row>
-    );
-  }
+    updateUsers(users){
+        // console.log('users updated=', users);
+        this.setState({users: users});
+    }
+
+    render() {
+        let {users} = this.state
+        return (
+            <Row>
+                <Col sm={8}>
+                    <PanelContainer controls={false}>
+                        <Panel>
+                            <PanelBody>
+                                <Grid>
+                                    <Row>
+                                        <Col xs={12}>
+                                            <UsersComponent users={users} onUsersChange={::this.updateUsers}/>
+                                        </Col>
+                                    </Row>
+                                </Grid>
+                            </PanelBody>
+                        </Panel>
+                    </PanelContainer>
+                </Col>
+                <Col sm={4}>
+                    <PanelContainer controls={false}>
+                        <Panel>
+                            <PanelBody>
+                                <Grid>
+                                    <Row>
+                                        <Col xs={12}>
+                                        </Col>                    
+                                    </Row>
+                                </Grid>
+                            </PanelBody>
+                        </Panel>
+                    </PanelContainer>
+                </Col>
+            </Row>
+        );
+    }
 }
