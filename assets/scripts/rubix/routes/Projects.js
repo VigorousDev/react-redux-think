@@ -28,10 +28,8 @@ class DatatableComponent extends React.Component {
                     name: 'It\'s A Wonderful Life',
                     time: '01.08.2017 10:04AM',
                     users: 8,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar0.png',
+                    owner_name: 'John Smith1'
                 },
                 {
                     pid: '102',
@@ -39,10 +37,8 @@ class DatatableComponent extends React.Component {
                     name: '2Casablanca',
                     time: '01.09.2017 09:23AM',
                     users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar1.png',
+                    owner_name: 'John Smith2'
                 },
                 {
                     pid: '103',
@@ -50,10 +46,8 @@ class DatatableComponent extends React.Component {
                     name: '3Casablanca',
                     time: '01.09.2017 09:23AM',
                     users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar2.png',
+                    owner_name: 'John Smith3'
                 },
                 {
                     pid: '4',
@@ -61,10 +55,8 @@ class DatatableComponent extends React.Component {
                     name: '4Casablanca',
                     time: '01.09.2017 09:23AM',
                     users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar3.png',
+                    owner_name: 'John Smith4'
                 },
                 {
                     pid: '5',
@@ -72,10 +64,8 @@ class DatatableComponent extends React.Component {
                     name: '5Casablanca',
                     time: '01.09.2017 09:23AM',
                     users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar4.png',
+                    owner_name: 'John Smith5'
                 },
                 {
                     pid: '6',
@@ -83,10 +73,8 @@ class DatatableComponent extends React.Component {
                     name: '6Casablanca',
                     time: '01.09.2017 09:23AM',
                     users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar5.png',
+                    owner_name: 'John Smith6'
                 },
                 {
                     pid: '7',
@@ -94,10 +82,8 @@ class DatatableComponent extends React.Component {
                     name: '7Casablanca',
                     time: '01.09.2017 09:23AM',
                     users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar6.png',
+                    owner_name: 'John Smith7'
                 },
                 {
                     pid: '1002',
@@ -105,10 +91,8 @@ class DatatableComponent extends React.Component {
                     name: '8Casablanca',
                     time: '01.09.2017 09:23AM',
                     users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
+                    owner_picture: '/imgs/app/avatars/avatar7.png',
+                    owner_name: 'John Smith8'
                 }
             ];
         this.state = {
@@ -171,8 +155,8 @@ class DatatableComponent extends React.Component {
         var formatter_owner = function (owner, row) {
             return (
                 <div className='owner'>
-                    <img className='ownerPicture' src={owner.picture}/>
-                    <div className='ownerName'>{owner.name}</div>
+                    <img className='ownerPicture' src={row.owner_picture}/>
+                    <div className='ownerName'>{row.owner_name}</div>
                 </div>
             );
         }
@@ -203,8 +187,8 @@ class DatatableComponent extends React.Component {
                     <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>
                     <TableHeaderColumn dataField='time' width='180' dataSort={true}>Created</TableHeaderColumn>
                     <TableHeaderColumn dataField='users' width='80' dataSort={true} dataAlign='center' dataFormat={formatter_users}>Users</TableHeaderColumn>
-                    <TableHeaderColumn dataField="owner" width='250' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
-                    <TableHeaderColumn dataField="pid" width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
+                    <TableHeaderColumn dataField='owner_name' width='250' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
+                    <TableHeaderColumn dataField='pid' width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         );

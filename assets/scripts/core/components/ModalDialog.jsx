@@ -35,10 +35,8 @@ export class ModalDialog extends React.Component {
                         name: '',
                         time: 'newTime',
                         users: 0,
-                        owner: {
-                            picture: '/imgs/app/avatars/avatar0.png',
-                            name: 'newName'
-                        }
+                        owner_picture: '/imgs/app/avatars/avatar8.png',
+                        owner_name: ''
                     }
                     break;
                 case 'User':
@@ -74,11 +72,7 @@ export class ModalDialog extends React.Component {
         let newValue = e.target.value;
         let {data} = this.state
         if(!data) data = {};
-        console.log(key, newValue, data);
-        if(key == 'ownerName'){
-            data['owner']['name'] = newValue;
-        }else
-            data[key] = newValue;
+        data[key] = newValue;
         this.setState({data: data});
     }
 
@@ -92,7 +86,7 @@ export class ModalDialog extends React.Component {
                 description = isEdit ? 'Would you like to rename your project?' : 'What would you like to call your new project?';
                 let name = data ? data.name : '';
                 let current = data ? data.current : 'Switch';
-                let ownerName = data ? data.owner.name : '';
+                let ownerName = data ? data.owner_name : '';
                 let formName = <FormGroup controlId="frmName">
                             <Col sm={3} componentClass={ControlLabel}>Project Name</Col>
                             <Col sm={9}>
@@ -113,7 +107,7 @@ export class ModalDialog extends React.Component {
                     <FormGroup controlId="formOwnerName">
                         <Col sm={3} componentClass={ControlLabel}>Owner Name</Col>
                         <Col sm={9}>
-                            <FormControl type='text' value={ownerName} onChange={this.handleChange.bind(this, 'ownerName')}/>
+                            <FormControl type='text' value={ownerName} onChange={this.handleChange.bind(this, 'owner_name')}/>
                         </Col>
                     </FormGroup>
                 formContent = 
