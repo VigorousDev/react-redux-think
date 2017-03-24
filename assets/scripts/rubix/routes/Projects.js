@@ -109,43 +109,13 @@ class DatatableComponent extends React.Component {
                         picture: '/imgs/app/avatars/avatar0.png',
                         name: 'John Smith'
                     }
-                },
-                {
-                    pid: '3043',
-                    current: 'Switch',
-                    name: '9Casablanca',
-                    time: '01.09.2017 09:23AM',
-                    users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
-                },
-                {
-                    pid: '123402',
-                    current: 'Switch',
-                    name: '10Casablanca',
-                    time: '01.09.2017 09:23AM',
-                    users: 3,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar0.png',
-                        name: 'John Smith'
-                    }
-                },
-                {
-                    pid: '8',
-                    current: 'Switch',
-                    name: '11The Wizard of Oz',
-                    time: '01.09.2017 09:23AM',
-                    users: 28,
-                    owner: {
-                        picture: '/imgs/app/avatars/avatar1.png',
-                        name: 'Alex Smith'
-                    }
                 }
             ];
         this.state = {
-            projects:projects
+            projects: projects,
+            modalOpened: false,
+            modalEdit: false,
+            projectID: null,
         };
     }
 
@@ -154,24 +124,28 @@ class DatatableComponent extends React.Component {
         _.map(rowKeys, function(item){            
             _.remove(projects, {pid: item});
         });
-        console.log('removed = ', projects);
         this.setState({projects: projects});
     }
 
-    callbackModal(isEdit, index, value){
-        if(isEdit){
-            var {projects, datatable} = this.state;
-            projects[index].name = value;
-            this.setState({projects: projects});
-        }
+    launchModal(isEdit, pID) {
+        var {projects} = this.state;        
+        this.setState({modalOpened: true, modalEdit: isEdit, projectID: pID});
+        var project = isEdit ? _.find(projects, function(obj) {return obj.pid === pID}) : null;
+        this.projectModal.open('Project', isEdit, project);
     }
 
-    launchModal(isEdit, index) {
-        console.log('index = ', index);
-        var {projects} = this.state;
-        // if(isEdit){
-        //     this.projectModal.open(isEdit, index, projects[index].name);
-        // }
+    callbackModal(data){
+        let {modalEdit, projectID, projects} = this.state;
+        if(modalEdit){
+            // projects[index].name = value;
+            // Find item index using indexOf+find
+            var index = _.indexOf(projects, _.find(projects, {pid: projectID}));
+            // Replace item at index using native splice
+            projects.splice(index, 1, data);            
+        }else{
+            projects.push(data);
+        }
+        this.setState({projects: projects});
     }
     
     render() {
@@ -216,7 +190,7 @@ class DatatableComponent extends React.Component {
                         <h5>All of your projects</h5>
                     </div>
                     <div className='right'>
-                        <Button outlined bsStyle='primary'>
+                        <Button outlined bsStyle='primary' onClick={self.launchModal.bind(self, false, 0)}>
                             <Icon style={{fontSize: 14}} glyph={'icon-flatline-film'} />
                             Create New project
                         </Button>
@@ -229,7 +203,7 @@ class DatatableComponent extends React.Component {
                     <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>
                     <TableHeaderColumn dataField='time' width='180' dataSort={true}>Created</TableHeaderColumn>
                     <TableHeaderColumn dataField='users' width='80' dataSort={true} dataAlign='center' dataFormat={formatter_users}>Users</TableHeaderColumn>
-                    <TableHeaderColumn dataField="owner" width='200' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
+                    <TableHeaderColumn dataField="owner" width='250' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
                     <TableHeaderColumn dataField="pid" width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
                 </BootstrapTable>
             </div>
