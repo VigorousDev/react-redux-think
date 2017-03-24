@@ -18,7 +18,7 @@ import {
   PanelHeader,
   PanelContainer,
 } from '@sketchpixy/rubix';
-class DatatableComponent extends React.Component {  
+class ProjectsComponent extends React.Component {  
     constructor(props){
         super(props);
         var projects = [
@@ -181,7 +181,7 @@ class DatatableComponent extends React.Component {
                     </div>
                 </div>
                 <ModalDialog ref={(c) => self.projectModal = c} callbackModal={::self.callbackModal}/>
-                <BootstrapTable data={projects} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow pagination>
+                <BootstrapTable data={projects} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow>
                     <TableHeaderColumn isKey dataField='pid' hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='current' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_current}>Current</TableHeaderColumn>
                     <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>
@@ -195,18 +195,18 @@ class DatatableComponent extends React.Component {
     }
 }
 
-export default class Datatablesjs extends React.Component {
+export default class Projects extends React.Component {
   render() {
     return (
       <Row>
         <Col xs={12}>
-          <PanelContainer>
+          <PanelContainer controls={false}>
             <Panel>
               <PanelBody>
                 <Grid>
                   <Row>
                     <Col xs={12}>
-                      <DatatableComponent />
+                      <ProjectsComponent />
                     </Col>
                   </Row>
                 </Grid>
