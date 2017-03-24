@@ -9,6 +9,7 @@
     "isomorphic-fetch",
     "lodash",
     "react",
+    "react-bootstrap-table",
     "react-dom",
     "react-modal",
     "react-redux",
