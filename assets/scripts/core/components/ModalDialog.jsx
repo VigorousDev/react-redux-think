@@ -47,7 +47,9 @@ export class ModalDialog extends React.Component {
                         email: 'rooney@proin.com',
                         phone: '(323) 555-1214',
                         photo: '/imgs/app/avatars/avatar' + newID + '.png',
-                        about: 'Invited'
+                        about: 'Invited',
+                        schedule_view: false,
+                        schedule_edit: false,
                     }
                     break;
                 default:

@@ -141,6 +141,12 @@ class UserComponent extends React.Component {
         this.setState({user: nextProps.user});
     }
 
+    onScheduleChanged(obj, e){
+        var {user} = this.state;        
+        user[e.target.id] = e.target.checked;
+        this.props.onScheduleChanged(user);        
+    }
+
     sendMessage(e){
         e.preventDefault();
         e.stopPropagation();
@@ -178,10 +184,10 @@ class UserComponent extends React.Component {
                             <div>
                                 <Row>
                                     <Col xs={6}>
-                                        <Switch id={'permission_view'} title={'View'}/>
+                                        <Switch id={'schedule_view'} checked={user.schedule_view} onChange={self.onScheduleChanged.bind(self, this)} title={'View'}/>
                                     </Col>
                                     <Col xs={6}>
-                                        <Switch id={'permission_edit'} title={'Edit'}/>
+                                        <Switch id={'schedule_edit'} checked={user.schedule_edit} onChange={self.onScheduleChanged.bind(self, this)} title={'Edit'}/>
                                     </Col> 
                                 </Row>
                             </div>
@@ -216,7 +222,9 @@ export default class Users extends React.Component {
                 email: 'gravida@rbisit.com',
                 phone: '(323) 555-1211',
                 photo: '/imgs/app/avatars/avatar0.png',
-                about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                schedule_view: true,
+                schedule_edit: false,
             },
             {
                 uid: '102',
@@ -225,7 +233,9 @@ export default class Users extends React.Component {
                 email: 'rooney@proin.com',
                 phone: '(323) 555-1212',
                 photo: '/imgs/app/avatars/avatar1.png',
-                about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                schedule_view: false,
+                schedule_edit: true,
             },
             {
                 uid: '103',
@@ -234,7 +244,9 @@ export default class Users extends React.Component {
                 email: 'pacheco@manga.com',
                 phone: '(323) 555-1213',
                 photo: '/imgs/app/avatars/avatar2.png',
-                about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                schedule_view: true,
+                schedule_edit: true,
             },
             {
                 uid: '104',
@@ -243,7 +255,9 @@ export default class Users extends React.Component {
                 email: 'rooney@proin.com',
                 phone: '(323) 555-1214',
                 photo: '/imgs/app/avatars/avatar3.png',
-                about: 'User104 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                about: 'User104 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                schedule_view: false,
+                schedule_edit: false,
             }
         ];
         this.state = {
@@ -258,6 +272,10 @@ export default class Users extends React.Component {
     }
 
     selectUser(user){
+        this.setState({user: user});
+    }
+
+    scheduleChanged(user){
         this.setState({user: user});
     }
 
@@ -287,7 +305,7 @@ export default class Users extends React.Component {
                                 <Grid>
                                     <Row>
                                         <Col xs={12}>
-                                            <UserComponent user={user}/>
+                                            <UserComponent user={user} onScheduleChanged={::this.scheduleChanged}/>
                                         </Col>                    
                                     </Row>
                                 </Grid>
