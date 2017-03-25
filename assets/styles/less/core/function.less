@@ -1,0 +1,75 @@
+.box-shadow(@offset, @color){
+	-webkit-box-shadow: 1px * @offset 1px * @offset 2px * @offset @color;
+	-moz-box-shadow: 1px * @offset 1px * @offset 2px * @offset @color;
+	box-shadow: 1px * @offset 1px * @offset 2px * @offset @color;
+}
+.box-shadow2(@offset1, @offset2, @offset3, @offset4, @color){
+	-webkit-box-shadow: 1px * @offset1 1px * @offset2 1px * @offset3 1px * @offset4 @color;
+	-moz-box-shadow: 1px * @offset1 1px * @offset2 1px * @offset3 1px * @offset4 @color;
+	box-shadow: 1px * @offset1 1px * @offset2 1px * @offset3 1px * @offset4 @color;
+}
+.box-shadow3(@allvalues){
+	-webkit-box-shadow: @allvalues;
+	-moz-box-shadow: @allvalues;
+	box-shadow: @allvalues;
+}
+.position-center(){
+	position: absolute;
+    left: 50%;
+    .transform(translate(-50%,0));
+}
+.transform(@allvalues){
+	-webkit-transform: @allvalues;
+    -moz-transform: @allvalues;
+    -ms-transform: @allvalues;
+    transform: @allvalues;
+}
+.transition(@attr, @time){
+	transition: @attr 1s * @time;
+    -o-transition: @attr 1s * @time;
+    -moz-transition: @attr 1s * @time;
+    -webkit-transition: @attr 1s * @time;
+}
+.transition2(@attr, @time, @effect, @time2){
+	transition: @attr 1s * @time @effect 1s * @time2;
+    -o-transition: @attr 1s * @time @effect 1s * @time2;
+    -moz-transition: @attr 1s * @time @effect 1s * @time2;
+    -webkit-transition: @attr 1s * @time @effect 1s * @time2;
+}
+.transition3(@attr, @time, @effect){
+	transition: @attr 1s * @time @effect;
+    -o-transition: @attr 1s * @time @effect;
+    -moz-transition: @attr 1s * @time @effect;
+    -webkit-transition: @attr 1s * @time @effect;
+}
+.border-radius(@value){
+	-webkit-border-radius: @value;
+	-moz-border-radius: @value;  
+	border-radius: @value;
+}
+.div_horizontal() {
+	clear: both;
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+	vertical-align: middle;
+}
+.div_horizontal2() {
+	clear: both;
+	float: left;
+	display: flex;
+	align-items: center;
+}
+.div_horizontal_splited(){
+	clear: both;
+	display: flex;    
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    align-items: center;
+}
+.gradient-deg(@deg, @start, @end){
+	background: linear-gradient(@deg, @start, @end);
+}
+.gradient-deg2(@deg, @start, @middle, @end){
+	background: linear-gradient(@deg, @start, @middle, @end);
+}

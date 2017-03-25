@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 // import moment from 'moment-timezone';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {customMultiSelect} from '../../core/components/Checkbox';
+import {customMultiSelect, Switch} from '../../core/components/Checkbox';
 import {ModalDialog} from '../../core/components/ModalDialog';
 import {
   Row,
@@ -137,8 +137,8 @@ class UserComponent extends React.Component {
         };
     }
 
-    componentWillReceiveProps(){
-        this.setState({user: this.props.user});
+    componentWillReceiveProps(nextProps){
+        this.setState({user: nextProps.user});
     }
 
     sendMessage(e){
@@ -157,7 +157,7 @@ class UserComponent extends React.Component {
                     <div>
                         <div className='text-center'>
                             <h2>{user.name}</h2>
-                            <div><img className='ownerPicture' src={user.photo}/></div>                        
+                            <div><img className='ownerPicture' src={user.photo}/></div>
                         </div>
                         <div>
                             <strong>About</strong>
@@ -175,6 +175,16 @@ class UserComponent extends React.Component {
                             <strong>Permissions</strong>
                             <hr/>
                             <Icon style={{fontSize: 16}} glyph={'icon-feather-align-justify'}/> Schedule
+                            <div>
+                                <Row>
+                                    <Col xs={6}>
+                                        <Switch id={'permission_view'} title={'View'}/>
+                                    </Col>
+                                    <Col xs={6}>
+                                        <Switch id={'permission_edit'} title={'Edit'}/>
+                                    </Col> 
+                                </Row>
+                            </div>
                             <div className='text-center'>
                                 <Button bsStyle='danger' block>
                                     <Icon style={{fontSize: 14}} glyph={'icon-fontello-warning-empty'} />&nbsp;&nbsp;Remove From Schedule
@@ -183,9 +193,8 @@ class UserComponent extends React.Component {
                         </div>
                         <hr/>
                         <div>
-                            <strong>Also a member of</strong>                            
+                            <strong>Also a member of</strong>
                             <div>
-                                
                             </div>
                         </div>
                         <hr/>
@@ -249,7 +258,6 @@ export default class Users extends React.Component {
     }
 
     selectUser(user){
-        // console.log('user fetched = ', user);
         this.setState({user: user});
     }
 

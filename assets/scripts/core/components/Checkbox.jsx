@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import ReactDOM from 'react-dom';
-export default class Checkbox extends React.Component {
+export class Checkbox extends React.Component {
   componentDidMount() { this.update(this.props.checked); }
   componentWillReceiveProps(props) { this.update(props.checked); }
   update(checked) {
@@ -17,6 +17,29 @@ export default class Checkbox extends React.Component {
         onChange={ this.props.onChange } />
     );
   }
+}
+
+export class Switch extends React.Component{
+    componentDidMount() { this.update(this.props.checked); }
+    componentWillReceiveProps(props) { this.update(props.checked); }
+    update(checked) {
+        ReactDOM.findDOMNode(this).indeterminate = checked === 'indeterminate';
+    }
+    render() {
+        return (
+            <div className="line">
+                <div className="line-cell">
+                    <div className="checkbox-switch">
+                        <input type="checkbox" id={this.props.id} checked={this.props.checked} onChange={this.props.onChange}/>
+                        <label htmlFor={this.props.id}></label>
+                    </div>
+                </div>
+                <div className="line-cell">
+                    <label htmlFor={this.props.id}>{this.props.title}</label>
+                </div>
+            </div>
+        );
+    }
 }
 
 export const customMultiSelect = function (props) {

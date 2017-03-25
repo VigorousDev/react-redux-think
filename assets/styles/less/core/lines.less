@@ -1,0 +1,16 @@
+.line {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+.line-row { display: table-row; }
+
+.line-icon,
+.line-cell {
+  display: table-cell;
+  vertical-align: middle;
+  .line-top > &, .line-top > .line-row > & { vertical-align: top; }
+  .line-bottom > &, .line-bottom > .line-row > & { vertical-align: bottom; }
+}
+.line-icon { width: 1%; }
