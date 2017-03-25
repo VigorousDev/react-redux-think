@@ -151,7 +151,8 @@ class UserComponent extends React.Component {
         e.preventDefault();
         e.stopPropagation();
 
-        this.props.router.push('/ltr/mailbox/compose');
+        var {user} = this.state;
+        this.props.router.push('/ltr/mailbox/compose?email=' + user.email + '&name=' + user.name + '&photo=' + user.photo);
     }
     
     render() {

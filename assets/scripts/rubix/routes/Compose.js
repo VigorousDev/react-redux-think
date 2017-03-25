@@ -52,7 +52,13 @@ export default class Compose extends React.Component {
     this.props.router.push('/ltr/mailbox/inbox');
   }
 
+  handleEmailChange(e){
+
+  }
+
   render() {
+    console.log(this.props.location.query.photo);
+    let photo = this.props.location.query.photo ? this.props.location.query.photo : '/imgs/app/avatars/avatar0.png';
     return (
       <PanelContainer className='inbox'>
         <Panel>
@@ -69,10 +75,10 @@ export default class Compose extends React.Component {
                 </Col>
                 <Col xs={4} className='text-right'>
                   <div className='inbox-avatar'>
-                    <img src='/imgs/app/avatars/avatar0.png' width='40' height='40' />
+                    <img src={photo} width='40' height='40' />
                     <div className='inbox-avatar-name hidden-xs hidden-sm'>
-                      <div>Anna Sanchez</div>
-                      <div><small>Compose</small></div>
+                      <div>{this.props.location.query.name}</div>
+                      <div><small>Assistant Director</small></div>
                     </div>
                   </div>
                 </Col>
@@ -88,7 +94,7 @@ export default class Compose extends React.Component {
                         <FormGroup controlId='email-to'>
                           <Col componentClass={ControlLabel} sm={1}>To</Col>
                           <Col sm={11}>
-                            <FormControl type='email' placeholder='Ex: sender@example.com' autoFocus />
+                            <FormControl type='email' placeholder='Ex: sender@example.com' autoFocus onChange={::this.handleEmailChange} value={this.props.location.query.email}/>
                           </Col>
                         </FormGroup>
                         <FormGroup controlId='email-cc' >
