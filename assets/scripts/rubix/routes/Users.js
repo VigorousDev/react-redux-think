@@ -223,7 +223,7 @@ export default class Users extends React.Component {
                 phone: '(323) 555-1211',
                 photo: '/imgs/app/avatars/avatar0.png',
                 about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                schedule_view: true,
+                schedule_view: false,
                 schedule_edit: false,
             },
             {
@@ -235,7 +235,7 @@ export default class Users extends React.Component {
                 photo: '/imgs/app/avatars/avatar1.png',
                 about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 schedule_view: false,
-                schedule_edit: true,
+                schedule_edit: false,
             },
             {
                 uid: '103',
@@ -245,8 +245,8 @@ export default class Users extends React.Component {
                 phone: '(323) 555-1213',
                 photo: '/imgs/app/avatars/avatar2.png',
                 about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                schedule_view: true,
-                schedule_edit: true,
+                schedule_view: false,
+                schedule_edit: false,
             },
             {
                 uid: '104',
