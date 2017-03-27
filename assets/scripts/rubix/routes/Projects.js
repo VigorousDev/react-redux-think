@@ -183,12 +183,12 @@ class ProjectsComponent extends React.Component {
                 <ModalDialog ref={(c) => self.modalDialog = c} callbackModal={::self.callbackModal}/>
                 <BootstrapTable data={projects} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow pagination>
                     <TableHeaderColumn isKey dataField='pid' hidden>ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField='pid' width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
                     <TableHeaderColumn dataField='current' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_current}>Current</TableHeaderColumn>
-                    <TableHeaderColumn dataField='owner_name' width='250' dataFormat={formatter_owner}>Owner</TableHeaderColumn>
-                    <TableHeaderColumn dataField='users' width='80' dataSort={true} dataFormat={formatter_users}>Users</TableHeaderColumn>
-                    <TableHeaderColumn dataField='time' width='180' dataSort={true}>Created</TableHeaderColumn>
+                    <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>
+                    <TableHeaderColumn columnClassName="hidden-xs" className="hidden-xs" dataField='time' width='180' dataSort={true}>Created</TableHeaderColumn>
+                    <TableHeaderColumn columnClassName="hidden-xs" className="hidden-xs" dataField='users' width='80' dataSort={true} dataAlign='center' dataFormat={formatter_users}>Users</TableHeaderColumn>
+                    <TableHeaderColumn columnClassName="hidden-xs" className="hidden-xs" dataField='owner_name' width='250' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
+                    <TableHeaderColumn dataField='pid' width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
                 </BootstrapTable>
                 <div className='space-for-pagination'/>
             </div>

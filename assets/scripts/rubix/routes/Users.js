@@ -134,7 +134,7 @@ class UsersComponent extends React.Component {
                     <TableHeaderColumn isKey dataField='uid' hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='status' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_status}>Status</TableHeaderColumn>
                     <TableHeaderColumn dataField='name' width='250' dataSort={true} dataFormat={formatter_name}>Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField='messaging' dataSort={false} dataFormat={formatter_messaging}>Messaging</TableHeaderColumn>
+                    <TableHeaderColumn dataField='messaging' dataSort={false} dataAlign='center' dataFormat={formatter_messaging}>Messaging</TableHeaderColumn>
                 </BootstrapTable>
                 <div className='space-for-pagination'/>
             </div>
