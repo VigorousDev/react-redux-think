@@ -11,7 +11,6 @@ import {
 import { Link, withRouter } from 'react-router';
 
 import ChatComponent from './chat';
-import NotificationsComponent from './notifications';
 
 @withRouter
 class ApplicationSidebar extends React.Component {
@@ -34,6 +33,7 @@ class ApplicationSidebar extends React.Component {
               <FormControl type='text' placeholder='Search...' onChange={::this.handleChange} className='sidebar-search' style={{border: 'none', background: 'none', margin: '10px 0 0 0', borderBottom: '1px solid #666', color: 'white'}} />
               <div className='sidebar-nav-container'>
                 <SidebarNav style={{marginBottom: 0}} ref={(c) => this._nav = c}>
+                  <div className='sidebar-header'>PAGES</div>
                   <SidebarNavItem glyph='icon-fontello-home' name='Home' href={::this.getPath('dashboard')} />
                   <SidebarNavItem glyph='icon-flatline-film' name={<span>Project</span>}>
                     <SidebarNav>
@@ -81,7 +81,6 @@ export default class SidebarContainer extends React.Component {
         <SidebarControls>
           <SidebarControlBtn bundle='fontello' glyph='docs' sidebar={0} />
           <SidebarControlBtn bundle='fontello' glyph='users-1' sidebar={1} />
-          <SidebarControlBtn bundle='fontello' glyph='bell-5' sidebar={2} />
         </SidebarControls>
         <div id='sidebar-container'>
           <Sidebar sidebar={0}>
@@ -89,9 +88,6 @@ export default class SidebarContainer extends React.Component {
           </Sidebar>
           <Sidebar sidebar={1}>
             <ChatComponent />
-          </Sidebar>
-          <Sidebar sidebar={2}>
-            <NotificationsComponent />
           </Sidebar>
         </div>
       </div>

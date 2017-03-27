@@ -31,7 +31,7 @@ export class ModalDialog extends React.Component {
                 case 'Projects':
                     data = {
                         pid: 'newID' + (newID++),
-                        current: 'Switch',
+                        current: 'Active',
                         name: 'New Project-' + newID,
                         time: 'newTime',
                         users: 0,
@@ -96,7 +96,7 @@ export class ModalDialog extends React.Component {
                 title = isEdit ? 'Edit Project' : 'New Project';
                 description = isEdit ? 'Would you like to rename your project?' : 'What would you like to call your new project?';
                 let name = data ? data.name : '';
-                let current = data ? data.current : 'Switch';
+                let current = data ? data.current : 'Active';
                 let ownerName = data ? data.owner_name : '';
                 let formName = <FormGroup controlId="frmName">
                             <Col sm={3} componentClass={ControlLabel}>Project Name</Col>
@@ -125,7 +125,6 @@ export class ModalDialog extends React.Component {
                     <Form horizontal>
                         {formName}
                         {formCurrent}
-                        {formOwnerName}
                     </Form>;                
                 break;
             case 'Users':

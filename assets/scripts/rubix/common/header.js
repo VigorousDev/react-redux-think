@@ -125,7 +125,7 @@ class NotificationsMenu extends React.Component {
   render() {
     const bullhornIcon = (
       <span>
-        <Icon bundle='fontello' glyph='bullhorn' />
+        <Icon bundle='fontello' glyph='bell-5' />
         <Badge className='fg-darkbrown bg-orange notification-badge'>3</Badge>
       </span>
     );

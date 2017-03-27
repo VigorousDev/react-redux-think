@@ -19,6 +19,7 @@ import {
   PanelContainer,
 } from '@sketchpixy/rubix';
 import { withRouter } from 'react-router';
+@withRouter
 class UsersComponent extends React.Component {  
     constructor(props){
         super(props);        
@@ -70,6 +71,12 @@ class UsersComponent extends React.Component {
         }
         this.updateUsers(users);
     }
+
+    sendMessage(row){
+        if(!row)
+            return;
+        this.props.router.push('/ltr/mailbox/compose?email=' + row.email + '&name=' + row.name + '&photo=' + row.photo);
+    }
     
     render() {
         let self = this;
@@ -102,6 +109,13 @@ class UsersComponent extends React.Component {
         var formatter_status = function(status, row){
             return <Label style={{fontSize:11}} className={status=='Online' ? 'bg-darkgreen45 fg-white' : 'bg-darkgray25 fg-black'}>{status}</Label>;
         }
+        var formatter_messaging = function(uid, row){
+            return (
+                <Button bsStyle='green' onClick={self.sendMessage.bind(self, row)} block>
+                    <Icon style={{fontSize: 14}} glyph={'icon-feather-mail'} />&nbsp;&nbsp;Send Message
+                </Button>
+            );
+        }
         return (
             <div className='page-users'>
                 <div className='controlpanel'>
@@ -118,10 +132,9 @@ class UsersComponent extends React.Component {
                 <ModalDialog ref={(c) => self.modalDialog = c} callbackModal={::self.callbackModal}/>
                 <BootstrapTable data={users} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow pagination>
                     <TableHeaderColumn isKey dataField='uid' hidden>ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='name' width='250' dataSort={true} dataFormat={formatter_name}>Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField='email' width='180' dataSort={true} dataFormat={formatter_email}>Email</TableHeaderColumn>
-                    <TableHeaderColumn dataField='phone' width='180' dataSort={true} dataFormat={formatter_phone}>Phone</TableHeaderColumn>
                     <TableHeaderColumn dataField='status' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_status}>Status</TableHeaderColumn>
+                    <TableHeaderColumn dataField='name' width='250' dataSort={true} dataFormat={formatter_name}>Name</TableHeaderColumn>
+                    <TableHeaderColumn dataField='messaging' dataSort={false} dataFormat={formatter_messaging}>Messaging</TableHeaderColumn>
                 </BootstrapTable>
                 <div className='space-for-pagination'/>
             </div>
@@ -142,8 +155,11 @@ class UserComponent extends React.Component {
     }
 
     onScheduleChanged(obj, e){
-        var {user} = this.state;        
+        var {user} = this.state;
         user[e.target.id] = e.target.checked;
+        if(e.target.id == 'schedule_view' && e.target.checked == false){
+            user['schedule_edit'] = false;
+        }
         this.props.onScheduleChanged(user);        
     }
 
@@ -181,7 +197,9 @@ class UserComponent extends React.Component {
                         <div>
                             <strong>Permissions</strong>
                             <hr/>
-                            <Icon style={{fontSize: 16}} glyph={'icon-feather-align-justify'}/> Schedule
+                            <h4>
+                                <Icon style={{fontSize: 24}} glyph={'icon-feather-align-justify'}/> Schedule
+                            </h4>
                             <div>
                                 <Row>
                                     <Col xs={6}>
@@ -193,7 +211,7 @@ class UserComponent extends React.Component {
                                 </Row>
                             </div>
                             <div className='text-center'>
-                                <Button bsStyle='danger' block>
+                                <Button bsStyle='danger' block outlined>
                                     <Icon style={{fontSize: 14}} glyph={'icon-fontello-warning-empty'} />&nbsp;&nbsp;Remove From Schedule
                                 </Button>
                             </div>
@@ -224,7 +242,7 @@ export default class Users extends React.Component {
                 phone: '(323) 555-1211',
                 photo: '/imgs/app/avatars/avatar0.png',
                 about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                schedule_view: false,
+                schedule_view: true,
                 schedule_edit: false,
             },
             {
@@ -235,7 +253,7 @@ export default class Users extends React.Component {
                 phone: '(323) 555-1212',
                 photo: '/imgs/app/avatars/avatar1.png',
                 about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                schedule_view: false,
+                schedule_view: true,
                 schedule_edit: false,
             },
             {
@@ -246,7 +264,7 @@ export default class Users extends React.Component {
                 phone: '(323) 555-1213',
                 photo: '/imgs/app/avatars/avatar2.png',
                 about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                schedule_view: false,
+                schedule_view: true,
                 schedule_edit: false,
             },
             {
@@ -257,7 +275,7 @@ export default class Users extends React.Component {
                 phone: '(323) 555-1214',
                 photo: '/imgs/app/avatars/avatar3.png',
                 about: 'User104 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                schedule_view: false,
+                schedule_view: true,
                 schedule_edit: false,
             }
         ];
