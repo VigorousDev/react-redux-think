@@ -25,6 +25,7 @@ import Compose from './rubix/routes/Compose';
 
 import Projects from './rubix/routes/Projects';
 import Users from './rubix/routes/Users';
+import Schedules from './rubix/routes/Schedules';
 
 
 import Gallery from './rubix/routes/backup/Gallery';
@@ -95,6 +96,8 @@ const routes = (
     <Route path='mailbox/compose' component={Compose} />
     <Route path='projects' component={Projects} />
     <Route path='users' component={Users} />
+    <Route path='schedules' component={Schedules} />
+    <Route path='importscript' component={Schedules} />
 
     <Route path='gallery' component={Gallery} />
     <Route path='blog/posts' component={Posts} />
@@ -162,7 +165,7 @@ export default function({dispatch, getState}) {
     //   dispatch(FETCH_SESSION()).then(check, check)
     // }
   }
-  return (    
+  return (
     <Route path='/' component={Root}>
       <IndexRoute component={Dashboard} onEnter={requireLogin}/>
 	    <Route path='/ltr'>

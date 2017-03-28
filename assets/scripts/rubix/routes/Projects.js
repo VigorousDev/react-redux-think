@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-// import moment from 'moment-timezone';
+// import moment from 'moment-created_timezone';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {customMultiSelect} from '../../core/components/Checkbox';
 import {ModalDialog} from '../../core/components/ModalDialog';
@@ -26,7 +26,7 @@ class ProjectsComponent extends React.Component {
                     pid: '101',
                     current: 'Active',
                     name: 'It\'s A Wonderful Life',
-                    time: '01.08.2017 10:04AM',
+                    created_time: '01.08.2017 10:04AM',
                     users: 8,
                     owner_picture: '/imgs/app/avatars/avatar0.png',
                     owner_name: 'John Smith1'
@@ -35,7 +35,7 @@ class ProjectsComponent extends React.Component {
                     pid: '102',
                     current: 'Switch',
                     name: '2Casablanca',
-                    time: '01.09.2017 09:23AM',
+                    created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar1.png',
                     owner_name: 'John Smith2'
@@ -44,7 +44,7 @@ class ProjectsComponent extends React.Component {
                     pid: '103',
                     current: 'Switch',
                     name: '3Casablanca',
-                    time: '01.09.2017 09:23AM',
+                    created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar2.png',
                     owner_name: 'John Smith3'
@@ -53,7 +53,7 @@ class ProjectsComponent extends React.Component {
                     pid: '4',
                     current: 'Switch',
                     name: '4Casablanca',
-                    time: '01.09.2017 09:23AM',
+                    created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar3.png',
                     owner_name: 'John Smith4'
@@ -62,7 +62,7 @@ class ProjectsComponent extends React.Component {
                     pid: '5',
                     current: 'Switch',
                     name: '5Casablanca',
-                    time: '01.09.2017 09:23AM',
+                    created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar4.png',
                     owner_name: 'John Smith5'
@@ -71,7 +71,7 @@ class ProjectsComponent extends React.Component {
                     pid: '6',
                     current: 'Switch',
                     name: '6Casablanca',
-                    time: '01.09.2017 09:23AM',
+                    created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar5.png',
                     owner_name: 'John Smith6'
@@ -80,7 +80,7 @@ class ProjectsComponent extends React.Component {
                     pid: '7',
                     current: 'Switch',
                     name: '7Casablanca',
-                    time: '01.09.2017 09:23AM',
+                    created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar6.png',
                     owner_name: 'John Smith7'
@@ -89,7 +89,7 @@ class ProjectsComponent extends React.Component {
                     pid: '1002',
                     current: 'Switch',
                     name: '8Casablanca',
-                    time: '01.09.2017 09:23AM',
+                    created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar7.png',
                     owner_name: 'John Smith8'
@@ -185,7 +185,7 @@ class ProjectsComponent extends React.Component {
                     <TableHeaderColumn isKey dataField='pid' hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='current' width='100' dataSort={true} dataAlign='center' dataFormat={formatter_current}>Current</TableHeaderColumn>
                     <TableHeaderColumn dataField='name' dataSort={true}>Project Name</TableHeaderColumn>
-                    <TableHeaderColumn columnClassName="hidden-xs" className="hidden-xs" dataField='time' width='180' dataSort={true}>Created</TableHeaderColumn>
+                    <TableHeaderColumn columnClassName="hidden-xs" className="hidden-xs" dataField='created_time' width='180' dataSort={true}>Created</TableHeaderColumn>
                     <TableHeaderColumn columnClassName="hidden-xs" className="hidden-xs" dataField='users' width='80' dataSort={true} dataAlign='center' dataFormat={formatter_users}>Users</TableHeaderColumn>
                     <TableHeaderColumn columnClassName="hidden-xs" className="hidden-xs" dataField='owner_name' width='250' dataFormat={formatter_owner} dataAlign='center'>Owner</TableHeaderColumn>
                     <TableHeaderColumn dataField='pid' width='100' dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>

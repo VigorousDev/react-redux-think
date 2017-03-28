@@ -52,6 +52,15 @@ export class ModalDialog extends React.Component {
                         schedule_edit: false,
                     }
                     break;
+                case 'Schedules':
+                    data = {
+                        sid: 'newID' + (newID++),
+                        name: 'New Schedule-' + newID,
+                        shoot_days: 0,
+                        created_time: '01.08.2017 10:04AM',
+                        owner_name: 'New Owner' + newID
+                    }
+                    break;
                 default:
                     break;
             }
@@ -140,6 +149,22 @@ export class ModalDialog extends React.Component {
                         <div>Enter email addresses below, separating them with a comma. You'll be notified when they've accepted.</div>
                         {formEmails}
                     </Form>;
+                break;
+            case 'Schedules':
+                title = isEdit ? 'Edit Schedule' : 'New Schedule';
+                description = isEdit ? 'Would you like to rename your schedule?' : 'What would you like to call your new schedule?';
+                name = data ? data.name : '';
+                formName = <FormGroup controlId="frmName">
+                            <Col sm={3} componentClass={ControlLabel}>Schedule Name</Col>
+                            <Col sm={9}>
+                                <FormControl autoFocus type='text' value={name} onChange={this.handleChange.bind(this, 'name')}/>
+                            </Col>
+                        </FormGroup>                
+                formContent = 
+                    <Form horizontal>
+                        {formName}
+                    </Form>;                
+                break;
                 break;
             default:
                 break;

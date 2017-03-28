@@ -41,7 +41,12 @@ class ApplicationSidebar extends React.Component {
                       <SidebarNavItem name='Users' href={::this.getPath('users')} />
                     </SidebarNav>
                   </SidebarNavItem>
-                  <SidebarNavItem glyph='icon-feather-align-justify' name='Schedule' href={::this.getPath('schedule')} />                  
+                  <SidebarNavItem glyph='icon-feather-align-justify' name={<span>Schedule</span>}>
+                    <SidebarNav>
+                      <SidebarNavItem name='Schedules' href={::this.getPath('schedules')} />
+                      <SidebarNavItem name='Import Script' href={::this.getPath('importscript')} />
+                    </SidebarNav>
+                  </SidebarNavItem>
                 </SidebarNav>
               </div>
             </Col>
