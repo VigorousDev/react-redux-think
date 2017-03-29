@@ -18,6 +18,7 @@ import {
   PanelHeader,
   PanelContainer,
 } from '@sketchpixy/rubix';
+import { withRouter } from 'react-router';
 class ProjectsComponent extends React.Component {  
     constructor(props){
         super(props);
@@ -171,7 +172,7 @@ class ProjectsComponent extends React.Component {
             <div className='page-projects'>
                 <div className='controlpanel'>
                     <div className='left'>
-                        <h5>All of your projects</h5>
+                        <h4>All of your projects</h4>
                     </div>
                     <div className='right'>
                         <Button outlined bsStyle='primary' onClick={self.launchModal.bind(self, false, 0)}>
@@ -195,9 +196,10 @@ class ProjectsComponent extends React.Component {
         );
     }
 }
-
+@withRouter
 export default class Projects extends React.Component {
   render() {
+    console.log('props =', this.props);
     return (
         <Row>
             <Col xs={12}>

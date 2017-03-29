@@ -120,7 +120,7 @@ class UsersComponent extends React.Component {
             <div className='page-users'>
                 <div className='controlpanel'>
                     <div className='left'>
-                        <h5>All users in the project</h5>
+                        <h4>All users in the project</h4>
                     </div>
                     <div className='right'>
                         <Button outlined bsStyle='primary' onClick={self.launchModal.bind(self, false, 0)}>

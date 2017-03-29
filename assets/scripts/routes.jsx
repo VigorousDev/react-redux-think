@@ -26,6 +26,7 @@ import Compose from './rubix/routes/Compose';
 import Projects from './rubix/routes/Projects';
 import Users from './rubix/routes/Users';
 import Schedules from './rubix/routes/Schedules';
+import ImportScript from './rubix/routes/ImportScript';
 
 
 import Gallery from './rubix/routes/backup/Gallery';
@@ -97,7 +98,7 @@ const routes = (
     <Route path='projects' component={Projects} />
     <Route path='users' component={Users} />
     <Route path='schedules' component={Schedules} />
-    <Route path='importscript' component={Schedules} />
+    <Route path='importscript' component={ImportScript} />
 
     <Route path='gallery' component={Gallery} />
     <Route path='blog/posts' component={Posts} />

@@ -81,10 +81,10 @@ class SchedulesComponent extends React.Component {
         this.setState({schedules: schedules});
     }
 
-    sendMessage(row){
+    openSchedule(row){
         if(!row)
             return;
-        this.props.router.push('/ltr/mailbox/compose?email=' + row.email + '&name=' + row.name + '&photo=' + row.photo);
+        // this.props.router.push('/ltr/mailbox/compose?email=' + row.email + '&name=' + row.name + '&photo=' + row.photo);
     }
     
     render() {
@@ -113,7 +113,7 @@ class SchedulesComponent extends React.Component {
         }
         var formatter_open = function(sid, row){
             return (
-                <Button bsStyle='green' onClick={self.sendMessage.bind(self, row)} block>
+                <Button bsStyle='green' onClick={self.openSchedule.bind(self, row)} block>
                     Open Schedule
                 </Button>
             );
@@ -129,7 +129,7 @@ class SchedulesComponent extends React.Component {
             <div className='page-schedules'>
                 <div className='controlpanel'>
                     <div className='left'>
-                        <h5>Schedules for </h5>
+                        <h4>Schedules for </h4>
                     </div>
                     <div className='right'>
                         <Button outlined bsStyle='primary' onClick={self.launchModal.bind(self, false, 0)}>
