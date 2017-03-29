@@ -111,7 +111,7 @@ class SchedulesComponent extends React.Component {
     openSchedule(row){
         if(!row)
             return;
-        this.props.router.push('/ltr/scehdule');
+        this.props.router.push('/ltr/schedule');
     }
 
     createCustomButtonGroup(props){
