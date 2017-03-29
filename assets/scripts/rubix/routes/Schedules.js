@@ -27,21 +27,24 @@ class SchedulesComponent extends React.Component {
                     name: 'Locked White',
                     shoot_days: 31,
                     created_time: '01.08.2017 10:04AM',
-                    owner_name: 'John Smith'
+                    owner_name: 'John Smith',
+                    checked: false
                 },
                 {
                     sid: '102',
                     name: 'Prelim Blue Draft',
                     shoot_days: 30,
                     created_time: '01.09.2017 10:04AM',
-                    owner_name: 'John Smith'
+                    owner_name: 'John Smith',
+                    checked: false
                 },
                 {
                     sid: '103',
                     name: 'Locked Blue',
                     shoot_days: 28,
                     created_time: '01.12.2017 10:04AM',
-                    owner_name: 'John Smith1'
+                    owner_name: 'John Smith1',
+                    checked: false
                 }
             ];
         this.state = {
@@ -52,12 +55,34 @@ class SchedulesComponent extends React.Component {
         };
     }
 
-    onAfterDeleteRow(rowKeys) {
-        var {schedules} = this.state;        
-        _.map(rowKeys, function(item){            
-            _.remove(schedules, {sid: item});
+    onSelectOne(row, isSelected, e) {
+        var {schedules} = this.state;
+        var index = _.indexOf(schedules, _.find(schedules, {sid: row.sid}));
+        if(index >= 0){
+            schedules[index].checked = isSelected;
+            this.setState({schedules: schedules});
+        }else{
+            console.log('Not found in array', row);
+        }
+    }
+
+    onSelectAll(isSelected, rows) {
+        var {schedules} = this.state;
+        _.map(rows, function(row){
+            var index = _.indexOf(schedules, _.find(schedules, {sid: row.sid}));
+            if(index >= 0){
+                schedules[index].checked = isSelected;
+            }
         });
         this.setState({schedules: schedules});
+    }
+
+    onDeleteRows(props){
+        var {schedules} = this.state;
+        var newArray = schedules.filter(function(schedule) {
+            return !schedule.checked;
+        });
+        this.setState({schedules: newArray});
     }
 
     launchModal(isEdit, sid) {
@@ -86,20 +111,42 @@ class SchedulesComponent extends React.Component {
             return;
         // this.props.router.push('/ltr/mailbox/compose?email=' + row.email + '&name=' + row.name + '&photo=' + row.photo);
     }
+
+    createCustomButtonGroup(props){
+        return (
+            <ButtonGroup className='datatable-btn-panel' sizeClass='btn-group-sm'>                
+                <Button bsStyle='primary'>
+                    <Icon style={{fontSize: 14}} glyph={'icon-fontello-doc-1'} />&nbsp;PDF
+                </Button>
+                <Button bsStyle='primary'>
+                    <Icon style={{fontSize: 14}} glyph={'icon-fontello-export-4'} />&nbsp;Export
+                </Button>
+                <Button bsStyle='primary'>
+                    <Icon style={{fontSize: 14}} glyph={'icon-fontello-docs-1'} />&nbsp;Duplicate
+                </Button>
+                <Button bsStyle='primary' onClick={this.onDeleteRows.bind(this)}>
+                    <Icon style={{fontSize: 14}} glyph={'icon-fontello-trash-1'} />&nbsp;Delete
+                </Button>
+            </ButtonGroup>
+        );
+    }    
     
     render() {
         let self = this;
         var {schedules} = this.state;
+        console.log('Rendering = ', schedules); 
 
         const options = {
             clearSearch: true,
-            afterDeleteRow: this.onAfterDeleteRow.bind(this)   // A hook for after insert rows
+            btnGroup: this.createCustomButtonGroup.bind(this)
         };
         const selectRowProp = {
             mode: 'checkbox',
             clickToSelect: false,
-            customComponent: customMultiSelect
-        };        
+            customComponent: customMultiSelect,
+            onSelect: this.onSelectOne.bind(this),
+            onSelectAll: this.onSelectAll.bind(this)
+        };
         
         var formatter_shoot_days = function(shoot_days){
             return shoot_days + ' Days';
@@ -124,7 +171,8 @@ class SchedulesComponent extends React.Component {
                     <Icon style={{fontSize: 12}} glyph={'icon-fontello-pencil-1'} /> Edit
                 </Button>
             );
-        }        
+        }
+        
         return (
             <div className='page-schedules'>
                 <div className='controlpanel'>
@@ -139,14 +187,16 @@ class SchedulesComponent extends React.Component {
                     </div>
                 </div>
                 <ModalDialog ref={(c) => self.modalDialog = c} callbackModal={::self.callbackModal}/>
-                <BootstrapTable data={schedules} striped hover bordered={false} selectRow={ selectRowProp } tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' options={ options } search deleteRow pagination>
+                <BootstrapTable data={schedules} striped hover bordered={false} selectRow={ selectRowProp } 
+                    tableHeaderClass='custom-select-header-class' tableBodyClass='custom-select-body-class' 
+                    options={ options } search deleteRow pagination>
                     <TableHeaderColumn isKey dataField='sid' hidden>ID</TableHeaderColumn>
                     <TableHeaderColumn dataField='name' dataSort={true}>Schedule Name</TableHeaderColumn>
                     <TableHeaderColumn dataField='shoot_days' width='100' dataSort={true} dataFormat={formatter_shoot_days}>Shoot Days</TableHeaderColumn>
                     <TableHeaderColumn dataField='owner_name' width='120' dataFormat={formatter_owner}>Owner</TableHeaderColumn>
                     <TableHeaderColumn dataField='created_time' width='180' dataSort={true}>Created</TableHeaderColumn>
                     <TableHeaderColumn dataField='sid' width='180' dataSort={false} dataFormat={formatter_open}>Open</TableHeaderColumn>
-                    <TableHeaderColumn dataField='sid' width='100' dataSort={false} dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>                    
+                    <TableHeaderColumn dataField='sid' width='100' dataSort={false} dataFormat={formatter_edit} dataAlign='center'>Edit</TableHeaderColumn>
                 </BootstrapTable>
                 <div className='space-for-pagination'/>
             </div>

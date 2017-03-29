@@ -36,7 +36,8 @@ export class ModalDialog extends React.Component {
                         time: 'newTime',
                         users: 0,
                         owner_picture: '/imgs/app/avatars/avatar' + newID + '.png',
-                        owner_name: 'New Owner' + newID
+                        owner_name: 'New Owner' + newID,
+                        checked: false
                     }
                     break;
                 case 'Users':
@@ -50,6 +51,7 @@ export class ModalDialog extends React.Component {
                         about: 'Invited',
                         schedule_view: false,
                         schedule_edit: false,
+                        checked: false
                     }
                     break;
                 case 'Schedules':
@@ -58,7 +60,8 @@ export class ModalDialog extends React.Component {
                         name: 'New Schedule-' + newID,
                         shoot_days: 0,
                         created_time: '01.08.2017 10:04AM',
-                        owner_name: 'New Owner' + newID
+                        owner_name: 'New Owner' + newID,
+                        checked: false
                     }
                     break;
                 default:

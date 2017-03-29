@@ -30,7 +30,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.08.2017 10:04AM',
                     users: 8,
                     owner_picture: '/imgs/app/avatars/avatar0.png',
-                    owner_name: 'John Smith1'
+                    owner_name: 'John Smith1',
+                    checked: false
                 },
                 {
                     pid: '102',
@@ -39,7 +40,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar1.png',
-                    owner_name: 'John Smith2'
+                    owner_name: 'John Smith2',
+                    checked: false
                 },
                 {
                     pid: '103',
@@ -48,7 +50,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar2.png',
-                    owner_name: 'John Smith3'
+                    owner_name: 'John Smith3',
+                    checked: false
                 },
                 {
                     pid: '4',
@@ -57,7 +60,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar3.png',
-                    owner_name: 'John Smith4'
+                    owner_name: 'John Smith4',
+                    checked: false
                 },
                 {
                     pid: '5',
@@ -66,7 +70,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar4.png',
-                    owner_name: 'John Smith5'
+                    owner_name: 'John Smith5',
+                    checked: false
                 },
                 {
                     pid: '6',
@@ -75,7 +80,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar5.png',
-                    owner_name: 'John Smith6'
+                    owner_name: 'John Smith6',
+                    checked: false
                 },
                 {
                     pid: '7',
@@ -84,7 +90,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar6.png',
-                    owner_name: 'John Smith7'
+                    owner_name: 'John Smith7',
+                    checked: false
                 },
                 {
                     pid: '1002',
@@ -93,7 +100,8 @@ class ProjectsComponent extends React.Component {
                     created_time: '01.09.2017 09:23AM',
                     users: 3,
                     owner_picture: '/imgs/app/avatars/avatar7.png',
-                    owner_name: 'John Smith8'
+                    owner_name: 'John Smith8',
+                    checked: false
                 }
             ];
         this.state = {
@@ -104,12 +112,34 @@ class ProjectsComponent extends React.Component {
         };
     }
 
-    onAfterDeleteRow(rowKeys) {
-        var {projects} = this.state;        
-        _.map(rowKeys, function(item){            
-            _.remove(projects, {pid: item});
+    onSelectOne(row, isSelected, e) {
+        var {projects} = this.state;
+        var index = _.indexOf(projects, _.find(projects, {pid: row.pid}));
+        if(index >= 0){
+            projects[index].checked = isSelected;
+            this.setState({projects: projects});
+        }else{
+            console.log('Not found in array', row);
+        }
+    }
+
+    onSelectAll(isSelected, rows) {
+        var {projects} = this.state;
+        _.map(rows, function(row){
+            var index = _.indexOf(projects, _.find(projects, {pid: row.pid}));
+            if(index >= 0){
+                projects[index].checked = isSelected;
+            }
         });
         this.setState({projects: projects});
+    }
+
+    onDeleteRows(props){
+        var {projects} = this.state;
+        var newArray = projects.filter(function(project) {
+            return !project.checked;
+        });
+        this.setState({projects: newArray});
     }
 
     launchModal(isEdit, pID) {
@@ -132,6 +162,16 @@ class ProjectsComponent extends React.Component {
         }
         this.setState({projects: projects});
     }
+
+    createCustomButtonGroup(props){
+        return (
+            <ButtonGroup className='datatable-btn-panel' sizeClass='btn-group-sm'>
+                <Button bsStyle='primary' onClick={this.onDeleteRows.bind(this)}>
+                    <Icon style={{fontSize: 14}} glyph={'icon-fontello-trash-1'} />&nbsp;Delete
+                </Button>
+            </ButtonGroup>
+        );
+    }  
     
     render() {
         let self = this;
@@ -139,12 +179,14 @@ class ProjectsComponent extends React.Component {
 
         const options = {
             clearSearch: true,
-            afterDeleteRow: this.onAfterDeleteRow.bind(this)   // A hook for after insert rows
+            btnGroup: this.createCustomButtonGroup.bind(this)
         };
         const selectRowProp = {
             mode: 'checkbox',
             clickToSelect: false,
-            customComponent: customMultiSelect
+            customComponent: customMultiSelect,
+            onSelect: this.onSelectOne.bind(this),
+            onSelectAll: this.onSelectAll.bind(this)
         };
         
         var formatter_current = function(current, row){
@@ -199,7 +241,6 @@ class ProjectsComponent extends React.Component {
 @withRouter
 export default class Projects extends React.Component {
   render() {
-    console.log('props =', this.props);
     return (
         <Row>
             <Col xs={12}>

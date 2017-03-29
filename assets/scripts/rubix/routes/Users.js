@@ -31,11 +31,12 @@ class UsersComponent extends React.Component {
         };
     }
 
-    componentDidUpdate(){
-        // this.setState({users: this.props.users});
+    componentWillReceiveProps(nextProps){
+        this.setState({users: nextProps.users});
     }
 
     updateUsers(users){
+        console.log(users);
         this.props.onUsersChange(users);
     }
 
@@ -43,12 +44,34 @@ class UsersComponent extends React.Component {
         this.props.onUserClick(user);
     }
 
-    onAfterDeleteRow(rowKeys) {
+    onSelectOne(row, isSelected, e) {
         var {users} = this.state;
-        _.map(rowKeys, function(item){
-            _.remove(users, {uid: item});
+        var index = _.indexOf(users, _.find(users, {uid: row.uid}));
+        if(index >= 0){
+            users[index].checked = isSelected;
+        }else{
+            console.log('Not found in array', row);
+        }
+        this.props.onUsersChange(users);
+    }
+
+    onSelectAll(isSelected, rows) {
+        var {users} = this.state;
+        _.map(rows, function(row){
+            var index = _.indexOf(users, _.find(users, {uid: row.uid}));
+            if(index >= 0){
+                users[index].checked = isSelected;
+            }
         });
-        this.updateUsers.bind(this, users);
+        this.props.onUsersChange(users);
+    }
+    
+    onDeleteRows(props){
+        var {users} = this.state;
+        var newArray = users.filter(function(user) {
+            return !user.checked;
+        });
+        this.props.onUsersChange(newArray);
     }
 
     launchModal(isEdit, pID) {
@@ -72,6 +95,16 @@ class UsersComponent extends React.Component {
         this.updateUsers(users);
     }
 
+    createCustomButtonGroup(props){
+        return (
+            <ButtonGroup className='datatable-btn-panel' sizeClass='btn-group-sm'>
+                <Button bsStyle='primary' onClick={this.onDeleteRows.bind(this)}>
+                    <Icon style={{fontSize: 14}} glyph={'icon-fontello-trash-1'} />&nbsp;Delete
+                </Button>
+            </ButtonGroup>
+        );
+    }
+
     sendMessage(row){
         if(!row)
             return;
@@ -84,12 +117,14 @@ class UsersComponent extends React.Component {
 
         const options = {
             clearSearch: true,
-            afterDeleteRow: this.onAfterDeleteRow.bind(this)   // A hook for after insert rows
+            btnGroup: this.createCustomButtonGroup.bind(this)
         };
         const selectRowProp = {
             mode: 'checkbox',
             clickToSelect: false,
-            customComponent: customMultiSelect
+            customComponent: customMultiSelect,
+            onSelect: this.onSelectOne.bind(this),
+            onSelectAll: this.onSelectAll.bind(this)
         };
 
         var formatter_name = function (name, row) {
@@ -244,6 +279,7 @@ export default class Users extends React.Component {
                 about: 'User101 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 schedule_view: true,
                 schedule_edit: false,
+                checked: false
             },
             {
                 uid: '102',
@@ -255,6 +291,7 @@ export default class Users extends React.Component {
                 about: 'User102 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 schedule_view: true,
                 schedule_edit: false,
+                checked: false
             },
             {
                 uid: '103',
@@ -266,6 +303,7 @@ export default class Users extends React.Component {
                 about: 'User103 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 schedule_view: true,
                 schedule_edit: false,
+                checked: false
             },
             {
                 uid: '104',
@@ -277,6 +315,7 @@ export default class Users extends React.Component {
                 about: 'User104 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                 schedule_view: true,
                 schedule_edit: false,
+                checked: false
             }
         ];
         this.state = {
@@ -286,7 +325,7 @@ export default class Users extends React.Component {
     }
 
     updateUsers(users){
-        // console.log('users updated=', users);
+        console.log('users updated=', users);
         this.setState({users: users});
     }
 
