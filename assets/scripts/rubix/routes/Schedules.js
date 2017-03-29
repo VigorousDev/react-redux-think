@@ -18,6 +18,8 @@ import {
   PanelHeader,
   PanelContainer,
 } from '@sketchpixy/rubix';
+import { withRouter } from 'react-router';
+@withRouter
 class SchedulesComponent extends React.Component {  
     constructor(props){
         super(props);
@@ -109,7 +111,7 @@ class SchedulesComponent extends React.Component {
     openSchedule(row){
         if(!row)
             return;
-        // this.props.router.push('/ltr/mailbox/compose?email=' + row.email + '&name=' + row.name + '&photo=' + row.photo);
+        this.props.router.push('/ltr/scehdule');
     }
 
     createCustomButtonGroup(props){

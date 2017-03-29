@@ -13,7 +13,7 @@ import {
   PanelContainer,
 } from '@sketchpixy/rubix';
 
-export default class Dropzonejs extends React.Component {
+export default class ImportScript extends React.Component {
   componentDidMount() {
     $('#my-awesome-dropzone').dropzone({
       paramName: "file", // The name that will be used to transfer the file

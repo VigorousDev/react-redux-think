@@ -36,7 +36,6 @@ class UsersComponent extends React.Component {
     }
 
     updateUsers(users){
-        console.log(users);
         this.props.onUsersChange(users);
     }
 
@@ -325,7 +324,6 @@ export default class Users extends React.Component {
     }
 
     updateUsers(users){
-        console.log('users updated=', users);
         this.setState({users: users});
     }
 
