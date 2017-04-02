@@ -242,23 +242,17 @@ class ProjectsComponent extends React.Component {
 export default class Projects extends React.Component {
   render() {
     return (
-        <Row>
-            <Col xs={12}>
-                <PanelContainer controls={false}>
-                    <Panel>
-                        <PanelBody>
-                            <Grid>
-                                <Row>
-                                    <Col xs={12}>
-                                        <ProjectsComponent />
-                                    </Col>
-                                </Row>
-                            </Grid>
-                        </PanelBody>
-                    </Panel>
-                </PanelContainer>
-            </Col>
-        </Row>
+        <Grid>
+            <PanelContainer controls={false}>
+                <Panel>
+                    <PanelBody>
+                        <Grid>                            
+                            <ProjectsComponent />
+                        </Grid>
+                    </PanelBody>
+                </Panel>
+            </PanelContainer>
+        </Grid>
     );
   }
 }

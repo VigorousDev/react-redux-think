@@ -60,6 +60,7 @@ export default class Compose extends React.Component {
     console.log(this.props.location.query.photo);
     let photo = this.props.location.query.photo ? this.props.location.query.photo : '/imgs/app/avatars/avatar0.png';
     return (
+      <Grid>
       <PanelContainer className='inbox'>
         <Panel>
           <PanelBody style={{paddingTop: 0}}>
@@ -142,6 +143,7 @@ export default class Compose extends React.Component {
           </PanelBody>
         </Panel>
       </PanelContainer>
+      </Grid>
     );
   }
 }

@@ -60,6 +60,7 @@ export default class Homepage extends React.Component {
 
   render() {
     return (
+      <Grid>
       <div id='homepage-container'>
         <Button bsStyle='deepred' id='demo-btn' onClick={::this.handleNavigation}>View Demo</Button>
         <div>
@@ -367,6 +368,7 @@ export default class Homepage extends React.Component {
           </Hero>
         </div>
       </div>
+      </Grid>
     );
   }
 }

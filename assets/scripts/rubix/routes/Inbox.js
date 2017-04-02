@@ -103,7 +103,7 @@ export default class Inbox extends React.Component {
 
   render() {
     return (
-      <div>
+      <Grid>
         <PanelContainer className='inbox' collapseBottom>
           <Panel>
             <PanelBody style={{paddingTop: 0}}>
@@ -208,7 +208,7 @@ export default class Inbox extends React.Component {
             </PanelBody>
           </Panel>
         </PanelContainer>
-      </div>
+      </Grid>
     );
   }
 }

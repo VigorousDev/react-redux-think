@@ -100,6 +100,7 @@ export default class Social extends React.Component {
 
   render() {
     return (
+      <Grid>
       <Row className='social'>
         <SocialBanner />
         <Col xs={12}>
@@ -305,6 +306,7 @@ export default class Social extends React.Component {
           </Row>
         </Col>
       </Row>
+      </Grid>
     );
   }
 }

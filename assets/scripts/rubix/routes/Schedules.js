@@ -136,7 +136,6 @@ class SchedulesComponent extends React.Component {
     render() {
         let self = this;
         var {schedules} = this.state;
-        console.log('Rendering = ', schedules); 
 
         const options = {
             clearSearch: true,
@@ -209,23 +208,17 @@ class SchedulesComponent extends React.Component {
 export default class Schedules extends React.Component {
   render() {
     return (
-        <Row>
-            <Col xs={12}>
-                <PanelContainer controls={false}>
-                    <Panel>
-                        <PanelBody>
-                            <Grid>
-                                <Row>
-                                    <Col xs={12}>
-                                        <SchedulesComponent />
-                                    </Col>
-                                </Row>
-                            </Grid>
-                        </PanelBody>
-                    </Panel>
-                </PanelContainer>
-            </Col>
-        </Row>
+        <Grid>
+            <PanelContainer controls={false}>
+            <Panel>
+                <PanelBody>
+                    <Grid>
+                        <SchedulesComponent />
+                    </Grid>
+                </PanelBody>
+            </Panel>
+            </PanelContainer>
+        </Grid>
     );
   }
 }

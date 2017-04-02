@@ -43,6 +43,7 @@ export default class Mail extends React.Component {
 
   render() {
     return (
+      <Grid>
       <PanelContainer className='inbox'>
         <Panel>
           <PanelBody style={{paddingTop: 0}}>
@@ -177,6 +178,7 @@ export default class Mail extends React.Component {
           </PanelBody>
         </Panel>
       </PanelContainer>
+      </Grid>
     );
   }
 }

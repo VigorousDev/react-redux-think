@@ -338,6 +338,7 @@ export default class Users extends React.Component {
     render() {
         let {users, user} = this.state
         return (
+            <Grid>
             <Row>
                 <Col sm={8}>
                     <PanelContainer controls={false}>
@@ -370,6 +371,7 @@ export default class Users extends React.Component {
                     </PanelContainer>
                 </Col>
             </Row>
+            </Grid>
         );
     }
 }

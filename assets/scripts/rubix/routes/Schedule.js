@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import SplitPane from 'react-split-pane-2';
+import {Resize, ResizeVertical, ResizeHorizon} from 'react-resize-layout';
 import {
   Row,
   Col,
@@ -14,22 +14,43 @@ import {
 } from '@sketchpixy/rubix';
 
 export default class Schedule extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      left: '100px'
+    };
+  }
+
   componentDidMount() {
+    // $(ReactDOM.findDOMNode(this.example))
+    // .layout(
+    //   { applyDefaultStyles: true }
+    // );
+    
+  }
+  componentWillUpdate(){
+    console.log('update');
+    
+  }
+
+  resizeClicked(e){
     
   }
 
   render() {
+    var {left} = this.state;
     return (
-        <Row>
-        <Col xs={12}>
-         {/*<SplitPane split="vertical" minSize="50"
-               defaultSize={ localStorage.getItem('splitPos') }
-               onChange={ size => localStorage.setItem('splitPos', size) }>
-            <div></div>
-            <div></div>
-        </SplitPane>*/}
-        </Col>
-        </Row>
+      <Grid>
+      <PanelContainer controls={false}>
+          <Panel>
+              <PanelBody>
+                  <Grid>
+                      sdf
+                  </Grid>
+              </PanelBody>
+          </Panel>
+      </PanelContainer>
+      </Grid>
     );
   }
 }

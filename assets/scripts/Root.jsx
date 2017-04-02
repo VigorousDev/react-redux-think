@@ -31,13 +31,7 @@ class Root extends React.Component {
         <Sidebar/>
         <Header/>
         <div id='body'>
-          <Grid>
-            <Row>
-              <Col xs={12}>
-                {this.props.children}
-              </Col>
-            </Row>
-          </Grid>
+          {this.props.children}          
         </div>
         <Footer/>
       </MainContainer>
