@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Resize, ResizeVertical, ResizeHorizon} from 'react-resize-layout';
 import {
   Row,
   Col,
@@ -16,41 +15,50 @@ import {
 export default class Schedule extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      left: '100px'
-    };
+    
+    $('#container').removeClass('container-open');
+    $('#container').addClass('force-close');
   }
 
   componentDidMount() {
-    // $(ReactDOM.findDOMNode(this.example))
-    // .layout(
-    //   { applyDefaultStyles: true }
-    // );
-    
-  }
-  componentWillUpdate(){
-    console.log('update');
-    
+    $(ReactDOM.findDOMNode(this.example))
+    .layout({ 
+       west: {
+          size: .45,
+          minSize: 541,
+          spacing_closed: 15,
+          togglerContent_closed: 'B<br>r<br>e<br>a<br>k<br>d<br>o<br>w<br>n',
+          togglerLength_closed: 200,
+          showOverflowOnHover: true
+        },
+        south: {
+          initClosed:	true, 
+          spacing_closed: 15,
+          togglerContent_closed: 'Day Out of Days',
+          togglerLength_closed: 200
+        }
+    });    
   }
 
-  resizeClicked(e){
+  componentWillUpdate(){
     
   }
 
   render() {
-    var {left} = this.state;
     return (
-      <Grid>
-      <PanelContainer controls={false}>
-          <Panel>
-              <PanelBody>
-                  <Grid>
-                      sdf
-                  </Grid>
-              </PanelBody>
-          </Panel>
-      </PanelContainer>
-      </Grid>
+      <div className="page-schedule">
+        <div ref={(c) => this.example = c} style={{width:'100%', height:'100%'}}>
+          <div className="pane ui-layout-west">
+            West
+          </div>
+          <div className="pane ui-layout-center">
+            Center
+          </div>
+          <div className="pane ui-layout-south">
+            South
+          </div>          
+        </div>
+      </div>
     );
   }
 }
