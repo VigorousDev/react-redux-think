@@ -1,24 +1,37 @@
 .page-schedule{    
-    height: ~"calc(100vh - 89px)";
+    height: ~"calc(100vh - 45px)";
     margin-top: -24px;
     margin-bottom: -24px;
     .pane{
         display: none;
     }
-    .rubix-panel-container-with-controls{
-        height: 100%;
-        .rubix-panel-container{
-            height: 100%;
-            border-radius: 0px;
-            .rubix-panel-header{
-                border-radius: 0px;
-                margin-bottom: 0px;
-                .nav > li > a {
-                    line-height: 1.5;
-                    padding: 5px;
-                    border-radius: 0px;
-                }
-            }
-        }
+	.tab-container{
+		height: 100%;
+		.tab-content{
+			height: ~"calc(100% - 34px)";
+			background: white;
+		}
+	}
+  .btn-toolbar{
+    .dropdown-menu{
+      width: 220px;
     }
+    .btn{
+      text-transform: none;
+      font-size: 12px;
+      padding: 2px 4px;
+      .rubix-icon ~ span{
+        vertical-align: middle;
+      }
+    }
+    padding: 5px;
+    background: #8798A8;
+    .btn-group{
+      & > .btn{
+        border-radius: 2px !important;
+        margin-right: 5px !important;
+      }
+    }
+  }
+	
 }

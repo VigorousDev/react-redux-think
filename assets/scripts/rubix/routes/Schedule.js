@@ -13,16 +13,20 @@ import {
   Button,
   Icon
 } from '@sketchpixy/rubix';
-import {Breakdown} from './schedule/Breakdown';
+import {Panel_Left, Panel_Right, Panel_Bottom} from './schedule/ScheduleContainer';
 
 export default class Schedule extends React.Component {
   constructor(props){
     super(props);
     $('#container').removeClass('container-open');
     $('#container').addClass('force-close');
-    this.state = {
-      activeTab: ''
-    };
+    $('#footer-container').css('display','none');
+  }
+
+  componentWillUnmount(){
+    // $('#container').removeClass('force-close');
+    // $('#container').addClass('container-open');
+    $('#footer-container').css('display','block');
   }
 
   componentDidMount() {
@@ -48,34 +52,19 @@ export default class Schedule extends React.Component {
     }, 500);    
   }
 
-  handleActiveState(eventKey) {
-    this.setState({
-      activeTab: eventKey
-    });
-  }
-
-  getItemProps(eventKey) {
-    return {
-      eventKey,
-      active: this.state.activeTab === eventKey
-    };
-  }
-
   render() {
     return (
       <div className="page-schedule">
         <div ref={(c) => this.example = c} style={{width:'100%', height:'100%'}}>
           <div className="pane ui-layout-west">
-            <Breakdown/>
+            <Panel_Left/>
           </div>
           <div className="pane ui-layout-center">
-            <div>
-              <p style={{textAlign:'right'}}>Center</p>
-            </div>
+            <Panel_Right/>
           </div>
           <div className="pane ui-layout-south">
-            South
-          </div>          
+            <Panel_Bottom/>
+          </div>   
         </div>
       </div>
     );
