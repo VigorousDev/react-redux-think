@@ -38,11 +38,10 @@ export default class Schedule extends React.Component {
             togglerContent_closed: 'Day Out of Days',
             togglerLength_closed: 200
           }
-      });
-    $(window).trigger('resize');
+      });    
     setTimeout(function(){
-      
-    }, 100);
+      $(window).trigger('resize');
+    }, 500);
   }
 
   render() {
