@@ -10,38 +10,39 @@ import {
   PanelHeader,
   FormControl,
   PanelContainer,
+  Button,
+  Icon
 } from '@sketchpixy/rubix';
 
 export default class Schedule extends React.Component {
   constructor(props){
     super(props);
-    
     $('#container').removeClass('container-open');
     $('#container').addClass('force-close');
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     $(ReactDOM.findDOMNode(this.example))
-    .layout({ 
-       west: {
-          size: .45,
-          minSize: 541,
-          spacing_closed: 15,
-          togglerContent_closed: 'B<br>r<br>e<br>a<br>k<br>d<br>o<br>w<br>n',
-          togglerLength_closed: 200,
-          showOverflowOnHover: true
-        },
-        south: {
-          initClosed:	true, 
-          spacing_closed: 15,
-          togglerContent_closed: 'Day Out of Days',
-          togglerLength_closed: 200
-        }
-    });    
-  }
-
-  componentWillUpdate(){
-    
+      .layout({
+          west: {
+            size: .45,
+            minSize: 541,
+            spacing_closed: 15,
+            togglerContent_closed: 'B<br>r<br>e<br>a<br>k<br>d<br>o<br>w<br>n',
+            togglerLength_closed: 200,
+            showOverflowOnHover: true
+          },
+          south: {
+            initClosed:	true, 
+            spacing_closed: 15,
+            togglerContent_closed: 'Day Out of Days',
+            togglerLength_closed: 200
+          }
+      });
+    $(window).trigger('resize');
+    setTimeout(function(){
+      
+    }, 100);
   }
 
   render() {
@@ -52,7 +53,9 @@ export default class Schedule extends React.Component {
             West
           </div>
           <div className="pane ui-layout-center">
-            Center
+            <div>
+              <p style={{textAlign:'right'}}>Center</p>
+            </div>
           </div>
           <div className="pane ui-layout-south">
             South

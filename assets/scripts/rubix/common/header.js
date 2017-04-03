@@ -28,10 +28,25 @@ import {
   Col } from '@sketchpixy/rubix';
 
 class Brand extends React.Component {
+  toggleSidebar(){
+    if($('#container').hasClass('force-close')){
+      $('#container').removeClass('force-close');
+      $('#container').addClass('container-open');
+    }else{
+      $('#container').removeClass('container-open');
+      $('#container').addClass('force-close');
+    }    
+    setTimeout(function(){
+      $(window).trigger('resize');
+    }, 500);
+  }
   render() {
     return (
-      <div style={{display:'flex', marginLeft:10}}>
-        <SidebarBtn visible/>
+      <div style={{display:'flex'}}>
+        {/*<SidebarBtn visible/>*/}
+        <div className='toggleSidebar' onClick={::this.toggleSidebar}>
+          <Icon style={{fontSize: 18, color: 'white'}} glyph={'icon-fontello-th-list-5'} />
+        </div>
         <div className='navbar-control'>        
           <img src={asset('/assets/images/logo.svg')} alt='thinkcrew' width='30' height='30' />
           <div className='navbar-projects'>
