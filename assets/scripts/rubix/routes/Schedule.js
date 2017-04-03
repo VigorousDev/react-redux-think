@@ -13,15 +13,19 @@ import {
   Button,
   Icon
 } from '@sketchpixy/rubix';
+import {Breakdown} from './schedule/Breakdown';
 
 export default class Schedule extends React.Component {
   constructor(props){
     super(props);
     $('#container').removeClass('container-open');
     $('#container').addClass('force-close');
+    this.state = {
+      activeTab: ''
+    };
   }
 
-  componentDidMount() {    
+  componentDidMount() {
     $(ReactDOM.findDOMNode(this.example))
       .layout({
           west: {
@@ -41,7 +45,20 @@ export default class Schedule extends React.Component {
       });    
     setTimeout(function(){
       $(window).trigger('resize');
-    }, 500);
+    }, 500);    
+  }
+
+  handleActiveState(eventKey) {
+    this.setState({
+      activeTab: eventKey
+    });
+  }
+
+  getItemProps(eventKey) {
+    return {
+      eventKey,
+      active: this.state.activeTab === eventKey
+    };
   }
 
   render() {
@@ -49,7 +66,7 @@ export default class Schedule extends React.Component {
       <div className="page-schedule">
         <div ref={(c) => this.example = c} style={{width:'100%', height:'100%'}}>
           <div className="pane ui-layout-west">
-            West
+            <Breakdown/>
           </div>
           <div className="pane ui-layout-center">
             <div>
