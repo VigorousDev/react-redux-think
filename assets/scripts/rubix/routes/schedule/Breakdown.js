@@ -55,25 +55,25 @@ export class Breakdown extends React.Component {
                 <MenuItem eventKey="8"><Icon glyph={'icon-fontello-cog-1'} />&nbsp;Schedule Settings</MenuItem>
               </DropdownHoverButton>
               <Button bsStyle='info' inverse>
-                <Icon style={{fontSize: 12}} glyph={'icon-fontello-plus-squared'} />&nbsp;New
+                <Icon glyph={'icon-fontello-plus-squared'} />&nbsp;New
               </Button>
               <Button bsStyle='info' inverse>
-                <Icon style={{fontSize: 12}} glyph={'icon-fontello-docs-1'} />&nbsp;Duplicate
+                <Icon glyph={'icon-fontello-docs-1'} />&nbsp;Duplicate
               </Button>            
               <Button bsStyle='info' inverse disabled>
-              <Icon style={{fontSize: 12}} glyph={'icon-fontello-flow-merge'} />&nbsp;Merge
+              <Icon glyph={'icon-fontello-flow-merge'} />&nbsp;Merge
               </Button>        
               <Button bsStyle='info' inverse>
-                <Icon style={{fontSize: 12}} glyph={'icon-fontello-trash-1'} />&nbsp;Delete
+                <Icon glyph={'icon-fontello-trash-1'} />&nbsp;Delete
               </Button>
             </ButtonGroup>
 
             <ButtonGroup sm className='pull-right'>
               <Button bsStyle='info' inverse>
-                <Icon style={{fontSize: 12}} glyph={'icon-fontello-left-6'} />&nbsp;Prev
+                <Icon glyph={'icon-fontello-left-1'} />&nbsp;Prev
               </Button>
               <Button bsStyle='info' inverse>
-                Next&nbsp;<Icon style={{fontSize: 12}} glyph={'icon-fontello-right-6'} />
+                Next&nbsp;<Icon glyph={'icon-fontello-right-1'} />
               </Button>
             </ButtonGroup>
           </ButtonToolbar>

@@ -4,6 +4,7 @@ import {
   Tabs
 } from '@sketchpixy/rubix';
 import {Breakdown} from './Breakdown';
+import {Stripboard} from './Stripboard';
 
 export class Panel_Left extends React.Component {
   render() {
@@ -13,7 +14,7 @@ export class Panel_Left extends React.Component {
           <Breakdown/>
         </Tab>
         <Tab eventKey={2} title="Recycle Bin">
-          Tab 2 content
+          Recycle Bin
         </Tab>
       </Tabs>
     );
@@ -24,8 +25,8 @@ export class Panel_Right extends React.Component {
   render() {
     return (
       <Tabs defaultActiveKey={1} id='panel_right' className='tab-container'>
-        <Tab eventKey={1} title="Scripboard">
-          Scripboard
+        <Tab eventKey={1} title="Stripboard">
+          <Stripboard/>
         </Tab>
         <Tab eventKey={2} title="Script">
           Script
