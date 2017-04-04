@@ -15,6 +15,7 @@ import {
   FormGroup,
   ControlLabel
 } from '@sketchpixy/rubix';
+import {BreakdownElements} from './BreakdownElements';
 
 export class Breakdown extends React.Component {
   constructor(props){
@@ -35,47 +36,47 @@ export class Breakdown extends React.Component {
 
   render(){
     return (
-      <div className="page-breakdown">
-        <ButtonToolbar>
-          <ButtonGroup sm>
-            <DropdownHoverButton id="bg-nested-dropdown" bsStyle='green' 
-              title={<Icon style={{fontSize: 12, color: 'white'}} glyph={'icon-fontello-menu-1'} />}>
-              <MenuItem eventKey="1"><Icon glyph={'icon-fontello-newspaper'} />&nbsp;Element Manager</MenuItem>
-              <MenuItem eventKey="2"><Icon glyph={'icon-fontello-th-list-5'} />&nbsp;Stripboard Manager</MenuItem>
-              <MenuItem eventKey="3"><Icon glyph={'icon-fontello-calendar-1'} />&nbsp;Calendar Manager</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey="4"><Icon glyph={'icon-fontello-sort-alt-up'} />&nbsp;Sort Strips</MenuItem>
-              <MenuItem eventKey="5"><Icon glyph={'icon-fontello-flash'} />&nbsp;Auto Schedule</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey="6"><Icon glyph={'icon-fontello-export-4'} />&nbsp;Export Data</MenuItem>
-              <MenuItem eventKey="7"><Icon glyph={'icon-fontello-doc-1'} />&nbsp;Save Documents</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey="8"><Icon glyph={'icon-fontello-cog-1'} />&nbsp;Schedule Settings</MenuItem>
-            </DropdownHoverButton>
-            <Button bsStyle='info' inverse>
-              <Icon style={{fontSize: 12}} glyph={'icon-fontello-plus-squared'} />&nbsp;New
-            </Button>
-            <Button bsStyle='info' inverse>
-              <Icon style={{fontSize: 12}} glyph={'icon-fontello-docs-1'} />&nbsp;Duplicate
-            </Button>            
-            <Button bsStyle='info' inverse disabled>
-             <Icon style={{fontSize: 12}} glyph={'icon-fontello-flow-merge'} />&nbsp;Merge
-            </Button>        
-            <Button bsStyle='info' inverse>
-              <Icon style={{fontSize: 12}} glyph={'icon-fontello-trash-1'} />&nbsp;Delete
-            </Button>
-          </ButtonGroup>
-
-          <ButtonGroup sm className='pull-right'>
-            <Button bsStyle='info' inverse>
-              <Icon style={{fontSize: 12}} glyph={'icon-fontello-left-6'} />&nbsp;Prev
-            </Button>
-            <Button bsStyle='info' inverse>
-              Next&nbsp;<Icon style={{fontSize: 12}} glyph={'icon-fontello-right-6'} />
-            </Button>
-          </ButtonGroup>
-        </ButtonToolbar>
+      <div className="page-breakdown">        
         <Form className='frm_breakdown'>
+          <ButtonToolbar className="toolbar">
+            <ButtonGroup sm>
+              <DropdownHoverButton id="bg-nested-dropdown" bsStyle='green' 
+                title={<Icon style={{fontSize: 12, color: 'white'}} glyph={'icon-fontello-menu-1'} />}>
+                <MenuItem eventKey="1"><Icon glyph={'icon-fontello-newspaper'} />&nbsp;Element Manager</MenuItem>
+                <MenuItem eventKey="2"><Icon glyph={'icon-fontello-th-list-5'} />&nbsp;Stripboard Manager</MenuItem>
+                <MenuItem eventKey="3"><Icon glyph={'icon-fontello-calendar-1'} />&nbsp;Calendar Manager</MenuItem>
+                <MenuItem divider />
+                <MenuItem eventKey="4"><Icon glyph={'icon-fontello-sort-alt-up'} />&nbsp;Sort Strips</MenuItem>
+                <MenuItem eventKey="5"><Icon glyph={'icon-fontello-flash'} />&nbsp;Auto Schedule</MenuItem>
+                <MenuItem divider />
+                <MenuItem eventKey="6"><Icon glyph={'icon-fontello-export-4'} />&nbsp;Export Data</MenuItem>
+                <MenuItem eventKey="7"><Icon glyph={'icon-fontello-doc-1'} />&nbsp;Save Documents</MenuItem>
+                <MenuItem divider />
+                <MenuItem eventKey="8"><Icon glyph={'icon-fontello-cog-1'} />&nbsp;Schedule Settings</MenuItem>
+              </DropdownHoverButton>
+              <Button bsStyle='info' inverse>
+                <Icon style={{fontSize: 12}} glyph={'icon-fontello-plus-squared'} />&nbsp;New
+              </Button>
+              <Button bsStyle='info' inverse>
+                <Icon style={{fontSize: 12}} glyph={'icon-fontello-docs-1'} />&nbsp;Duplicate
+              </Button>            
+              <Button bsStyle='info' inverse disabled>
+              <Icon style={{fontSize: 12}} glyph={'icon-fontello-flow-merge'} />&nbsp;Merge
+              </Button>        
+              <Button bsStyle='info' inverse>
+                <Icon style={{fontSize: 12}} glyph={'icon-fontello-trash-1'} />&nbsp;Delete
+              </Button>
+            </ButtonGroup>
+
+            <ButtonGroup sm className='pull-right'>
+              <Button bsStyle='info' inverse>
+                <Icon style={{fontSize: 12}} glyph={'icon-fontello-left-6'} />&nbsp;Prev
+              </Button>
+              <Button bsStyle='info' inverse>
+                Next&nbsp;<Icon style={{fontSize: 12}} glyph={'icon-fontello-right-6'} />
+              </Button>
+            </ButtonGroup>
+          </ButtonToolbar>
           <FormGroup controlId="frm_bdName">
             <FormControl type="text" className="text-center" style={{fontWeight:'bold'}} value="202PT1" onChange={::this.handleChange}/>
           </FormGroup>
@@ -189,6 +190,14 @@ export class Breakdown extends React.Component {
               </FormGroup>
             </Col>
           </Row>
+        </Form>
+        <Form className='frm_elements'>
+          <div className='add-elements'>
+            <FormGroup controlId="frm_addElements" style={{width: 300}}>
+              <FormControl type="text" onChange={::this.handleChange} placeholder="Add elements"/>
+            </FormGroup>
+          </div>
+          <BreakdownElements/>
         </Form>
       </div>
     );

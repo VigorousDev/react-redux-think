@@ -1,0 +1,139 @@
+.page-breakdown{
+  height: 100%;
+  .frm_breakdown{
+    padding: 2px 5px;
+    .form-group{
+      margin-bottom: 2px;
+      .form-control{
+        height: 25px;
+        font-size: 12px;
+        padding: 0px 3px;
+      }
+    }
+    .row{
+      margin: 0px;
+      div[class^='col-sm-'] {
+        padding: 1px;
+      }
+    }
+    .text-center{
+      padding: 0px;
+    }
+    label{
+      padding: 0px 18px;
+      font-size: 12px;
+      // font-weight: 200;
+      margin-bottom: 0px;
+    }
+  }
+  .frm_elements{
+    height: ~"calc(100% - 263px)";
+    font-size: 13px;
+    .add-elements{
+      padding: 5px;
+      background: #8798A8;
+      .form-group{
+        margin-bottom: 2px;
+        .form-control{
+          height: 25px;
+          font-size: 12px;
+          padding: 0px 3px;
+        }
+      }
+    }
+
+    .elements-category{
+      height: ~"calc(100% - 40px)";
+      .bde-columns {
+        padding: .2em .2em 1em .2em;
+        height: 100%;
+        overflow-x: scroll;
+        /*Create up to 100 columns for elements as needed*/
+        -webkit-columns: 100 10em;
+          -moz-columns: 100 10em;
+                columns: 100 10em;
+        -moz-column-fill: auto;
+            column-fill: auto;
+        -webkit-column-gap: 1em;
+          -moz-column-gap: 1em;
+                column-gap: 1em;
+        -webkit-column-rule: 1px solid var(--c-blt);
+          -moz-column-rule: 1px solid var(--c-blt);
+                column-rule: 1px solid var(--c-blt);
+      }
+
+      .bde-category {
+        margin-bottom: 2px;
+        padding: .2em 0 0 .5em;
+        width: ~"calc(100%)";
+        line-height: 1.8em;
+        background-color: #8BB7FF;
+        border-radius: .2em;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .bde-category span {
+        width: ~"calc(97% - 1em)";
+        display: inline-block;
+      }
+      .bde-category a {
+        width: 1em;
+        display: inline-block;
+      }
+
+      .bde-category .dropdown-menu { 
+        margin: 0 0 0 1em;
+        height: 15em;
+        width: 8em;
+        border: 1px solid var(--c-blt);
+        top: auto;
+        overflow-y: scroll;
+      }
+      .bde-category .dropdown-menu li {
+        padding: 0 0 0 .5em;
+        height: 1.8em;
+        line-height: 1.8em;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .bde-category .dropdown-menu i {
+        width: 1em;
+      }
+
+      .bde-list {
+        list-style-type: none; 
+        margin: 0; 
+        padding: 0;
+      }
+      .bde-list li {
+        margin: 0 0 2px 2em;
+        padding: .2em 0 0 .5em;
+        font-size: .9em;
+        background-color: #DEF;
+        border-radius: .2em;
+      }
+      .bde-list a, .bde-list i {
+        height: 1.4em;
+        line-height: 1.4em;
+        display: inline-block;
+      }
+      .bde-list a {
+        padding: 0 !important;
+        width: ~"calc(97% - 1em)";
+        color: #333;
+        overflow: hidden;
+      }
+      .bde-list span {
+        top: -.2em;
+        width: 1em;
+        color: var(--c-blm);
+        cursor: pointer;
+        position: relative;
+      }
+      .bde-list span:hover {
+        color: #6b1300;
+      }
+    }  
+  }
+    
+}
