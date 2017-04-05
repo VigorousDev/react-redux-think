@@ -3,4 +3,42 @@
   .frm_script{
     padding: 2px 5px;
   }
+
+  .script-container {
+    padding: 1em 0 5em 0;
+    height: inherit;
+    // width: 570px;
+    overflow: scroll;
+  }
+
+  FinalDraft {
+    font-size: 13px;
+    font-family: monospace;
+  }
+  Paragraph {
+    line-height: 1em;
+    display: block;
+  }
+  Paragraph[type="General"],
+  Paragraph[type="Scene Heading"], 
+  Paragraph[type="Action"],
+  Paragraph[type="Dialogue"] {
+    margin-bottom: 1em;
+  }
+  Paragraph[type="General"],
+  Paragraph[type="Scene Heading"], 
+  Paragraph[type="Action"] {
+    margin-left:  90px;
+  }
+  Paragraph[type="Character"] {
+    margin-left: 250px;
+  }
+  Paragraph[type="Dialogue"] {
+    margin-left:  170px;
+    margin-right: 120px;
+  }
+  Paragraph[type="Scene Heading"],
+  Paragraph[type="Character"] {
+    text-transform: uppercase;
+  }
 }

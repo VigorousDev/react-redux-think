@@ -62,7 +62,7 @@ export class Stripboard extends React.Component {
                 <MenuItem eventKey="3">Locked White</MenuItem>
                 <MenuItem eventKey="4">Manage Stripboards</MenuItem>
               </DropdownButton>
-              <DropdownButton id="bg-nested-dropdown" inverse 
+              <DropdownButton id="bg-nested-dropdown" inverse pullRight 
                 title={<Icon glyph={'icon-fontello-calendar-1'}>&nbsp;Start on Jan 6&nbsp;</Icon>}>
                 <MenuItem eventKey="1">Start on Jan 6</MenuItem>
                 <MenuItem eventKey="2">Six Day Weeks</MenuItem>
