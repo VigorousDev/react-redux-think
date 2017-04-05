@@ -49,7 +49,7 @@ export class Script extends React.Component {
           </ButtonToolbar>          
         </Form>
         <div className='script-container'>
-          <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
+          <div dangerouslySetInnerHTML={ {__html: htmlContent} } style={{width:570}} />
         </div>
       </div>
     );
