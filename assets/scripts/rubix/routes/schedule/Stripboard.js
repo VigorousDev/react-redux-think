@@ -8,6 +8,7 @@ import {
   Button,
   ButtonToolbar,
   ButtonGroup,
+  DropdownButton,
   DropdownHoverButton,
   MenuItem,
   Form,
@@ -35,41 +36,38 @@ export class Stripboard extends React.Component {
           <ButtonToolbar className="toolbar">
             <ButtonGroup sm>
               <Button bsStyle='info' inverse>
-                <Icon glyph={'icon-fontello-plus-squared'} />&nbsp;New
+                <Icon glyph={'icon-fontello-level-down'} />&nbsp;Add Day
               </Button>
               <Button bsStyle='info' inverse>
-                <Icon glyph={'icon-fontello-docs-1'} />&nbsp;Duplicate
+                <Icon glyph={'icon-fontello-quote'} />&nbsp;Add Banner
               </Button>            
-              <Button bsStyle='info' inverse disabled>
-              <Icon glyph={'icon-fontello-flow-merge'} />&nbsp;Merge
+              <Button bsStyle='info' inverse>
+              <Icon glyph={'icon-fontello-link-2'} />&nbsp;Group
               </Button>        
               <Button bsStyle='info' inverse>
-                <Icon glyph={'icon-fontello-trash-1'} />&nbsp;Delete
+                <Icon glyph={'icon-fontello-trash-4'} />&nbsp;Recycle
               </Button>
-              <DropdownHoverButton id="bg-nested-dropdown" bsStyle='green' 
-                title={<Icon style={{fontSize: 12, color: 'white'}} glyph={'icon-fontello-menu-1'} />}>
-                <MenuItem eventKey="1"><Icon glyph={'icon-fontello-newspaper'} />&nbsp;Element Manager</MenuItem>
-                <MenuItem eventKey="2"><Icon glyph={'icon-fontello-th-list-5'} />&nbsp;Stripboard Manager</MenuItem>
-                <MenuItem eventKey="3"><Icon glyph={'icon-fontello-calendar-1'} />&nbsp;Calendar Manager</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey="4"><Icon glyph={'icon-fontello-sort-alt-up'} />&nbsp;Sort Strips</MenuItem>
-                <MenuItem eventKey="5"><Icon glyph={'icon-fontello-flash'} />&nbsp;Auto Schedule</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey="6"><Icon glyph={'icon-fontello-export-4'} />&nbsp;Export Data</MenuItem>
-                <MenuItem eventKey="7"><Icon glyph={'icon-fontello-doc-1'} />&nbsp;Save Documents</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey="8"><Icon glyph={'icon-fontello-cog-1'} />&nbsp;Schedule Settings</MenuItem>
+              <DropdownHoverButton id="bg-nested-dropdown" inverse 
+                title={<Icon glyph={'icon-fontello-resize-vertical'}>&nbsp;Strip Size</Icon>}>
+                <MenuItem eventKey="1">Small Strips</MenuItem>
+                <MenuItem eventKey="2">Medium Strips</MenuItem>
+                <MenuItem eventKey="3">Large Strips</MenuItem>
               </DropdownHoverButton>
-              
             </ButtonGroup>
-
             <ButtonGroup sm className='pull-right'>
-              <Button bsStyle='info' inverse>
-                <Icon glyph={'icon-fontello-left-6'} />&nbsp;Prev
-              </Button>
-              <Button bsStyle='info' inverse>
-                Next&nbsp;<Icon glyph={'icon-fontello-right-6'} />
-              </Button>
+              <DropdownButton id="bg-nested-dropdown" inverse 
+                title={<Icon glyph={'icon-fontello-menu-1'}>&nbsp;FirstPass&nbsp;</Icon>}>
+                <MenuItem eventKey="1">Script Order</MenuItem>
+                <MenuItem eventKey="2">First Pass</MenuItem>
+                <MenuItem eventKey="3">Locked White</MenuItem>
+                <MenuItem eventKey="4">Manage Stripboards</MenuItem>
+              </DropdownButton>
+              <DropdownButton id="bg-nested-dropdown" inverse 
+                title={<Icon glyph={'icon-fontello-calendar-1'}>&nbsp;Start on Jan 6&nbsp;</Icon>}>
+                <MenuItem eventKey="1">Start on Jan 6</MenuItem>
+                <MenuItem eventKey="2">Six Day Weeks</MenuItem>
+                <MenuItem eventKey="3">Manage Calendars...</MenuItem>
+              </DropdownButton>
             </ButtonGroup>
           </ButtonToolbar>
         </Form>

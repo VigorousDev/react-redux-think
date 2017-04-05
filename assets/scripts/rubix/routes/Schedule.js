@@ -11,9 +11,15 @@ import {
   FormControl,
   PanelContainer,
   Button,
-  Icon
+  Icon,
+  Tab,
+  Tabs
 } from '@sketchpixy/rubix';
-import {Panel_Left, Panel_Right, Panel_Bottom} from './schedule/ScheduleContainer';
+import {Breakdown} from './schedule/Breakdown';
+import {RecycleBin} from './schedule/RecycleBin';
+import {Stripboard} from './schedule/Stripboard';
+import {Script} from './schedule/Script';
+import {DayOutofDays} from './schedule/DayOutofDays';
 
 export default class Schedule extends React.Component {
   constructor(props){
@@ -57,13 +63,27 @@ export default class Schedule extends React.Component {
       <div className="page-schedule">
         <div ref={(c) => this.example = c} style={{width:'100%', height:'100%'}}>
           <div className="pane ui-layout-west">
-            <Panel_Left/>
+            <Tabs defaultActiveKey={1} id='panel_left' className='tab-container'>
+              <Tab eventKey={1} title="Breakdown">
+                <Breakdown/>
+              </Tab>
+              <Tab eventKey={2} title="Recycle Bin">
+                <RecycleBin/>
+              </Tab>
+            </Tabs>
           </div>
           <div className="pane ui-layout-center">
-            <Panel_Right/>
+            <Tabs defaultActiveKey={1} id='panel_right' className='tab-container'>
+              <Tab eventKey={1} title="Stripboard">
+                <Stripboard/>
+              </Tab>
+              <Tab eventKey={2} title="Script">
+                <Script/>
+              </Tab>
+            </Tabs>
           </div>
           <div className="pane ui-layout-south">
-            <Panel_Bottom/>
+            <DayOutofDays/>
           </div>   
         </div>
       </div>
