@@ -20,13 +20,100 @@ import {
 export class Stripboard extends React.Component {
   constructor(props){
     super(props);
+    
+    var casts = {
+        maxid: 3,
+        data: {
+            1: {
+                name: 'George',
+                occr: 103,
+            },
+            2: {
+                name: 'Mary',
+                occr: 35,
+            },
+            3: {
+                name: 'Harry',
+                occr: 11,
+            }
+        }        
+    };
+
+    var breakdowns = {
+        maxid: 1,
+        data: {
+            1: {
+                name: '202PT1',
+                int_ext: 'INT',
+                set: 'GEORGE\'S OFFICE',
+                day_night: 'NIGHT',
+                description: 'You can type quite a lot of text in the description field compared to MMS.',
+                pages: 100,
+                one_eight: 3,
+                scriptPg: '100AB',
+                scriptDay: 'Night 100', 
+                unit: 'Splinter Unit',
+                location: 'Savings & Loan',
+                hours: 10,
+                mins: 30,
+                comments: 'This is an extremely very long comment that I am making about this breakdown sheet right now.',
+                elements: {
+                    type: 'cast',
+                    ids: [1, 2, 3, 4, 5]
+                }
+            }
+        }
+    };
+
+    var banners = {
+        maxid: 2,
+        data: {
+            1: {
+                title: 'It\'s A Wonderful Life',
+            },
+            2: {
+                title: 'Test banner',
+            }
+        }
+    };
+
+    var days = {
+        maxid: 2,
+        data: {
+            1: {
+                number: 1,
+                date: '2017/7/11',
+                hours: 10,
+                mins: 30,
+                pgs: '4 3/8',
+            },
+            2: {
+                number: 2,
+                date: '2017/7/12',
+                hours: 11,
+                mins: 25,
+                pgs: '5 6/8',
+            },
+        }
+    };
+
+    var strip = [
+        {
+            type: 'banner',
+            id: '1',
+        },
+        {
+            type: 'breakdown',
+            id: '1'
+        },
+        {
+            type: 'day',
+            id: '2'
+        }
+    ];
   }
 
   componentDidMount(){
-
-  }
-
-  handleChange(key, e) {
   }
 
   render(){
@@ -70,7 +157,7 @@ export class Stripboard extends React.Component {
               </DropdownButton>
             </ButtonGroup>
           </ButtonToolbar>
-        </Form>        
+        </Form>
       </div>
     );
   }
