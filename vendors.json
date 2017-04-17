@@ -15,7 +15,6 @@
     "react-redux",
     "react-router",
     "react-router-redux",
-    "react-sortable-tree",
     "redux",
     "redux-actions",
     "redux-devtools",
