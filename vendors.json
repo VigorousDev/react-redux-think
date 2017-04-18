@@ -8,6 +8,7 @@
     "immutable",
     "isomorphic-fetch",
     "lodash",
+    "moment",
     "react",
     "react-bootstrap-table",
     "react-dom",

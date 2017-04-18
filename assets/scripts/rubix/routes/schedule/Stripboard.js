@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
+import moment from 'moment';
 import {
   Row,
   Col,
@@ -17,11 +18,12 @@ import {
   FormGroup,
   ControlLabel
 } from '@sketchpixy/rubix';
+import {DATATYPES} from '../../../core/datatypes';
 
 export class Stripboard extends React.Component {
   constructor(props){
-    super(props);
-    
+    super(props);   
+
     var casts = {
         maxid: 3,
         data: {
@@ -36,12 +38,22 @@ export class Stripboard extends React.Component {
             3: {
                 name: 'Harry',
                 occr: 11,
+            },
+            4: {
+                name: 'Uncle Billy',
+                occr: 11,
+                n_a: ['2017/07/12', '2017/07/13']
+            },
+            5: {
+                name: 'Mr. Potter',
+                occr: 2,
+                n_a: ['2017/07/11']
             }
         }        
-    };
+    };    
 
     var breakdowns = {
-        maxid: 1,
+        maxid: 6,
         data: {
             1: {
                 name: '202PT1',
@@ -50,17 +62,121 @@ export class Stripboard extends React.Component {
                 day_night: 'NIGHT',
                 description: 'You can type quite a lot of text in the description field compared to MMS.',
                 pages: 100,
-                one_eight: 3,
+                eighth: 3,
                 scriptPg: '100AB',
-                scriptDay: 'Night 100', 
-                unit: 'Splinter Unit',
-                location: 'Savings & Loan',
+                scriptDay: 'Day 2', 
+                unit: 'First Unit',
+                location: 'Bailey Savings & Loan',
                 hours: 10,
                 mins: 30,
                 comments: 'This is an extremely very long comment that I am making about this breakdown sheet right now.',
                 elements: {
-                    type: 'cast',
-                    ids: [1, 2, 3, 4, 5]
+                    casts :[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
+                    bg: [1],
+                    veh: [1],
+                    fx: [1],
+                    stunt: [1],
+                    animal: [1],
+                }
+            },
+            2: {
+                name: '17',
+                int_ext: 'INT',
+                set: 'BEDROOM -- GEORGE AND MARY\'S HOUSE',
+                day_night: 'NIGHT',
+                description: 'George learns of Mary\'s pregnancy.',
+                pages: 100,
+                eighth: 3,
+                scriptPg: '1',
+                scriptDay: 'Day 2', 
+                unit: 'First Unit',
+                location: 'Bailey House',
+                hours: 1,
+                mins: 30,
+                comments: 'This is an extremely very long comment that I am making about this breakdown sheet right now.',
+                elements: {
+                    casts :[1, 2, 3, 4, 5],                    
+                    bg: [1],
+                }
+            },
+            3: {
+                name: '32',
+                int_ext: 'INT',
+                set: 'MARTINI\'S NEW HOUSE',
+                day_night: 'DAY',
+                description: 'This strip also has a red flag in the cast. Try hovering over it!',
+                pages: 100,
+                eighth: 3,
+                scriptPg: '34',
+                scriptDay: 'Day 2', 
+                unit: 'First Unit',
+                location: 'Los Feliz House',
+                hours: 1,
+                mins: 30,
+                comments: 'This is an extremely very long comment that I am making about this breakdown sheet right now.',
+                elements: {
+                    casts :[1, 2, 3, 4, 5],
+                    veh: [1],
+                }
+            },
+            4: {
+                name: '17',
+                int_ext: 'EXT',
+                set: 'BAILEY PARK',
+                day_night: 'DAY',
+                description: 'Other elements can be flagged too. This strip has a flag on a vehicle.',
+                pages: 100,
+                eighth: 3,
+                scriptPg: '34',
+                scriptDay: 'Day 2', 
+                unit: 'First Unit',
+                location: 'Burbank Lot',
+                hours: 1,
+                mins: 30,
+                comments: 'This is an extremely very long comment that I am making about this breakdown sheet right now.',
+                elements: {
+                    casts :[1, 2, 3, 5, 6],                    
+                    bg: [1],
+                }
+            },
+            5: {
+                name: '64',
+                int_ext: 'EXT',
+                set: 'Hollywood Forever Cemetery',
+                day_night: 'NIGHT',
+                description: 'George discovers his brother\'s death',
+                pages: 100,
+                eighth: 3,
+                scriptPg: '34',
+                scriptDay: 'Day 2', 
+                unit: 'First Unit',
+                location: 'Burbank Lot',
+                hours: 1,
+                mins: 30,
+                comments: 'This is an extremely very long comment that I am making about this breakdown sheet right now.',
+                elements: {
+                    casts :[3,5,7],
+                    bg: [1],
+                }
+            },
+            6: {
+                name: '202PT1',
+                int_ext: 'INT',
+                set: 'BEDROOM -- GEORGE AND MARY\'S HOUSE',
+                day_night: 'NIGHT',
+                description: 'George learns of Mary\'s pregnancy.',
+                pages: 100,
+                eighth: 3,
+                scriptPg: '34',
+                scriptDay: 'Day 2', 
+                unit: 'First Unit',
+                location: 'Bailey House',
+                hours: 1,
+                mins: 30,
+                comments: 'This is an extremely very long comment that I am making about this breakdown sheet right now.',
+                elements: {
+                    casts :[1, 2, 3, 4, 5, 6, 10, 18],                    
+                    bg: [1],
                 }
             }
         }
@@ -83,14 +199,14 @@ export class Stripboard extends React.Component {
         data: {
             1: {
                 number: 1,
-                date: '2017/7/11',
+                date: '2017/07/11',
                 hours: 10,
                 mins: 30,
                 pgs: '4 3/8',
             },
             2: {
                 number: 2,
-                date: '2017/7/12',
+                date: '2017/07/12',
                 hours: 11,
                 mins: 25,
                 pgs: '5 6/8',
@@ -98,80 +214,268 @@ export class Stripboard extends React.Component {
         }
     };
 
+    var groups = {
+        maxid: 1,
+        data: {
+            1: [
+                {
+                    type: DATATYPES.BANNER,
+                    id: '2',
+                },
+                {
+                    type: DATATYPES.BREAKDOWN,
+                    id: '4'
+                },
+                {
+                    type: DATATYPES.BREAKDOWN,
+                    id: '5'
+                }
+            ]
+        }
+    };
+
     var strip = [
         {
-            type: 'banner',
-            id: '1',
-        },
-        {
-            type: 'breakdown',
+            type: DATATYPES.BANNER,
             id: '1'
         },
         {
-            type: 'day',
+            type: DATATYPES.BREAKDOWN,
+            id: '1'
+        },
+        {
+            type: DATATYPES.DAY,
+            id: 1
+        },
+        {
+            type: DATATYPES.BREAKDOWN,
             id: '2'
+        },
+        {
+            type: DATATYPES.BREAKDOWN,
+            id: '3'
+        },
+        {
+            type: DATATYPES.GROUP,
+            id: '1'
+        },
+        {
+            type: DATATYPES.DAY,
+            id: '2'
+        },
+        {
+            type: DATATYPES.BREAKDOWN,
+            id: '6'
         }
     ];
+
+    this.state = {
+        casts: casts,
+        breakdowns: breakdowns,
+        banners: banners,
+        days: days,
+        groups: groups,
+        strip: strip,
+    };
+  }
+
+  stripSize(eventKey, event){
+    $('.strips').removeClass('strip-small');
+    $('.strips').removeClass('strip-medium');
+    $('.strips').removeClass('strip-large');
+    $('.strips').addClass(eventKey);
+  }
+
+  eventHandler(val){
+    this.setState({strip: strip});
   }
 
   componentDidMount(){
       // Sortable, Selectable
-			    var prev = -1; 
-                $(ReactDOM.findDOMNode(this.strips_container))
-                .selectable({
-				  cancel: '.sort-handle',
-				  selecting: function(e, ui) { 
-				        var curr = $(ui.selecting.tagName, e.target).index(ui.selecting); 
-				        if(e.shiftKey && prev > -1) {
-				            $(ui.selecting.tagName, e.target).slice(Math.min(prev, curr), 1 + Math.max(prev, curr)).addClass('ui-selected');
-				            prev = -1;
-				        } else {
-				            prev = curr;
-				        }
-				    }
-				}).sortable({
-					axis: 'y',
-					items: '.sort-item',
-					revert: 250,
-					scroll: true,
-					placeholder: 'sortable-placeholder',
-					forcePlaceholderSize: true,
-					cursor: 'move',
-					containment: 'parent',
-					animation: 450,
-					helper: function(e, item) {
-						item.children().each(function() {
-					        $(this).width($(this).width()); // make <tr>'s width match the cloned element
-					    });
-						if (!item.hasClass('ui-selected')) {
-							item.parent().children('.ui-selected').removeClass('ui-selected');
-							item.addClass('ui-selected');
-						}
-						var selected = item.parent().children('.ui-selected').clone();
-						item.data('multidrag', selected).siblings('.ui-selected').remove();
-						return $('<div/>').append(selected); // set element to wrap the helper
-					},
-					stop: function(e, ui) {
-						$('.ui-sortable').off('mouseup');
-						var selected = ui.item.data('multidrag');
-						ui.item.after(selected);
-						ui.item.remove();
-						$('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
-					},
-					connectWith: ".sort-select",
-					start: function(e, ui){
-						ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
-						$('.ui-sortable').on('mouseup', function() {
-							var selected = ui.item.data('multidrag');
-							$(selected).addClass('ui-sortable-helper-stop'); //include special class for selected strips
-						});
-					}
-				});
+    var prev = -1; 
+    var self = this;
+    $(ReactDOM.findDOMNode(this.strips_container))
+    .selectable({
+        cancel: '.sort-handle',
+        selecting: function(e, ui) { 
+            var curr = $(ui.selecting.tagName, e.target).index(ui.selecting); 
+            if(e.shiftKey && prev > -1) {
+                $(ui.selecting.tagName, e.target).slice(Math.min(prev, curr), 1 + Math.max(prev, curr)).addClass('ui-selected');
+                prev = -1;
+            } else {
+                prev = curr;
+            }
+        }
+    }).sortable({
+        axis: 'y',
+        items: '.sort-item',
+        revert: 250,
+        scroll: true,
+        placeholder: 'sortable-placeholder',
+        forcePlaceholderSize: true,
+        cursor: 'move',
+        containment: 'parent',
+        animation: 450,
+        helper: function(e, item) {
+            item.children().each(function() {
+                $(this).width($(this).width()); // make <tr>'s width match the cloned element
+            });
+            if (!item.hasClass('ui-selected')) {
+                item.parent().children('.ui-selected').removeClass('ui-selected');
+                item.addClass('ui-selected');
+            }
+            var selected = item.parent().children('.ui-selected').clone();
+            item.data('multidrag', selected).siblings('.ui-selected').remove();
+            return $('<div/>').append(selected); // set element to wrap the helper
+        },
+        update: function(e, ui){
+            setTimeout(function(){ // wait for update is completed.
+                // console.log(ui);
+                var order = [];
+                $('.sort-select').children().each(function(e){
+                    order.push($(this).attr('id') + '=' + ($(this).index() + 1 ));                
+                });
+                var positions = order.join(';');
+                self.eventHandler(positions);
+            }, 10);
+        },
+        stop: function(e, ui) {
+            $('.ui-sortable').off('mouseup');
+            var selected = ui.item.data('multidrag');
+            ui.item.after(selected);
+            ui.item.remove();
+            $('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
+        },
+        connectWith: ".sort-select",
+        start: function(e, ui){
+            ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
+            $('.ui-sortable').on('mouseup', function() {
+                var selected = ui.item.data('multidrag');
+                $(selected).addClass('ui-sortable-helper-stop'); //include special class for selected strips
+            });
+        }
+    });
+  }
+
+  getContent(data){
+    let content = null;
+    let obj = null, title = '';
+    if(!data)
+        return null;
+    switch(data.type){
+        case DATATYPES.BANNER:
+            obj = this.state.banners.data[data.id];
+            title = obj ? obj.title: '!Error';
+            content = <div className='banner'>
+                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
+                    <div className="dayban-text">-- {title} --</div>
+                </div>;
+            break;
+        case DATATYPES.BREAKDOWN:
+            obj = this.state.breakdowns.data[data.id];
+            if(!obj){
+                content = <div className="strip intnight">!Error</div>;
+            }else{
+                let css = obj.int_ext.toLowerCase() + obj.day_night.toLowerCase()
+                content = <div className={"strip " + css}>
+                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
+                    <div className="strip-col-1">
+                        <div className="str-sc">{obj.name}</div>
+                    </div>
+                    <div className="strip-col-2">
+                        <div className="strip-row-1">
+                            <div className="str-ie">{obj.int_ext}</div>
+                            <div className="str-set">{obj.set}</div>
+                            <div className="str-dn">{obj.day_night}</div>
+                        </div>
+                        <div className="strip-row-2">
+                            <div className="str-unit">Unit: {obj.unit}</div>
+                            <div className="str-loc">Loc: {obj.location}</div>
+                            <div className="str-scpg">Script Pg: {obj.scriptPg}</div>
+                        </div>
+                        <div className="strip-row-3">
+                            <div className="str-desc">{obj.description}</div>
+                        </div>
+                    </div>
+                    <div className="strip-col-3">
+                        <div className="strip-row-1">
+                            <div className="str-pg">{obj.pages}</div>
+                            <div className="str-eighth">{obj.eighth}/8</div>
+                        </div>
+                        <div className="strip-row-2">
+                            <div className="str-time">{obj.scriptDay}</div>
+                        </div>
+                        <div className="strip-row-3">
+                            <div className="str-time">{obj.hours}:{obj.mins}</div>
+                        </div>
+                    </div>
+
+                    <div className="strip-col-4">
+                        <div className="strip-row-1">
+                            <div className="str-cast">{obj.elements.casts ? obj.elements.casts.join(',') : ''}</div>
+                        </div>
+                        <div className="strip-row-2">
+                            <div className="str-bg">{obj.elements.bg ? 'BG: 100': ''}</div>
+                            <div className="str-veh">{obj.elements.veh ? 'Veh: 100': ''}</div>
+                            <div className="str-fx">{obj.elements.fx ? 'FX': ''}</div>
+                            <div className="str-stunt">{obj.elements.stunts ? 'Stunts': ''}</div>
+                            <div className="str-animal">{obj.elements.animal ? 'Animals': ''}</div>
+                        </div>
+                    </div>
+                </div>;
+            }
+            break;
+        case DATATYPES.DAY:
+            obj = this.state.days.data[data.id];
+            title = '!Error';
+            if(obj){
+                title = "END OF DAY " + obj.number + " - "+ moment(new Date(obj.date)).format('MMMM D Y') + " - " + obj.pgs + " ("+ obj.hours + ":" + obj.mins + " Hours)";
+            }
+            content = <div className="daystrip">
+                <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
+                <div className="dayban-text">-- {title} --</div>
+            </div>
+            break;
+        default:
+            break;
+    }
+    return content;
   }
 
   render(){
-     return (
-      <div className="page-stripboard">        
+    let {strip} = this.state;
+    let self = this;
+    let strip_lists = _.map(strip, (t, index)=>{
+        if(t.type == DATATYPES.GROUP){
+            let obj = this.state.groups.data[t.id];
+            let content = <div> !Error </div>;
+            if(obj){
+                content = _.map(obj, (o, index1)=>{
+                    let item_content = self.getContent(o);
+                    return (
+                        <li key={index1} id={index + "_" + index1}>
+                            {item_content}
+                        </li>
+                    )
+                })
+            }
+            return (
+                <div key={index} className='sort-group sort-item' id={index}>
+                    {content}
+                </div>
+            )
+        }else{
+            let content = self.getContent(t);
+            return (            
+                <li key={index} className='sort-item' id={index}>
+                    {content}
+                </li>
+            ) 
+        };        
+    })
+    
+    return (
+      <div className="page-stripboard">
         <Form className='frm_stripboard'>
           <ButtonToolbar className="toolbar">
             <ButtonGroup sm>
@@ -187,11 +491,11 @@ export class Stripboard extends React.Component {
               <Button bsStyle='info' inverse>
                 <Icon glyph={'icon-fontello-trash-4'} />&nbsp;Recycle
               </Button>
-              <DropdownHoverButton id="bg-nested-dropdown" inverse 
+              <DropdownHoverButton id="bg-nested-dropdown" inverse onSelect={this.stripSize.bind(this)}
                 title={<Icon glyph={'icon-fontello-resize-vertical'}>&nbsp;Strip Size</Icon>}>
-                <MenuItem eventKey="1">Small Strips</MenuItem>
-                <MenuItem eventKey="2">Medium Strips</MenuItem>
-                <MenuItem eventKey="3">Large Strips</MenuItem>
+                <MenuItem eventKey="strip-small">Small Strips</MenuItem>
+                <MenuItem eventKey="strip-medium">Medium Strips</MenuItem>
+                <MenuItem eventKey="strip-large">Large Strips</MenuItem>
               </DropdownHoverButton>
             </ButtonGroup>
             <ButtonGroup sm className='pull-right'>
@@ -212,308 +516,8 @@ export class Stripboard extends React.Component {
           </ButtonToolbar>
         </Form>
         <div className="strips-container">
-            <ul ref={(c) => this.strips_container = c} className="strips strip-medium sort-select tooltip-demo">
-                <li className="sort-item">
-                    <div className="banner">
-                        <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                        <div className="dayban-text">-- It's A Wonderful Life --</div>
-                    </div>
-                </li>
-                <li className="sort-item ui-selected">
-                    <div className="strip intnight">
-                        <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                        <div className="strip-col-1">
-                            <div className="str-sc">202PT1</div>
-                        </div>
-                        <div className="strip-col-2">
-                            <div className="strip-row-1">
-                                <div className="str-ie">INT</div>
-                                <div className="str-set">GEORGE'S OFFICE</div>
-                                <div className="str-dn">NIGHT</div>
-                            </div>
-                            <div className="strip-row-2">
-                                <div className="str-unit">Unit: First Unit</div>
-                                <div className="str-loc">Loc: Bailey Savings &amp; Loan</div>
-                                <div className="str-scpg">Script Pg: 34</div>
-                            </div>
-                            <div className="strip-row-3">
-                                <div className="str-desc">You can type quite a lot of text in the description field compared to MMS.</div>
-                            </div>
-                        </div>
-                        <div className="strip-col-3">
-                            <div className="strip-row-1">
-                                <div className="str-pg">1</div>
-                                <div className="str-eighth">3/8</div>
-                            </div>
-                            <div className="strip-row-2">
-                                <div className="str-time">Day 2</div>
-                            </div>
-                            <div className="strip-row-3">
-                                <div className="str-time">1:30</div>
-                            </div>
-                        </div>
-
-                        <div className="strip-col-4">
-                            <div className="strip-row-1">
-                                <div className="str-cast">1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40</div>
-                            </div>
-                            <div className="strip-row-2">
-                                <div className="str-bg">BG: 100</div>
-                                <div className="str-veh">Veh: 100</div>
-                                <div className="str-fx">FX</div>
-                                <div className="str-stunt">Stunts</div>
-                                <div className="str-animal">Animals</div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li className="sort-item">
-                <div className="daystrip">
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                    <div className="dayban-text">-- END OF DAY 10 - July 19, 2017 - 5 2/8 Pgs. (11:15 Hours) --</div>
-                </div>
-                </li>
-                <li className="sort-item">
-                <div className="strip intnight">
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                    <div className="strip-col-1">
-                    <div className="str-sc">202PT1</div>
-                    </div>
-                    <div className="strip-col-2">
-                    <div className="strip-row-1">
-                        <div className="str-ie">INT</div>
-                        <div className="str-set">BEDROOM -- GEORGE AND MARY'S HOUSE</div>
-                        <div className="str-dn">NIGHT</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-unit">Unit: First Unit</div>
-                        <div className="str-loc">Loc: Bailey House</div>
-                        <div className="str-scpg">Script Pg: 34</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-desc">George learns of Mary's pregnancy.</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-3">
-                    <div className="strip-row-1">
-                        <div className="str-pg">1</div>
-                        <div className="str-eighth">3/8</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-time">Day 2</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-time">1:30</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-4">
-                    <div className="strip-row-1">
-                        <div className="str-cast">1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-bg">BG: 100</div>
-                        <div className="str-veh">Veh: 100</div>
-                        <div className="str-fx">FX</div>
-                        <div className="str-stunt">Stunts</div>
-                        <div className="str-animal">Animals</div>
-                    </div>
-                    </div>
-                </div>
-                </li>
-                <li className="sort-item">
-                <div className="strip intday">
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                    <div className="strip-col-1">
-                    <div className="str-sc">32</div>
-                    </div>
-                    <div className="strip-col-2">
-                    <div className="strip-row-1">
-                        <div className="str-ie">INT</div>
-                        <div className="str-set">MARTINI'S NEW HOUSE</div>
-                        <div className="str-dn">DAY</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-unit">Unit: First Unit</div>
-                        <div className="str-loc">Loc: Los Feliz House</div>
-                        <div className="str-scpg">Script Pg: 34</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-desc">This strip also has a red flag in the cast. Try hovering over it!</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-3">
-                    <div className="strip-row-1">
-                        <div className="str-pg">1</div>
-                        <div className="str-eighth">3/8</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-time">Day 2</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-time">1:30</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-4">
-                    <div className="strip-row-1">
-                        <div className="str-cast">1, 2, 4, 5, 6, <span className="str-cast-flag" data-toggle="tooltip" data-placement="top" title="Cousin Tilly can't work on this day">15</span></div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-bg"></div>
-                        <div className="str-veh">Veh: 1</div>
-                        <div className="str-fx"></div>
-                        <div className="str-stunt"></div>
-                        <div className="str-animal"></div>
-                    </div>
-                    </div>
-                </div>
-                </li>
-                <li className="sort-item">
-                <div className="strip extday">
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                    <div className="strip-col-1">
-                    <div className="str-sc">17</div>
-                    </div>
-                    <div className="strip-col-2">
-                    <div className="strip-row-1">
-                        <div className="str-ie">EXT</div>
-                        <div className="str-set">BAILEY PARK</div>
-                        <div className="str-dn">DAY</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-unit">Unit: First Unit</div>
-                        <div className="str-loc">Loc: Burbank Lot</div>
-                        <div className="str-scpg">Script Pg: 34</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-desc">Other elements can be flagged too. This strip has a flag on a vehicle.</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-3">
-                    <div className="strip-row-1">
-                        <div className="str-pg">1</div>
-                        <div className="str-eighth">3/8</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-time">Day 2</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-time">1:30</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-4">
-                    <div className="strip-row-1">
-                        <div className="str-cast">1, 2, 4, 5, 6</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-bg">BG: 3</div>
-                        <div className="str-veh">Veh: <span className="str-cast-flag" data-toggle="tooltip" data-placement="top" title="Potter's Car can't work on this day">1</span></div>
-                        <div className="str-fx"></div>
-                        <div className="str-stunt"></div>
-                        <div className="str-animal"></div>
-                    </div>
-                    </div>
-                </div>
-                </li>
-                <li className="sort-item">
-                <div className="strip extnight">
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                    <div className="strip-col-1">
-                    <div className="str-sc">64</div>
-                    </div>
-                    <div className="strip-col-2">
-                    <div className="strip-row-1">
-                        <div className="str-ie">EXT</div>
-                        <div className="str-set">CEMETERY</div>
-                        <div className="str-dn">NIGHT</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-unit">Unit: First Unit</div>
-                        <div className="str-loc">Loc: Hollywood Forever Cemetery</div>
-                        <div className="str-scpg">Script Pg: 34</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-desc">George discovers his brother's death</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-3">
-                    <div className="strip-row-1">
-                        <div className="str-pg">1</div>
-                        <div className="str-eighth">3/8</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-time">Day 2</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-time">1:30</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-4">
-                    <div className="strip-row-1">
-                        <div className="str-cast">1, 2, 4, 5, 6</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-bg"></div>
-                        <div className="str-veh">Veh: 1</div>
-                        <div className="str-fx"></div>
-                        <div className="str-stunt"></div>
-                        <div className="str-animal"></div>
-                    </div>
-                    </div>
-                </div>
-                </li>
-                <li className="sort-item">
-                <div className="daystrip">
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                    <div className="dayban-text">-- END OF DAY 11 - July 22, 2017 - 3 2/8 Pgs. (12:15 Hours) --</div>
-                </div>
-                </li>
-                <li className="sort-item">
-                <div className="strip intnight">
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
-                    <div className="strip-col-1">
-                    <div className="str-sc">202PT1</div>
-                    </div>
-                    <div className="strip-col-2">
-                    <div className="strip-row-1">
-                        <div className="str-ie">INT</div>
-                        <div className="str-set">BEDROOM -- GEORGE AND MARY'S HOUSE</div>
-                        <div className="str-dn">NIGHT</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-unit">Unit: First Unit</div>
-                        <div className="str-loc">Loc: Bailey House</div>
-                        <div className="str-scpg">Script Pg: 34</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-desc">George learns of Mary's pregnancy.</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-3">
-                    <div className="strip-row-1">
-                        <div className="str-pg">1</div>
-                        <div className="str-eighth">3/8</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-time">Day 2</div>
-                    </div>
-                    <div className="strip-row-3">
-                        <div className="str-time">1:30</div>
-                    </div>
-                    </div>
-                    <div className="strip-col-4">
-                    <div className="strip-row-1">
-                        <div className="str-cast">1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18</div>
-                    </div>
-                    <div className="strip-row-2">
-                        <div className="str-bg">BG: 100</div>
-                        <div className="str-veh">Veh: 100</div>
-                        <div className="str-fx">FX</div>
-                        <div className="str-stunt">Stunts</div>
-                        <div className="str-animal">Animals</div>
-                    </div>
-                    </div>
-                </div>
-                </li>
+            <ul ref={(c) => this.strips_container = c} className="strips strip-medium sort-select">
+                {strip_lists}
             </ul>
         </div>
       </div>
