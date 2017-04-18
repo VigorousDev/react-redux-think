@@ -115,6 +115,58 @@ export class Stripboard extends React.Component {
   }
 
   componentDidMount(){
+      // Sortable, Selectable
+			    var prev = -1; 
+                $(ReactDOM.findDOMNode(this.strips_container))
+                .selectable({
+				  cancel: '.sort-handle',
+				  selecting: function(e, ui) { 
+				        var curr = $(ui.selecting.tagName, e.target).index(ui.selecting); 
+				        if(e.shiftKey && prev > -1) {
+				            $(ui.selecting.tagName, e.target).slice(Math.min(prev, curr), 1 + Math.max(prev, curr)).addClass('ui-selected');
+				            prev = -1;
+				        } else {
+				            prev = curr;
+				        }
+				    }
+				}).sortable({
+					axis: 'y',
+					items: '.sort-item',
+					revert: 250,
+					scroll: true,
+					placeholder: 'sortable-placeholder',
+					forcePlaceholderSize: true,
+					cursor: 'move',
+					containment: 'parent',
+					animation: 450,
+					helper: function(e, item) {
+						item.children().each(function() {
+					        $(this).width($(this).width()); // make <tr>'s width match the cloned element
+					    });
+						if (!item.hasClass('ui-selected')) {
+							item.parent().children('.ui-selected').removeClass('ui-selected');
+							item.addClass('ui-selected');
+						}
+						var selected = item.parent().children('.ui-selected').clone();
+						item.data('multidrag', selected).siblings('.ui-selected').remove();
+						return $('<div/>').append(selected); // set element to wrap the helper
+					},
+					stop: function(e, ui) {
+						$('.ui-sortable').off('mouseup');
+						var selected = ui.item.data('multidrag');
+						ui.item.after(selected);
+						ui.item.remove();
+						$('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
+					},
+					connectWith: ".sort-select",
+					start: function(e, ui){
+						ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
+						$('.ui-sortable').on('mouseup', function() {
+							var selected = ui.item.data('multidrag');
+							$(selected).addClass('ui-sortable-helper-stop'); //include special class for selected strips
+						});
+					}
+				});
   }
 
   render(){
@@ -160,7 +212,7 @@ export class Stripboard extends React.Component {
           </ButtonToolbar>
         </Form>
         <div className="strips-container">
-            <ul className="strips strip-medium sort-select tooltip-demo">
+            <ul ref={(c) => this.strips_container = c} className="strips strip-medium sort-select tooltip-demo">
                 <li className="sort-item">
                     <div className="banner">
                         <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
