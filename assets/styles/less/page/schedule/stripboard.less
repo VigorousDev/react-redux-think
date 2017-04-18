@@ -26,4 +26,332 @@
       margin-bottom: 0px;
     }
   }
+
+  .schedule-container {
+    background-color: white;
+    .tabs-container {
+      height: calc(100%);
+      > li a {
+        padding-top: .5em;
+        padding-bottom: .5em;
+      }
+    }
+    .tab-content {
+      height: calc(~"100% - 26px");
+      overflow: hidden;
+    }
+    .tab-pane {
+      height: calc(100%);
+    }
+    .panel-body {
+      height: inherit;
+      border-bottom: none;
+    } 
+  }
+
+  .sched-nav {
+    padding: .4em .4em .3em .4em;
+    background-color: var(--c-nav);
+    border-top: 1px solid var(--c-blm);
+    border-bottom: 1px solid var(--c-blm);
+    position: relative;
+    .btn-group-xs {
+      display: inline-block;
+    }
+    .dropdown-menu {
+      left: auto;
+    }
+    .drop-select{
+      text-align: left;
+      .caret{
+        margin-top: .6em;
+        float: right;
+      }
+    }
+  }
+
+  .sched-stripboard .sched-nav .drop-select-parent{
+    width: 45%;
+    max-width: 400px;
+  }
+  .sched-stripboard .sched-nav .drop-select-parent > div {
+    width: 48%;
+  }
+  .sched-stripboard .sched-nav .drop-select {
+    width: 100%;
+    white-space: nowrap;
+    ovrflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sched-stripboard .sched-nav .drop-select .caret {
+    position: absolute;
+  }
+
+  .strips-container, .recycle-container {
+    font-size: 10px;
+    padding-bottom: 4em;
+    overflow: scroll;
+    height: inherit;
+  }
+
+  .strips {
+    margin: 0;
+    padding: 0;
+    min-width: 100em;
+    list-style-type: none; 
+    overflow: hidden;
+  }
+
+  .selected		{background-color: var(--c-sel)}
+  .intday			{background-color: var(--c-ida)}
+  .intnight		{background-color: var(--c-ini)}
+  .intdawn		{background-color: var(--c-idn)}
+  .intdusk		{background-color: var(--c-idk)}
+  .intmorning		{background-color: var(--c-imo)}
+  .intafternoon   {background-color: var(--c-iaf)}
+  .intevening		{background-color: var(--c-iev)}
+  .intmagic		{background-color: var(--c-imh)}
+  .extday			{background-color: var(--c-eda)}
+  .extnight		{background-color: var(--c-eni)}
+  .extdawn		{background-color: var(--c-edn)}
+  .extdusk		{background-color: var(--c-edk)}
+  .extmorning		{background-color: var(--c-emo)}
+  .extafternoon	{background-color: var(--c-eaf)}
+  .extevening		{background-color: var(--c-eev)}
+  .extmagic		{background-color: var(--c-emh)}
+  .space			{background-color: var(--c-spa)}
+  .daystrip		{background-color: var(--c-day)}
+  .banner			{background-color: var(--c-ban)}
+
+  .strip, .daystrip, .banner {
+    margin: 0 4px 4px 0;
+    box-shadow: 1px 1px 1px #666;
+    border-radius: 3px;
+  }
+  .strip {
+    color: #333;
+  }
+
+  .strips .sort-handle {
+    border-radius: 3px 0 0 3px;
+    border-left: 4px solid rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    float: left;
+  }
+  .dayban-text {
+    height: 100%;
+    width: calc(46em);
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .strips .sort-group li:not(:last-child) > div {
+    margin: 0 4px 0 0;
+    box-shadow: none;
+  }
+
+  .strip-row-1, .strip-row-2, .strip-row-3 {
+    padding: 0 .5em;
+    overflow: hidden;
+  }
+  .strip-row-1, .strip-row-2 {
+    border-bottom: 1px solid var(--c-bmd);
+  }
+  .strip-col-1 > div, 
+  .strip-row-1 > div, 
+  .strip-row-2 > div, 
+  .strip-row-3 > div {
+    vertical-align: bottom;
+  }
+  .strip-row-1 > div, 
+  .strip-row-2 > div, 
+  .strip-row-3 > div {
+    line-height: 1.6em;
+    display: inline-block;
+  }
+  .strip-row-1 > div, 
+  .strip-row-2 > div, 
+  .strip-row-3 > div {
+    height: 1.6em;
+  }
+  .strip > div {
+    height: 100%;
+    float: left;
+  }
+  .strip > div:not(:first-child):not(:last-child) {
+    border-right: 1px solid var(--c-bmd);
+  }
+
+  .strip-col-1 {
+    width: calc(5em);
+  }
+  .strip-col-2 {
+    width: calc(36em);
+  }
+  .strip-col-3 {
+    width: calc(5em);
+  }
+  .strip-col-4 {
+    width: calc(~"100% - 4px - 16px - 46em");
+  }
+
+  .strip-small .strip,
+  .strip-small .daystrip,
+  .strip-small .banner {
+    height: 1.75em; 
+  }
+  .strip-medium .strip,
+  .strip-medium .daystrip,
+  .strip-medium .banner  {
+    height: 3.5em; 
+  }
+  .strip-large .strip,
+  .strip-large .daystrip,
+  .strip-large .banner  {
+    height: 5.3em; 
+  }
+  .strip-small .dayban-text {
+    font-size: 1em;
+  }
+  .strip-medium .dayban-text {
+    font-size: 1.5em;
+  }
+  .strip-large .dayban-text {
+    font-size: 1.7em;
+  }
+  .strip-large .strip-col-4 .strip-row-1 > div {
+    height: 3.4em;
+  }
+  .strip-small  .strip-col-1 .strip-row-1,
+  .strip-small  .strip-col-2 .strip-row-1,
+  .strip-small  .strip-col-3 .strip-row-1,
+  .strip-small  .strip-col-4 .strip-row-1,
+  .strip-medium .strip-col-4 .strip-row-2,
+  .strip-large .strip-col-4 .strip-row-2 {
+    border-bottom: none;
+  }
+  .strip-small  .strip-col-2 .strip-row-2,
+  .strip-small  .strip-col-2 .strip-row-3,
+  .strip-small  .strip-col-3 .strip-row-2,
+  .strip-small  .strip-col-3 .strip-row-3,
+  .strip-small  .strip-col-4 .strip-row-2,
+  .strip-medium .strip-col-2 .strip-row-2,
+  .strip-medium .strip-col-3 .strip-row-2 {
+    display: none;
+  }
+
+  .str-sc {
+    height: 100%;
+    line-height: 1em; 
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .str-ie {
+    width: 8%;
+  }
+  .str-set {
+    width: 67%;
+  }
+  .str-dn {
+    width: 23%;
+    text-align: right;
+  }
+  .str-desc {
+    width: 100%;
+  }
+  .str-pg {
+    width: 45%;
+    text-align: right;
+  }
+  .str-eighth {
+    width: 45%;
+  }
+  .str-time {
+    width: 100%;
+    text-align: center;
+  }
+  .str-cast {
+    width: 100%;
+  }
+  .str-bg {
+    width: 5em;
+  }
+  .str-veh {
+    width: 5.5em;
+  }
+  .str-fx {
+    width: 2em;
+  }
+  .str-stunt {
+    width: 4em;
+  }
+  .str-animal {
+    width: 5em;
+  }
+  .str-unit {
+    width: 12em;
+  }
+  .str-loc {
+    width: 15em;
+  }
+  .str-scpg {
+    width: 7em;
+  }
+  .str-cast-flag {
+    color: var(--c-dgr);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .sort-group .sort-handle,
+  .sort-group.ui-selecting .sort-handle,
+  .sort-group .ui-selecting .sort-handle,
+  .sort-group.ui-selected .sort-handle,  
+  .sort-group .ui-selected .sort-handle {
+    border-left-color: var(--c-grp);
+  }
+
+  .strips .ui-sortable-helper {
+    -webkit-transform: rotate(1deg) translateX(20px);
+    -moz-transform: rotate(1deg) translateX(20px);
+    transform: rotate(1deg) translateX(20px);
+  }
+  .strips .ui-sortable-helper-stop {
+    -webkit-transform: rotate(-1deg) translateX(-20px);
+    -moz-transform: rotate(-1deg) translateX(-20px);
+    transform: rotate(-1deg) translateX(-20px);
+    -webkit-transition: 0.25s ease-out;
+      -moz-transition: 0.25s ease-out;
+      transition: 0.25s ease-out;
+  }
+
+  .sort-handle {
+    height: 100%;
+    width: 16px;
+    font-size: 16px;
+    color: #828282;
+    cursor: move;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .ui-selecting > div, tr.ui-selecting {
+    background-color: var(--c-slt);
+  }
+  .ui-selected > div, .ui-selected > li div, tr.ui-selected {
+    background-color: var(--c-sel);
+  }
+
 }
