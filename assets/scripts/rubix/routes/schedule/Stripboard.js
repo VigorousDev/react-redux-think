@@ -237,35 +237,51 @@ export class Stripboard extends React.Component {
     var strip = [
         {
             type: DATATYPES.BANNER,
-            id: '1'
+            id: '1',
+            desc: 'a',
+            position: 0,
         },
         {
             type: DATATYPES.BREAKDOWN,
-            id: '1'
+            id: '1',
+            desc: 'b',
+            position: 1,
         },
         {
             type: DATATYPES.DAY,
-            id: 1
+            id: '1',
+            desc: 'c',
+            position: 2,
         },
         {
             type: DATATYPES.BREAKDOWN,
-            id: '2'
+            id: '2',
+            desc: 'd',
+            position: 3,
         },
         {
             type: DATATYPES.BREAKDOWN,
-            id: '3'
+            id: '3',
+            desc: 'e',
+            position: 4,
         },
         {
             type: DATATYPES.GROUP,
-            id: '1'
+            id: '1',
+            desc: 'f',
+            position: 5,
         },
         {
             type: DATATYPES.DAY,
-            id: '2'
+            id: '2',
+            desc: 'g',
+            position: 6,
         },
         {
             type: DATATYPES.BREAKDOWN,
-            id: '6'
+            id: '6',
+            desc: 'h',
+            position: 7,
         }
     ];
 
@@ -279,85 +295,132 @@ export class Stripboard extends React.Component {
     };
   }
 
-  stripSize(eventKey, event){
+  componentDidMount(){
+      this.sortable_init();
+  }
+
+  stripsize_onchange(eventKey, event){
     $('.strips').removeClass('strip-small');
     $('.strips').removeClass('strip-medium');
     $('.strips').removeClass('strip-large');
     $('.strips').addClass(eventKey);
   }
 
-  eventHandler(val){
-    this.setState({strip: strip});
-  }
-
-  componentDidMount(){
-      // Sortable, Selectable
-    var prev = -1; 
+  sortable_init(){
+    var prev = -1;      
     var self = this;
     $(ReactDOM.findDOMNode(this.strips_container))
-    .selectable({
-        cancel: '.sort-handle',
-        selecting: function(e, ui) { 
-            var curr = $(ui.selecting.tagName, e.target).index(ui.selecting); 
-            if(e.shiftKey && prev > -1) {
-                $(ui.selecting.tagName, e.target).slice(Math.min(prev, curr), 1 + Math.max(prev, curr)).addClass('ui-selected');
-                prev = -1;
-            } else {
-                prev = curr;
-            }
-        }
-    }).sortable({
-        axis: 'y',
-        items: '.sort-item',
-        revert: 250,
-        scroll: true,
-        placeholder: 'sortable-placeholder',
-        forcePlaceholderSize: true,
-        cursor: 'move',
-        containment: 'parent',
-        animation: 450,
-        helper: function(e, item) {
-            item.children().each(function() {
-                $(this).width($(this).width()); // make <tr>'s width match the cloned element
-            });
-            if (!item.hasClass('ui-selected')) {
-                item.parent().children('.ui-selected').removeClass('ui-selected');
-                item.addClass('ui-selected');
-            }
-            var selected = item.parent().children('.ui-selected').clone();
-            item.data('multidrag', selected).siblings('.ui-selected').remove();
-            return $('<div/>').append(selected); // set element to wrap the helper
-        },
-        update: function(e, ui){
-            setTimeout(function(){ // wait for update is completed.
-                // console.log(ui);
-                var order = [];
-                $('.sort-select').children().each(function(e){
-                    order.push($(this).attr('id') + '=' + ($(this).index() + 1 ));                
-                });
-                var positions = order.join(';');
-                self.eventHandler(positions);
-            }, 10);
-        },
-        stop: function(e, ui) {
-            $('.ui-sortable').off('mouseup');
-            var selected = ui.item.data('multidrag');
-            ui.item.after(selected);
-            ui.item.remove();
-            $('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
-        },
-        connectWith: ".sort-select",
-        start: function(e, ui){
-            ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
-            $('.ui-sortable').on('mouseup', function() {
-                var selected = ui.item.data('multidrag');
-                $(selected).addClass('ui-sortable-helper-stop'); //include special class for selected strips
-            });
-        }
+        // .selectable({
+        //     cancel: '.sort-handle',
+        //     selecting: function(e, ui) { 
+        //         var curr = $(ui.selecting.tagName, e.target).index(ui.selecting); 
+        //         if(e.shiftKey && prev > -1) {
+        //             $(ui.selecting.tagName, e.target).slice(Math.min(prev, curr), 1 + Math.max(prev, curr)).addClass('ui-selected');
+        //             prev = -1;
+        //         } else {
+        //             prev = curr;
+        //         }
+        //     }
+        // })
+        .sortable({
+            items: '.sort-item',
+            update: function(e, ui){
+                setTimeout(function(){ // wait for update is completed.
+                    self.handleSortableUpdate();
+                    // var ids = [];
+                    // $('.sort-select').children().each(function(e){
+                    //     ids.push($(this).attr('id'));
+                    // });
+                    // console.log(ids);
+                }, 10);
+            },            
+            axis: 'y',
+            revert: 250,
+            scroll: true,
+            placeholder: 'sortable-placeholder',
+            forcePlaceholderSize: true,
+            cursor: 'move',
+            containment: 'parent',
+            animation: 450,
+            connectWith: ".sort-select",
+            // helper: function(e, item) {
+            //     item.children().each(function() {
+            //         $(this).width($(this).width()); // make <tr>'s width match the cloned element
+            //     });
+            //     if (!item.hasClass('ui-selected')) {
+            //         item.parent().children('.ui-selected').removeClass('ui-selected');
+            //         item.addClass('ui-selected');
+            //     }
+            //     var selected = item.parent().children('.ui-selected').clone();
+            //     item.data('multidrag', selected).siblings('.ui-selected').remove();
+            //     return $('<div/>').append(selected); // set element to wrap the helper
+            // },
+            // stop: function(e, ui) {
+            //     $('.ui-sortable').off('mouseup');
+            //     var selected = ui.item.data('multidrag');
+            //     ui.item.after(selected);
+            //     ui.item.remove();
+            //     $('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
+            // },        
+            // start: function(e, ui){
+            //     ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
+            //     $('.ui-sortable').on('mouseup', function() {
+            //         var selected = ui.item.data('multidrag');
+            //         $(selected).addClass('ui-sortable-helper-stop'); //include special class for selected strips
+            //     });
+            // }
     });
   }
 
-  getContent(data){
+  handleSortableUpdate() {
+    // We should only use setState to mutate our component's state,
+    // so here we'll clone the items array (using lodash) and
+    // update the list items through this new array.
+    var newItems = _.clone(this.state.strip, true);
+    var $node = $(ReactDOM.findDOMNode(this.strips_container));
+
+    // Here's where our data-id attribute from before comes
+    // into play. toArray will return a sorted array of item ids:
+    var ids = [];
+    $('.sort-select').children().each(function(e){
+        ids.push($(this).attr('id'));
+    });
+    // ids = $node.sortable('toArray', { attribute: 'id' });
+    // console.log(ids);
+
+    // Now we can loop through the array of ids, find the
+    // item in our array by its id (again, w/ lodash),
+    // and update its position:    
+    ids.forEach((id, index) => {
+      var item = _.find(newItems, function(obj){return obj.desc == id});
+      item.position = index;
+    });
+
+    // We'll cancel the sortable change and let React reorder the DOM instead:    
+    $node.sortable('cancel');
+
+    // After making our updates, we'll set our items
+    // array to our updated array, causing items with
+    // a new position to be updated in the DOM:
+    this.setState({ strip: newItems });
+  }
+
+  sortable_update(val){
+    let newStrip = [];
+    let {strip} = this.state;
+    for(let i=0; i<val.length; i++){
+        let index = val[i];
+        let obj = strip[index];
+        newStrip.push({
+            type: obj.type,
+            id: obj.id
+        });
+    }
+    console.log(newStrip);
+    this.setState({strip: newStrip});
+  }
+
+  sortable_getItemContent(data){
     let content = null;
     let obj = null, title = '';
     if(!data)
@@ -367,7 +430,7 @@ export class Stripboard extends React.Component {
             obj = this.state.banners.data[data.id];
             title = obj ? obj.title: '!Error';
             content = <div className='banner'>
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
+                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i>{data.position}</div>
                     <div className="dayban-text">-- {title} --</div>
                 </div>;
             break;
@@ -378,7 +441,7 @@ export class Stripboard extends React.Component {
             }else{
                 let css = obj.int_ext.toLowerCase() + obj.day_night.toLowerCase()
                 content = <div className={"strip " + css}>
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
+                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i>{data.position}</div>
                     <div className="strip-col-1">
                         <div className="str-sc">{obj.name}</div>
                     </div>
@@ -429,10 +492,10 @@ export class Stripboard extends React.Component {
             obj = this.state.days.data[data.id];
             title = '!Error';
             if(obj){
-                title = "END OF DAY " + obj.number + " - "+ moment(new Date(obj.date)).format('MMMM D Y') + " - " + obj.pgs + " ("+ obj.hours + ":" + obj.mins + " Hours)";
+                title = "END OF DAY " + obj.number + " - " + moment(new Date(obj.date)).format('MMMM D Y') + " - " + obj.pgs + " ("+ obj.hours + ":" + obj.mins + " Hours)";
             }
             content = <div className="daystrip">
-                <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
+                <div className="sort-handle"><i className="fa fa-ellipsis-v"></i>{data.position}</div>
                 <div className="dayban-text">-- {title} --</div>
             </div>
             break;
@@ -442,16 +505,20 @@ export class Stripboard extends React.Component {
     return content;
   }
 
-  render(){
+  sortable_getContent(){
     let {strip} = this.state;
     let self = this;
-    let strip_lists = _.map(strip, (t, index)=>{
+    let items = _.sortBy(strip, 'position');
+    // return items.map((item, index) =>{
+    //     return <li key={index} className='sort-item' id={item.desc}>{index} - id:{item.desc}, type:{item.type}</li>
+    // });
+    let strip_content = _.map(items, (t, index)=>{
         if(t.type == DATATYPES.GROUP){
             let obj = this.state.groups.data[t.id];
             let content = <div> !Error </div>;
             if(obj){
                 content = _.map(obj, (o, index1)=>{
-                    let item_content = self.getContent(o);
+                    let item_content = self.sortable_getItemContent(o);
                     return (
                         <li key={index1} id={index + "_" + index1}>
                             {item_content}
@@ -460,20 +527,25 @@ export class Stripboard extends React.Component {
                 })
             }
             return (
-                <div key={index} className='sort-group sort-item' id={index}>
+                <div key={index} className='sort-group sort-item' id={t.desc}>
+                    {t.position}
                     {content}
                 </div>
             )
         }else{
-            let content = self.getContent(t);
+            let content = self.sortable_getItemContent(t);
             return (            
-                <li key={index} className='sort-item' id={index}>
+                <li key={index} className='sort-item' id={t.desc}>
                     {content}
                 </li>
             ) 
-        };        
+        };
     })
-    
+    return strip_content;
+  }
+
+  render(){
+    let content = this.sortable_getContent();
     return (
       <div className="page-stripboard">
         <Form className='frm_stripboard'>
@@ -491,7 +563,7 @@ export class Stripboard extends React.Component {
               <Button bsStyle='info' inverse>
                 <Icon glyph={'icon-fontello-trash-4'} />&nbsp;Recycle
               </Button>
-              <DropdownHoverButton id="bg-nested-dropdown" inverse onSelect={this.stripSize.bind(this)}
+              <DropdownHoverButton id="bg-nested-dropdown" inverse onSelect={this.stripsize_onchange.bind(this)}
                 title={<Icon glyph={'icon-fontello-resize-vertical'}>&nbsp;Strip Size</Icon>}>
                 <MenuItem eventKey="strip-small">Small Strips</MenuItem>
                 <MenuItem eventKey="strip-medium">Medium Strips</MenuItem>
@@ -517,7 +589,7 @@ export class Stripboard extends React.Component {
         </Form>
         <div className="strips-container">
             <ul ref={(c) => this.strips_container = c} className="strips strip-medium sort-select">
-                {strip_lists}
+                {content}
             </ul>
         </div>
       </div>
