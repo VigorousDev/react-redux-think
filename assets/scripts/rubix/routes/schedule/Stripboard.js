@@ -238,49 +238,41 @@ export class Stripboard extends React.Component {
         {
             type: DATATYPES.BANNER,
             id: '1',
-            desc: 'a',
             position: 0,
         },
         {
             type: DATATYPES.BREAKDOWN,
             id: '1',
-            desc: 'b',
             position: 1,
         },
         {
             type: DATATYPES.DAY,
             id: '1',
-            desc: 'c',
             position: 2,
         },
         {
             type: DATATYPES.BREAKDOWN,
             id: '2',
-            desc: 'd',
             position: 3,
         },
         {
             type: DATATYPES.BREAKDOWN,
             id: '3',
-            desc: 'e',
             position: 4,
         },
         {
             type: DATATYPES.GROUP,
             id: '1',
-            desc: 'f',
             position: 5,
         },
         {
             type: DATATYPES.DAY,
             id: '2',
-            desc: 'g',
             position: 6,
         },
         {
             type: DATATYPES.BREAKDOWN,
             id: '6',
-            desc: 'h',
             position: 7,
         }
     ];
@@ -299,6 +291,92 @@ export class Stripboard extends React.Component {
       this.sortable_init();
   }
 
+  group_onclick(){
+    let ids = [];
+    $('.sort-select > .ui-selected').each(function(e){
+        $(this).removeClass('ui-selected');
+        ids.push($(this).attr('id'));
+    });
+    if(ids.length == 0) // none are selected
+        return;
+    
+    let {strip} = this.state;
+    let newStrip = [];
+    let position = 0; 
+    if(ids.length == 1){ // one strip selected
+        let selected = ids[0];
+        let selectedStrip = strip[selected];
+        if(selectedStrip.type != DATATYPES.GROUP){ // ignore not-group
+            return;
+        }     
+        for(let i = 0; i< strip.length; i++){
+            if(i == selected){
+                let groupObj = this.state.groups.data[selectedStrip.id];
+                if(groupObj){
+                    _.map(groupObj, (o, index1)=>{
+                        newStrip.push({
+                            type: o.type,
+                            id: o.id,
+                            position: position++,
+                        });              
+                    });
+                }      
+            }else{
+                newStrip.push({
+                    type: strip[i].type,
+                    id: strip[i].id,
+                    position: position++,
+                });                
+            }
+        }
+        this.setState({strip: newStrip});
+    }else{
+        let {groups} = this.state;
+        let newGroups = _.clone(groups, true);
+        for(let i=0; i<strip.length; i++){
+            if(ids.indexOf(i.toString()) == -1){
+                newStrip.push({
+                    type: strip[i].type,
+                    id: strip[i].id,
+                    position: position++,
+                });
+            }else{
+                if(ids[0] == i){ // first occurence of group                    
+                    let newGroupID = ++newGroups.maxid;
+                    let newGroupData = [];
+                    // build new group
+                    for(let j=0; j<ids.length; j++){
+                        let id = ids[j];
+                        if(strip[id].type == DATATYPES.GROUP){
+                            let groupObj = groups.data[strip[id].id];
+                            if(groupObj){
+                                _.map(groupObj, (o, index1)=>{
+                                    newGroupData.push({
+                                        type: o.type,
+                                        id: o.id,
+                                    });              
+                                });
+                            } 
+                        }else{
+                            newGroupData.push({
+                                type: strip[id].type,
+                                id: strip[id].id
+                            });
+                        }
+                    }
+
+                    newGroups.data[newGroupID] = newGroupData;
+                    newStrip.push({
+                        type: DATATYPES.GROUP,
+                        id: newGroupID,
+                        position: position++,
+                    })                    
+                }
+            }
+        }
+        this.setState({strip: newStrip, groups: newGroups});
+    }
+  }
   stripsize_onchange(eventKey, event){
     $('.strips').removeClass('strip-small');
     $('.strips').removeClass('strip-medium');
@@ -310,18 +388,18 @@ export class Stripboard extends React.Component {
     var prev = -1;      
     var self = this;
     $(ReactDOM.findDOMNode(this.strips_container))
-        // .selectable({
-        //     cancel: '.sort-handle',
-        //     selecting: function(e, ui) { 
-        //         var curr = $(ui.selecting.tagName, e.target).index(ui.selecting); 
-        //         if(e.shiftKey && prev > -1) {
-        //             $(ui.selecting.tagName, e.target).slice(Math.min(prev, curr), 1 + Math.max(prev, curr)).addClass('ui-selected');
-        //             prev = -1;
-        //         } else {
-        //             prev = curr;
-        //         }
-        //     }
-        // })
+        .selectable({
+            cancel: '.sort-handle',
+            selecting: function(e, ui) { 
+                var curr = $(ui.selecting.tagName, e.target).index(ui.selecting); 
+                if(e.shiftKey && prev > -1) {
+                    $(ui.selecting.tagName, e.target).slice(Math.min(prev, curr), 1 + Math.max(prev, curr)).addClass('ui-selected');
+                    prev = -1;
+                } else {
+                    prev = curr;
+                }
+            }
+        })
         .sortable({
             items: '.sort-item',
             update: function(e, ui){
@@ -527,7 +605,7 @@ export class Stripboard extends React.Component {
                 })
             }
             return (
-                <div key={index} className='sort-group sort-item' id={t.desc}>
+                <div key={index} className='sort-group sort-item' id={index}>
                     {t.position}
                     {content}
                 </div>
@@ -535,7 +613,7 @@ export class Stripboard extends React.Component {
         }else{
             let content = self.sortable_getItemContent(t);
             return (            
-                <li key={index} className='sort-item' id={t.desc}>
+                <li key={index} className='sort-item' id={index}>
                     {content}
                 </li>
             ) 
@@ -557,8 +635,8 @@ export class Stripboard extends React.Component {
               <Button bsStyle='info' inverse>
                 <Icon glyph={'icon-fontello-quote'} />&nbsp;Add Banner
               </Button>            
-              <Button bsStyle='info' inverse>
-              <Icon glyph={'icon-fontello-link-2'} />&nbsp;Group
+              <Button bsStyle='info' inverse onClick={this.group_onclick.bind(this)}>
+                <Icon glyph={'icon-fontello-link-2'} />&nbsp;Group
               </Button>        
               <Button bsStyle='info' inverse>
                 <Icon glyph={'icon-fontello-trash-4'} />&nbsp;Recycle
