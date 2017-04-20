@@ -22,7 +22,10 @@ import {DATATYPES} from '../../../core/datatypes';
 
 export class Stripboard extends React.Component {
   constructor(props){
-    super(props);   
+    super(props);
+
+    this.sortableInitialized = false;
+    this.uniqueID = 0;
 
     var casts = {
         maxid: 3,
@@ -288,7 +291,13 @@ export class Stripboard extends React.Component {
   }
 
   componentDidMount(){
+      console.log('mount');
       this.sortable_init();
+  }
+
+  componentDidUpdate(prevPros, prevState){
+      console.log('update');
+    //   this.sortable_init();
   }
 
   group_onclick(){
@@ -377,6 +386,7 @@ export class Stripboard extends React.Component {
         this.setState({strip: newStrip, groups: newGroups});
     }
   }
+
   stripsize_onchange(eventKey, event){
     $('.strips').removeClass('strip-small');
     $('.strips').removeClass('strip-medium');
@@ -387,6 +397,13 @@ export class Stripboard extends React.Component {
   sortable_init(){
     var prev = -1;      
     var self = this;
+    if(this.sortableInitialized){
+        console.log('destroyed');
+        $(ReactDOM.findDOMNode(this.strips_container)).sortable('destroy');
+        $(ReactDOM.findDOMNode(this.strips_container)).selectable('destroy');
+    }else{
+        this.sortableInitialized = true;
+    }
     $(ReactDOM.findDOMNode(this.strips_container))
         .selectable({
             cancel: '.sort-handle',
@@ -403,14 +420,7 @@ export class Stripboard extends React.Component {
         .sortable({
             items: '.sort-item',
             update: function(e, ui){
-                setTimeout(function(){ // wait for update is completed.
-                    self.handleSortableUpdate();
-                    // var ids = [];
-                    // $('.sort-select').children().each(function(e){
-                    //     ids.push($(this).attr('id'));
-                    // });
-                    // console.log(ids);
-                }, 10);
+                self.handleSortableUpdate();
             },            
             axis: 'y',
             revert: 250,
@@ -450,37 +460,32 @@ export class Stripboard extends React.Component {
     });
   }
 
+  refresh(){
+    let {strip} = this.state;
+    let newItems = _.sortBy(strip, 'position');
+    // var newItems = _.clone(this.state.strip, true);
+
+    // get sorted ids
+    // var $node = $(ReactDOM.findDOMNode(this.strips_container));
+    // $node.sortable('refreshPositions');
+    console.log(newItems);
+    this.setState({strip: newItems});
+  }
+  
   handleSortableUpdate() {
-    // We should only use setState to mutate our component's state,
-    // so here we'll clone the items array (using lodash) and
-    // update the list items through this new array.
+    let {strip} = this.state;
     var newItems = _.clone(this.state.strip, true);
+
+    // get sorted ids
     var $node = $(ReactDOM.findDOMNode(this.strips_container));
-
-    // Here's where our data-id attribute from before comes
-    // into play. toArray will return a sorted array of item ids:
-    var ids = [];
-    $('.sort-select').children().each(function(e){
-        ids.push($(this).attr('id'));
-    });
-    // ids = $node.sortable('toArray', { attribute: 'id' });
-    // console.log(ids);
-
-    // Now we can loop through the array of ids, find the
-    // item in our array by its id (again, w/ lodash),
-    // and update its position:    
+    var ids = $node.sortable('toArray', { attribute: 'id' });
+    $node.sortable('cancel'); // make sortable cancel sorting    
     ids.forEach((id, index) => {
-      var item = _.find(newItems, function(obj){return obj.desc == id});
-      item.position = index;
+        newItems[id].position = index;
     });
 
-    // We'll cancel the sortable change and let React reorder the DOM instead:    
-    $node.sortable('cancel');
-
-    // After making our updates, we'll set our items
-    // array to our updated array, causing items with
-    // a new position to be updated in the DOM:
-    this.setState({ strip: newItems });
+    var newStrip = _.sortBy(newItems, 'position');
+    this.setState({strip: newStrip});
   }
 
   sortable_update(val){
@@ -586,11 +591,11 @@ export class Stripboard extends React.Component {
   sortable_getContent(){
     let {strip} = this.state;
     let self = this;
-    let items = _.sortBy(strip, 'position');
+    // let items = _.sortBy(strip, 'position');
     // return items.map((item, index) =>{
     //     return <li key={index} className='sort-item' id={item.desc}>{index} - id:{item.desc}, type:{item.type}</li>
     // });
-    let strip_content = _.map(items, (t, index)=>{
+    let strip_content = _.map(strip, (t, index)=>{
         if(t.type == DATATYPES.GROUP){
             let obj = this.state.groups.data[t.id];
             let content = <div> !Error </div>;
@@ -605,7 +610,7 @@ export class Stripboard extends React.Component {
                 })
             }
             return (
-                <div key={index} className='sort-group sort-item' id={index}>
+                <div key={index} className='sort-group sort-item' id={index} data-id={t.position}>
                     {t.position}
                     {content}
                 </div>
@@ -613,23 +618,25 @@ export class Stripboard extends React.Component {
         }else{
             let content = self.sortable_getItemContent(t);
             return (            
-                <li key={index} className='sort-item' id={index}>
+                <li key={index} className='sort-item' id={index} data-id={t.position}>
                     {content}
                 </li>
             ) 
         };
     })
+    
     return strip_content;
   }
 
   render(){
+    console.log('render');
     let content = this.sortable_getContent();
     return (
       <div className="page-stripboard">
         <Form className='frm_stripboard'>
           <ButtonToolbar className="toolbar">
             <ButtonGroup sm>
-              <Button bsStyle='info' inverse>
+              <Button bsStyle='info' inverse onClick={this.refresh.bind(this)}>
                 <Icon glyph={'icon-fontello-level-down'} />&nbsp;Add Day
               </Button>
               <Button bsStyle='info' inverse>
