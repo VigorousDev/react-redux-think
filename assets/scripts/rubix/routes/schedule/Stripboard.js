@@ -24,9 +24,6 @@ export class Stripboard extends React.Component {
   constructor(props){
     super(props);
 
-    this.sortableInitialized = false;
-    this.uniqueID = 0;
-
     var casts = {
         maxid: 3,
         data: {
@@ -296,8 +293,6 @@ export class Stripboard extends React.Component {
   }
 
   componentDidUpdate(prevPros, prevState){
-      console.log('update');
-    //   this.sortable_init();
   }
 
   group_onclick(){
@@ -397,13 +392,6 @@ export class Stripboard extends React.Component {
   sortable_init(){
     var prev = -1;      
     var self = this;
-    if(this.sortableInitialized){
-        console.log('destroyed');
-        $(ReactDOM.findDOMNode(this.strips_container)).sortable('destroy');
-        $(ReactDOM.findDOMNode(this.strips_container)).selectable('destroy');
-    }else{
-        this.sortableInitialized = true;
-    }
     $(ReactDOM.findDOMNode(this.strips_container))
         .selectable({
             cancel: '.sort-handle',
@@ -420,7 +408,9 @@ export class Stripboard extends React.Component {
         .sortable({
             items: '.sort-item',
             update: function(e, ui){
-                self.handleSortableUpdate();
+                setTimeout(function(){
+                    self.handleSortableUpdate();                    
+                }, 10);                
             },            
             axis: 'y',
             revert: 250,
@@ -431,45 +421,47 @@ export class Stripboard extends React.Component {
             containment: 'parent',
             animation: 450,
             connectWith: ".sort-select",
-            // helper: function(e, item) {
-            //     item.children().each(function() {
-            //         $(this).width($(this).width()); // make <tr>'s width match the cloned element
-            //     });
-            //     if (!item.hasClass('ui-selected')) {
-            //         item.parent().children('.ui-selected').removeClass('ui-selected');
-            //         item.addClass('ui-selected');
-            //     }
-            //     var selected = item.parent().children('.ui-selected').clone();
-            //     item.data('multidrag', selected).siblings('.ui-selected').remove();
-            //     return $('<div/>').append(selected); // set element to wrap the helper
-            // },
-            // stop: function(e, ui) {
-            //     $('.ui-sortable').off('mouseup');
-            //     var selected = ui.item.data('multidrag');
-            //     ui.item.after(selected);
-            //     ui.item.remove();
-            //     $('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
-            // },        
-            // start: function(e, ui){
-            //     ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
-            //     $('.ui-sortable').on('mouseup', function() {
-            //         var selected = ui.item.data('multidrag');
-            //         $(selected).addClass('ui-sortable-helper-stop'); //include special class for selected strips
-            //     });
-            // }
+            helper: function(e, item) {
+                item.children().each(function() {
+                    $(this).width($(this).width()); // make <tr>'s width match the cloned element
+                });
+                if (!item.hasClass('ui-selected')) {
+                    item.parent().children('.ui-selected').removeClass('ui-selected');
+                    item.addClass('ui-selected');
+                }
+                var selected = item.parent().children('.ui-selected').clone();                
+                item.data('multidrag', selected).siblings('.ui-selected').hide();
+                return $('<div/>').append(selected); // set element to wrap the helper
+            },
+            stop: function(e, ui) {
+                $('.ui-sortable').off('mouseup');                
+                var selected = ui.item.data('multidrag');
+                var item = ui.item;
+                ui.item.after(item.parent().children('.ui-selected').show());
+                // ui.item.remove();
+                // $(item).addClass('sortable-leftover'); // use special css for recognition
+                $('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
+            },        
+            start: function(e, ui){
+                ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
+                $('.ui-sortable').on('mouseup', function() {
+                    var selected = ui.item.data('multidrag');
+                    $(selected).addClass('ui-sortable-helper-stop'); //include special class for selected strips
+                });
+            }
     });
   }
 
   refresh(){
     let {strip} = this.state;
-    let newItems = _.sortBy(strip, 'position');
-    // var newItems = _.clone(this.state.strip, true);
+    // let newItems = _.sortBy(strip, 'position');
+    // // var newItems = _.clone(this.state.strip, true);
 
-    // get sorted ids
-    // var $node = $(ReactDOM.findDOMNode(this.strips_container));
-    // $node.sortable('refreshPositions');
-    console.log(newItems);
-    this.setState({strip: newItems});
+    // // get sorted ids
+    // // var $node = $(ReactDOM.findDOMNode(this.strips_container));
+    // // $node.sortable('refreshPositions');
+    // console.log(newItems);
+    // this.setState({strip: newItems});
   }
   
   handleSortableUpdate() {
@@ -479,13 +471,13 @@ export class Stripboard extends React.Component {
     // get sorted ids
     var $node = $(ReactDOM.findDOMNode(this.strips_container));
     var ids = $node.sortable('toArray', { attribute: 'id' });
-    $node.sortable('cancel'); // make sortable cancel sorting    
+    
+    // sort array
     ids.forEach((id, index) => {
         newItems[id].position = index;
     });
-
-    var newStrip = _.sortBy(newItems, 'position');
-    this.setState({strip: newStrip});
+    // var newStrip = _.sortBy(newItems, 'position');
+    this.setState({strip: newItems});
   }
 
   sortable_update(val){
@@ -629,7 +621,7 @@ export class Stripboard extends React.Component {
   }
 
   render(){
-    console.log('render');
+    // console.log('render');
     let content = this.sortable_getContent();
     return (
       <div className="page-stripboard">
