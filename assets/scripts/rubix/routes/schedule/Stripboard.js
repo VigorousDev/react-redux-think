@@ -357,20 +357,22 @@ export class Stripboard extends React.Component {
                     var totalCount = item.parent().children().length;
                     var newOrder = [];
                     insertPos = insertPos > selected_indices[0] ? insertPos + 1 : insertPos;
-                    for(var i=0; i<totalCount; i++){
+                    for(var i=0; i<=totalCount; i++){
                         if(i == insertPos){ // insert selected rows
                             for(var j=0; j<selected_indices.length; j++)
                                 newOrder.push(selected_indices[j]);
                         }
-                        var strI = i.toString();
-                        var index = selected_indices.indexOf(strI);
-                        if(index == -1){
-                            newOrder.push(strI); // insert unselected rows
-                        }
+                        if(i<totalCount){
+                            var strI = i.toString();
+                            var index = selected_indices.indexOf(strI);
+                            if(index == -1){
+                                newOrder.push(strI); // insert unselected rows
+                            }
+                        }                        
                     }
                     self.sortable_update(newOrder);
                 }
-            },        
+            },
             start: function(e, ui){
                 ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
                 $('.ui-sortable').on('mouseup', function() {
