@@ -19,6 +19,7 @@ import {
   ControlLabel
 } from '@sketchpixy/rubix';
 import {DATATYPES} from '../../../core/datatypes';
+import {ModalDialog} from '../../../core/components/ModalDialog';
 
 export class Stripboard extends React.Component {
   constructor(props){
@@ -527,11 +528,33 @@ export class Stripboard extends React.Component {
 
   // [Event handlers]
   onClick_addDay(){
-
+    this.mdAddDay.open('StripAddDay', false, null);
+  }
+  callback_addDay(data){
+      let {days, strip} = this.state;
+      let newID = ++days.maxid; 
+      days.data[newID] = data;
+      strip.push({
+          type: DATATYPES.DAY,
+          id: newID,
+          position: strip.length
+      });
+      this.setState({days: days, strip: strip});
   }
 
   onClick_addBanner(){
-
+    this.mdAddBanner.open('StripAddBanner', false, null);
+  }
+  callback_addBanner(data){
+      let {banners, strip} = this.state;
+      let newID = ++banners.maxid; 
+      banners.data[newID] = data;
+      strip.push({
+          type: DATATYPES.BANNER,
+          id: newID,
+          position: strip.length
+      });
+      this.setState({banners: banners, strip: strip});
   }
 
   onClick_group(){
@@ -645,14 +668,17 @@ export class Stripboard extends React.Component {
 
   render(){
     let content = this.sortable_getContent();
+    let self = this;
     return (
       <div className="page-stripboard">
-        <Form className='frm_stripboard'>
+        <Form className='frm_stripboard'>          
           <ButtonToolbar className="toolbar">
             <ButtonGroup sm>
+              <ModalDialog ref={(c) => self.mdAddDay = c} callbackModal={::self.callback_addDay}/>
               <Button bsStyle='info' inverse onClick={this.onClick_addDay.bind(this)}>
                 <Icon glyph={'icon-fontello-level-down'} />&nbsp;Add Day
               </Button>
+              <ModalDialog ref={(c) => self.mdAddBanner = c} callbackModal={::self.callback_addBanner}/>
               <Button bsStyle='info' inverse onClick={this.onClick_addBanner.bind(this)}>
                 <Icon glyph={'icon-fontello-quote'} />&nbsp;Add Banner
               </Button>            

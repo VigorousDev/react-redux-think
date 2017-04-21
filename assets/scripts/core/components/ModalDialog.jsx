@@ -168,6 +168,58 @@ export class ModalDialog extends React.Component {
                         {formName}
                     </Form>;                
                 break;
+            case 'StripAddDay':
+                title = 'Add Day';
+                description = 'Add a day break';
+                let formNumber = <FormGroup controlId="frmNumber">
+                            <Col sm={2} componentClass={ControlLabel}>Number</Col>
+                            <Col sm={10}>
+                                <FormControl autoFocus type='text' onChange={this.handleChange.bind(this, 'number')}/>
+                            </Col>
+                        </FormGroup>
+                let formDate = <FormGroup controlId="frmDate">
+                            <Col sm={2} componentClass={ControlLabel}>Date</Col>
+                            <Col sm={10}>
+                                <FormControl autoFocus type='text' onChange={this.handleChange.bind(this, 'date')} placeholder="2017/04/22"/>
+                            </Col>
+                        </FormGroup>
+                let formTime = <FormGroup controlId="frmTime">
+                            <Col sm={2} componentClass={ControlLabel}>Hours</Col>
+                            <Col sm={4}>
+                                <FormControl autoFocus type='text' onChange={this.handleChange.bind(this, 'hours')}/>
+                            </Col>
+                            <Col sm={2} componentClass={ControlLabel}>Mins</Col>
+                            <Col sm={4}>
+                                <FormControl autoFocus type='text' onChange={this.handleChange.bind(this, 'mins')}/>
+                            </Col>
+                        </FormGroup>
+                let formPgs = <FormGroup controlId="frmPgs">
+                            <Col sm={2} componentClass={ControlLabel}>Pgs</Col>
+                            <Col sm={10}>
+                                <FormControl autoFocus type='text' onChange={this.handleChange.bind(this, 'pgs')} placeholder="5 6/8"/>
+                            </Col>
+                        </FormGroup>
+                formContent = 
+                    <Form horizontal>
+                        {formNumber}
+                        {formDate}
+                        {formTime}
+                        {formPgs}
+                    </Form>;
+                break;
+            case 'StripAddBanner':
+                title = 'Add Banner';
+                description = 'Add a banner';
+                let formTitle = <FormGroup controlId="frmTitle">
+                            <Col sm={2} componentClass={ControlLabel}>Title</Col>
+                            <Col sm={10}>
+                                <FormControl autoFocus type='text' onChange={this.handleChange.bind(this, 'title')}/>
+                            </Col>
+                        </FormGroup>
+                formContent = 
+                    <Form horizontal>
+                        {formTitle}
+                    </Form>;
                 break;
             default:
                 break;
