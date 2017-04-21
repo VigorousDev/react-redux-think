@@ -287,8 +287,7 @@ export class Stripboard extends React.Component {
     };
   }
 
-  componentDidMount(){
-      console.log('mount');
+  componentDidMount(){      
       this.sortable_init();
   }
 
@@ -298,11 +297,15 @@ export class Stripboard extends React.Component {
   group_onclick(){
     let ids = [];
     $('.sort-select > .ui-selected').each(function(e){
-        $(this).removeClass('ui-selected');
         ids.push($(this).attr('data-id'));
     });
     if(ids.length == 0) // none are selected
         return;
+
+    // remove class
+    $('.sort-select .ui-selected').each(function(e){
+        $(this).removeClass('ui-selected');
+    });
     
     let {strip} = this.state;
     let strip_sorted = _.sortBy(strip, 'position');
@@ -408,11 +411,7 @@ export class Stripboard extends React.Component {
         })
         .sortable({
             items: '.sort-item',
-            update: function(e, ui){
-                setTimeout(function(){
-                    self.handleSortableUpdate();                    
-                }, 10);                
-            },            
+            update: function(e, ui){},            
             axis: 'y',
             revert: 250,
             scroll: true,
@@ -430,18 +429,48 @@ export class Stripboard extends React.Component {
                     item.parent().children('.ui-selected').removeClass('ui-selected');
                     item.addClass('ui-selected');
                 }
-                var selected = item.parent().children('.ui-selected').clone();                
-                item.data('multidrag', selected).siblings('.ui-selected').hide();
+                var selected = item.parent().children('.ui-selected').clone();
+                item.data('multidrag', selected).siblings('.ui-selected').hide(); // hide during the move
                 return $('<div/>').append(selected); // set element to wrap the helper
             },
             stop: function(e, ui) {
                 $('.ui-sortable').off('mouseup');                
-                var selected = ui.item.data('multidrag');
                 var item = ui.item;
-                ui.item.after(item.parent().children('.ui-selected').show());
+                item.parent().children('.ui-selected').show();
                 // ui.item.remove();
-                // $(item).addClass('sortable-leftover'); // use special css for recognition
                 $('.ui-selected').removeClass('ui-sortable-helper-stop'); // remove special class for strips
+
+                // remove selected
+                $('.sort-select .ui-selected').each(function(e){
+                    $(this).removeClass('ui-selected');
+                });
+
+                // get new order
+                var selected_indices = [];
+                var selected = item.data('multidrag');
+                selected.each(function(){
+                    selected_indices.push($(this).attr('id'));
+                });
+                var insertPos = item.index();
+                if(selected_indices.length == 1 && selected_indices[0] == insertPos.toString()){ 
+                    // not updated
+                }else{
+                    var totalCount = item.parent().children().length;
+                    var newOrder = [];
+                    insertPos = insertPos > selected_indices[0] ? insertPos + 1 : insertPos;
+                    for(var i=0; i<totalCount; i++){
+                        if(i == insertPos){ // insert selected rows
+                            for(var j=0; j<selected_indices.length; j++)
+                                newOrder.push(selected_indices[j]);
+                        }
+                        var strI = i.toString();
+                        var index = selected_indices.indexOf(strI);
+                        if(index == -1){
+                            newOrder.push(strI); // insert unselected rows
+                        }
+                    }
+                    self.sortable_update(newOrder);
+                }
             },        
             start: function(e, ui){
                 ui.placeholder.height(ui.helper[0].scrollHeight); // make placeholder space match size of selected items
@@ -459,35 +488,21 @@ export class Stripboard extends React.Component {
     this.setState({strip: strip_sorted});
   }
   
-  handleSortableUpdate() {
+  sortable_update(ids) {
     let {strip} = this.state;
     var newItems = _.clone(this.state.strip, true);
 
     // get sorted ids
     var $node = $(ReactDOM.findDOMNode(this.strips_container));
-    var ids = $node.sortable('toArray', { attribute: 'id' });
+    // var ids = $node.sortable('toArray', { attribute: 'id' });
+    // console.log(ids);
+    $node.sortable('cancel');
     
     // sort array
     ids.forEach((id, index) => {
         newItems[id].position = index;
     });
-    // var newStrip = _.sortBy(newItems, 'position');
-    this.setState({strip: newItems});
-  }
-
-  sortable_update(val){
-    let newStrip = [];
-    let {strip} = this.state;
-    for(let i=0; i<val.length; i++){
-        let index = val[i];
-        let obj = strip[index];
-        newStrip.push({
-            type: obj.type,
-            id: obj.id
-        });
-    }
-    // let items = _.sortBy(newStrip, 'position');
-    console.log(newStrip);
+    var newStrip = _.sortBy(newItems, 'position');
     this.setState({strip: newStrip});
   }
 
@@ -501,7 +516,7 @@ export class Stripboard extends React.Component {
             obj = this.state.banners.data[data.id];
             title = obj ? obj.title: '!Error';
             content = <div className='banner'>
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i>{data.position}</div>
+                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
                     <div className="dayban-text">-- {title} --</div>
                 </div>;
             break;
@@ -512,7 +527,7 @@ export class Stripboard extends React.Component {
             }else{
                 let css = obj.int_ext.toLowerCase() + obj.day_night.toLowerCase()
                 content = <div className={"strip " + css}>
-                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i>{data.position}</div>
+                    <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
                     <div className="strip-col-1">
                         <div className="str-sc">{obj.name}</div>
                     </div>
@@ -566,7 +581,7 @@ export class Stripboard extends React.Component {
                 title = "END OF DAY " + obj.number + " - " + moment(new Date(obj.date)).format('MMMM D Y') + " - " + obj.pgs + " ("+ obj.hours + ":" + obj.mins + " Hours)";
             }
             content = <div className="daystrip">
-                <div className="sort-handle"><i className="fa fa-ellipsis-v"></i>{data.position}</div>
+                <div className="sort-handle"><i className="fa fa-ellipsis-v"></i></div>
                 <div className="dayban-text">-- {title} --</div>
             </div>
             break;
@@ -599,7 +614,6 @@ export class Stripboard extends React.Component {
             }
             return (
                 <div key={index} className='sort-group sort-item' id={index} data-id={t.position}>
-                    {t.position}
                     {content}
                 </div>
             )
