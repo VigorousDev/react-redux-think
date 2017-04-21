@@ -287,112 +287,11 @@ export class Stripboard extends React.Component {
     };
   }
 
-  componentDidMount(){      
+  componentDidMount(){
       this.sortable_init();
   }
 
-  componentDidUpdate(prevPros, prevState){
-  }
-
-  group_onclick(){
-    let ids = [];
-    $('.sort-select > .ui-selected').each(function(e){
-        ids.push($(this).attr('data-id'));
-    });
-    if(ids.length == 0) // none are selected
-        return;
-
-    // remove class
-    $('.sort-select .ui-selected').each(function(e){
-        $(this).removeClass('ui-selected');
-    });
-    
-    let {strip} = this.state;
-    let strip_sorted = _.sortBy(strip, 'position');
-    let newStrip = [];
-    let position = 0; 
-    if(ids.length == 1){ // one strip selected
-        let selected = ids[0];
-        let selectedStrip = strip_sorted[selected];
-        if(selectedStrip.type != DATATYPES.GROUP){ // ignore not-group
-            return;
-        }     
-        for(let i = 0; i< strip_sorted.length; i++){
-            if(i == selected){
-                let groupObj = this.state.groups.data[selectedStrip.id];
-                if(groupObj){
-                    _.map(groupObj, (o, index1)=>{
-                        newStrip.push({
-                            type: o.type,
-                            id: o.id,
-                            position: position++,
-                        });              
-                    });
-                }      
-            }else{
-                newStrip.push({
-                    type: strip_sorted[i].type,
-                    id: strip_sorted[i].id,
-                    position: position++,
-                });                
-            }
-        }
-        this.setState({strip: newStrip});
-    }else{
-        let {groups} = this.state;
-        let newGroups = _.clone(groups, true);
-        for(let i=0; i<strip_sorted.length; i++){
-            if(ids.indexOf(i.toString()) == -1){
-                newStrip.push({
-                    type: strip_sorted[i].type,
-                    id: strip_sorted[i].id,
-                    position: position++,
-                });
-            }else{
-                if(ids[0] == i){ // first occurence of group                    
-                    let newGroupID = ++newGroups.maxid;
-                    let newGroupData = [];
-                    // build new group
-                    for(let j=0; j<ids.length; j++){
-                        let id = ids[j];
-                        if(strip_sorted[id].type == DATATYPES.GROUP){
-                            let groupObj = groups.data[strip_sorted[id].id];
-                            if(groupObj){
-                                _.map(groupObj, (o, index1)=>{
-                                    newGroupData.push({
-                                        type: o.type,
-                                        id: o.id,
-                                    });              
-                                });
-                            } 
-                        }else{
-                            newGroupData.push({
-                                type: strip_sorted[id].type,
-                                id: strip_sorted[id].id
-                            });
-                        }
-                    }
-
-                    newGroups.data[newGroupID] = newGroupData;
-                    newStrip.push({
-                        type: DATATYPES.GROUP,
-                        id: newGroupID,
-                        position: position++,
-                    })                    
-                }
-            }
-        }
-        this.setState({strip: newStrip, groups: newGroups});
-    }
-  }
-
-  stripsize_onchange(eventKey, event){
-    $('.strips').removeClass('strip-small');
-    $('.strips').removeClass('strip-medium');
-    $('.strips').removeClass('strip-large');
-    $('.strips').addClass(eventKey);
-  }
-
+  // [Sortable functions]
   sortable_init(){
     var prev = -1;      
     var self = this;
@@ -482,12 +381,6 @@ export class Stripboard extends React.Component {
     });
   }
 
-  refresh(){
-    let {strip} = this.state;    
-    let strip_sorted = _.sortBy(strip, 'position');
-    this.setState({strip: strip_sorted});
-  }
-  
   sortable_update(ids) {
     let {strip} = this.state;
     var newItems = _.clone(this.state.strip, true);
@@ -630,27 +523,144 @@ export class Stripboard extends React.Component {
     return strip_content;
   }
 
+  // [Event handlers]
+  onClick_addDay(){
+
+  }
+
+  onClick_addBanner(){
+
+  }
+
+  onClick_group(){
+    let ids = [];
+    $('.sort-select > .ui-selected').each(function(e){
+        ids.push($(this).attr('data-id'));
+    });
+    if(ids.length == 0) // none are selected
+        return;
+
+    // remove class
+    $('.sort-select .ui-selected').each(function(e){
+        $(this).removeClass('ui-selected');
+    });
+    
+    let {strip} = this.state;
+    let strip_sorted = _.sortBy(strip, 'position');
+    let newStrip = [];
+    let position = 0; 
+    if(ids.length == 1){ // one strip selected
+        let selected = ids[0];
+        let selectedStrip = strip_sorted[selected];
+        if(selectedStrip.type != DATATYPES.GROUP){ // ignore not-group
+            return;
+        }     
+        for(let i = 0; i< strip_sorted.length; i++){
+            if(i == selected){
+                let groupObj = this.state.groups.data[selectedStrip.id];
+                if(groupObj){
+                    _.map(groupObj, (o, index1)=>{
+                        newStrip.push({
+                            type: o.type,
+                            id: o.id,
+                            position: position++,
+                        });              
+                    });
+                }      
+            }else{
+                newStrip.push({
+                    type: strip_sorted[i].type,
+                    id: strip_sorted[i].id,
+                    position: position++,
+                });                
+            }
+        }
+        this.setState({strip: newStrip});
+    }else{
+        let {groups} = this.state;
+        let newGroups = _.clone(groups, true);
+        for(let i=0; i<strip_sorted.length; i++){
+            if(ids.indexOf(i.toString()) == -1){
+                newStrip.push({
+                    type: strip_sorted[i].type,
+                    id: strip_sorted[i].id,
+                    position: position++,
+                });
+            }else{
+                if(ids[0] == i){ // first occurence of group                    
+                    let newGroupID = ++newGroups.maxid;
+                    let newGroupData = [];
+                    // build new group
+                    for(let j=0; j<ids.length; j++){
+                        let id = ids[j];
+                        if(strip_sorted[id].type == DATATYPES.GROUP){
+                            let groupObj = groups.data[strip_sorted[id].id];
+                            if(groupObj){
+                                _.map(groupObj, (o, index1)=>{
+                                    newGroupData.push({
+                                        type: o.type,
+                                        id: o.id,
+                                    });              
+                                });
+                            } 
+                        }else{
+                            newGroupData.push({
+                                type: strip_sorted[id].type,
+                                id: strip_sorted[id].id
+                            });
+                        }
+                    }
+
+                    newGroups.data[newGroupID] = newGroupData;
+                    newStrip.push({
+                        type: DATATYPES.GROUP,
+                        id: newGroupID,
+                        position: position++,
+                    })                    
+                }
+            }
+        }
+        this.setState({strip: newStrip, groups: newGroups});
+    }
+  }
+
+  onClick_recycle(){
+
+  }
+
+  onChange_stripSize(eventKey, event){
+    $('.strips').removeClass('strip-small');
+    $('.strips').removeClass('strip-medium');
+    $('.strips').removeClass('strip-large');
+    $('.strips').addClass(eventKey);
+  }
+  
+  refresh(){
+    let {strip} = this.state;    
+    let strip_sorted = _.sortBy(strip, 'position');
+    this.setState({strip: strip_sorted});
+  } 
+
   render(){
-    // console.log('render');
     let content = this.sortable_getContent();
     return (
       <div className="page-stripboard">
         <Form className='frm_stripboard'>
           <ButtonToolbar className="toolbar">
             <ButtonGroup sm>
-              <Button bsStyle='info' inverse onClick={this.refresh.bind(this)}>
+              <Button bsStyle='info' inverse onClick={this.onClick_addDay.bind(this)}>
                 <Icon glyph={'icon-fontello-level-down'} />&nbsp;Add Day
               </Button>
-              <Button bsStyle='info' inverse>
+              <Button bsStyle='info' inverse onClick={this.onClick_addBanner.bind(this)}>
                 <Icon glyph={'icon-fontello-quote'} />&nbsp;Add Banner
               </Button>            
-              <Button bsStyle='info' inverse onClick={this.group_onclick.bind(this)}>
+              <Button bsStyle='info' inverse onClick={this.onClick_group.bind(this)}>
                 <Icon glyph={'icon-fontello-link-2'} />&nbsp;Group
               </Button>        
-              <Button bsStyle='info' inverse>
+              <Button bsStyle='info' inverse onClick={this.onClick_recycle.bind(this)}>
                 <Icon glyph={'icon-fontello-trash-4'} />&nbsp;Recycle
               </Button>
-              <DropdownHoverButton id="bg-nested-dropdown" inverse onSelect={this.stripsize_onchange.bind(this)}
+              <DropdownHoverButton id="bg-nested-dropdown" inverse onSelect={this.onChange_stripSize.bind(this)}
                 title={<Icon glyph={'icon-fontello-resize-vertical'}>&nbsp;Strip Size</Icon>}>
                 <MenuItem eventKey="strip-small">Small Strips</MenuItem>
                 <MenuItem eventKey="strip-medium">Medium Strips</MenuItem>
