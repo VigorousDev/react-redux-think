@@ -36,8 +36,8 @@ const store = factory(combineReducers({
   loading: loadingReducer,
   routing: routeReducer,
   form: formReducer,
-  navigation: require('./core/navigation/reducers'),
-  notifications: require('./notifications/messages/reducers')
+  navigation: require('./core/redux/navigation/reducers'),
+  notifications: require('./core/redux/notifications/reducers')
 }), initialState)
 //  
 

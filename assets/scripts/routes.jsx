@@ -8,83 +8,83 @@ import { Grid, Row, Col, MainContainer } from '@sketchpixy/rubix';
 
 /* Common Components */
 
-import Sidebar from './rubix/common/sidebar';
-import Header from './rubix/common/header';
-import Footer from './rubix/common/footer';
+import Sidebar from './pages/components/common/sidebar';
+import Header from './pages/components/common/header';
+import Footer from './pages/components/common/footer';
 
 /* Pages */
 
-import Homepage from './rubix/routes/Homepage';
+import Homepage from './pages/components/Homepage';
 
-import Dashboard from './rubix/routes/Dashboard';
-import Social from './rubix/routes/Social';
+import Dashboard from './pages/components/Dashboard';
+import Social from './pages/components/Social';
 
-import Inbox from './rubix/routes/Inbox';
-import Mail from './rubix/routes/Mail';
-import Compose from './rubix/routes/Compose';
+import Inbox from './pages/components/Inbox';
+import Mail from './pages/components/Mail';
+import Compose from './pages/components/Compose';
 
-import Projects from './rubix/routes/Projects';
-import Users from './rubix/routes/Users';
-import Schedules from './rubix/routes/Schedules';
-import ImportScript from './rubix/routes/ImportScript';
-import Schedule from './rubix/routes/Schedule';
-
-
-import Gallery from './rubix/routes/backup/Gallery';
+import Projects from './pages/components/Projects';
+import Users from './pages/components/Users';
+import Schedules from './pages/components/Schedules';
+import ImportScript from './pages/components/ImportScript';
+import Schedule from './pages/components/Schedule';
 
 
-import Posts from './rubix/routes/backup/Posts';
-import Post from './rubix/routes/backup/Post';
+import Gallery from './pages/components/backup/Gallery';
 
-import Panels from './rubix/routes/backup/Panels';
 
-import LineSeries from './rubix/routes/backup/LineSeries';
-import AreaSeries from './rubix/routes/backup/AreaSeries';
-import BarColSeries from './rubix/routes/backup/BarColSeries';
-import MixedSeries from './rubix/routes/backup/MixedSeries';
-import PieDonutSeries from './rubix/routes/backup/PieDonutSeries';
+import Posts from './pages/components/backup/Posts';
+import Post from './pages/components/backup/Post';
 
-import Chartjs from './rubix/routes/backup/Chartjs';
-import C3js from './rubix/routes/backup/C3js';
-import Morrisjs from './rubix/routes/backup/Morrisjs';
+import Panels from './pages/components/backup/Panels';
 
-import StaticTimeline from './rubix/routes/backup/StaticTimeline';
-import InteractiveTimeline from './rubix/routes/backup/InteractiveTimeline';
+import LineSeries from './pages/components/backup/LineSeries';
+import AreaSeries from './pages/components/backup/AreaSeries';
+import BarColSeries from './pages/components/backup/BarColSeries';
+import MixedSeries from './pages/components/backup/MixedSeries';
+import PieDonutSeries from './pages/components/backup/PieDonutSeries';
 
-import Codemirrorjs from './rubix/routes/backup/Codemirrorjs';
-import Maps from './rubix/routes/backup/Maps';
-import Editor from './rubix/routes/backup/Editor';
+import Chartjs from './pages/components/backup/Chartjs';
+import C3js from './pages/components/backup/C3js';
+import Morrisjs from './pages/components/backup/Morrisjs';
 
-import Buttons from './rubix/routes/backup/Buttons';
-import Dropdowns from './rubix/routes/backup/Dropdowns';
-import TabsAndNavs from './rubix/routes/backup/TabsAndNavs';
-import Sliders from './rubix/routes/backup/Sliders';
-import Knobs from './rubix/routes/backup/Knobs';
-import Modals from './rubix/routes/backup/Modals';
-import Messengerjs from './rubix/routes/backup/Messengerjs';
+import StaticTimeline from './pages/components/backup/StaticTimeline';
+import InteractiveTimeline from './pages/components/backup/InteractiveTimeline';
 
-import Controls from './rubix/routes/backup/Controls';
-import XEditable from './rubix/routes/backup/XEditable';
-import Wizard from './rubix/routes/backup/Wizard';
+import Codemirrorjs from './pages/components/backup/Codemirrorjs';
+import Maps from './pages/components/backup/Maps';
+import Editor from './pages/components/backup/Editor';
 
-import Tables from './rubix/routes/backup/Tables';
-import Datatablesjs from './rubix/routes/backup/Datatablesjs';
-import Tablesawjs from './rubix/routes/backup/Tablesawjs';
+import Buttons from './pages/components/backup/Buttons';
+import Dropdowns from './pages/components/backup/Dropdowns';
+import TabsAndNavs from './pages/components/backup/TabsAndNavs';
+import Sliders from './pages/components/backup/Sliders';
+import Knobs from './pages/components/backup/Knobs';
+import Modals from './pages/components/backup/Modals';
+import Messengerjs from './pages/components/backup/Messengerjs';
 
-import Grids from './rubix/routes/backup/Grids';
-import Calendar from './rubix/routes/backup/Calendar';
+import Controls from './pages/components/backup/Controls';
+import XEditable from './pages/components/backup/XEditable';
+import Wizard from './pages/components/backup/Wizard';
 
-import Dropzonejs from './rubix/routes/backup/Dropzonejs';
-import Cropjs from './rubix/routes/backup/Cropjs';
+import Tables from './pages/components/backup/Tables';
+import Datatablesjs from './pages/components/backup/Datatablesjs';
+import Tablesawjs from './pages/components/backup/Tablesawjs';
 
-import Fonts from './rubix/routes/backup/Fonts';
+import Grids from './pages/components/backup/Grids';
+import Calendar from './pages/components/backup/Calendar';
 
-import Login from './rubix/routes/backup/Login';
-import Signup from './rubix/routes/backup/Signup';
-import Invoice from './rubix/routes/backup/Invoice';
-import Pricing from './rubix/routes/backup/Pricing';
+import Dropzonejs from './pages/components/backup/Dropzonejs';
+import Cropjs from './pages/components/backup/Cropjs';
 
-import Lock from './rubix/routes/backup/Lock';
+import Fonts from './pages/components/backup/Fonts';
+
+import Login from './pages/components/backup/Login';
+import Signup from './pages/components/backup/Signup';
+import Invoice from './pages/components/backup/Invoice';
+import Pricing from './pages/components/backup/Pricing';
+
+import Lock from './pages/components/backup/Lock';
 
 /**
  * Includes Sidebar, Header and Footer.

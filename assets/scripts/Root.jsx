@@ -5,9 +5,9 @@ import Modal from 'react-modal'
 import DevTools from './DevTools'
 import modalStyle from './core/modalStyle'
 
-import Sidebar from './rubix/common/sidebar';
-import Header from './rubix/common/header';
-import Footer from './rubix/common/footer';
+import Sidebar from './pages/components/common/sidebar';
+import Header from './pages/components/common/header';
+import Footer from './pages/components/common/footer';
 import { Grid, Row, Col, MainContainer } from '@sketchpixy/rubix';
 
 import { Button } from '@sketchpixy/rubix'

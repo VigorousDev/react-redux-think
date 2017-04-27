@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 import classNames from 'classnames'
 import React from 'react'
 
-import Button from '../../core/components/Button'
+import Button from '../components/Button'
 
 export default function Notification(props) {
   const {onClose, level, message} = props

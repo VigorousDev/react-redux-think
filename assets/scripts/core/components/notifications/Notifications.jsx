@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import React from 'react'
 
 import Notification from './Notification'
-import {DISMISS} from '../messages/actions'
+import {DISMISS} from '../../redux/notifications/actions'
 
 @connect(
   ({notifications}) => ({notifications: notifications.toList().toJS()}),
