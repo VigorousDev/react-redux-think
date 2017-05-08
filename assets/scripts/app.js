@@ -4,15 +4,16 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router, Route, browserHistory} from 'react-router'
 
-// import './fb'
-import './magics'
-import store from './store'
+// import './core/fb'
+// import './core/preloader'
+import './core/magics'
+import store from './redux/store'
 import routes from './routes'
 import render from '@sketchpixy/rubix/lib/node/router'
 // import l20n from '@sketchpixy/rubix/lib/L20n'
 
 
-// import './preloader'
+
 // Pace.on("done", function(){
 //     console.log('pace is done');
 //     $(document.body).removeClass('pace-small');

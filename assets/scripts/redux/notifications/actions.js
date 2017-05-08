@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import {createAction} from 'redux-actions'
-import {shortid} from '../../rand'
+import {shortid} from '../../core/rand'
 
 function notify(level, ...messages) {
   const grouped = _.groupBy(messages, (m) => m.code === 'validation_failed'? 'vf' : 'rest')

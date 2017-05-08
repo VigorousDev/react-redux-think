@@ -5,9 +5,9 @@ import {browserHistory} from 'react-router'
 import {syncHistory, routeReducer} from 'react-router-redux'
 import thunk from 'redux-thunk'
 
-import {loadingReducer} from './core/actions'
-import getRoutes from './routes'
-import DevTools from './DevTools'
+import {loadingReducer} from './actions'
+import getRoutes from '../routes'
+import DevTools from '../core/components/DevTools'
 
 const logger = store => next => action => {
   console.group(action.type)
@@ -36,8 +36,10 @@ const store = factory(combineReducers({
   loading: loadingReducer,
   routing: routeReducer,
   form: formReducer,
-  navigation: require('./core/redux/navigation/reducers'),
-  notifications: require('./core/redux/notifications/reducers')
+  navigation: require('./navigation/reducers'),
+  notifications: require('./notifications/reducers'),
+  projects: require('./projects/reducers'),
+  users: require('./users/users'),
 }), initialState)
 //  
 

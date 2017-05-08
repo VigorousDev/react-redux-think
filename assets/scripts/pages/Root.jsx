@@ -2,12 +2,12 @@ import classNames from 'classnames'
 import React from 'react'
 import {connect} from 'react-redux'
 import Modal from 'react-modal'
-import DevTools from './DevTools'
-import modalStyle from './core/modalStyle'
+import DevTools from '../core/components/DevTools'
+import modalStyle from '../core/modalStyle'
 
-import Sidebar from './pages/components/common/sidebar';
-import Header from './pages/components/common/header';
-import Footer from './pages/components/common/footer';
+import Sidebar from './components/common/sidebar';
+import Header from './components/common/header';
+import Footer from './components/common/footer';
 import { Grid, Row, Col, MainContainer } from '@sketchpixy/rubix';
 
 import { Button } from '@sketchpixy/rubix'
