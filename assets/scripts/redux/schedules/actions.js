@@ -1,6 +1,6 @@
-import {createAsyncAction} from '../../core/actions'
+import {createAsyncAction} from '../actions'
 import {fetch} from '../../core/http'
-import {ERROR} from '../../notifications/messages/actions'
+import {ERROR} from '../notifications/actions'
 
 const fetchEventTickets = createAsyncAction('FETCH_PROJECT_SCHEDULES', function(eid) {
   return (dispatch) => {

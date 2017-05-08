@@ -39,7 +39,8 @@ const store = factory(combineReducers({
   navigation: require('./navigation/reducers'),
   notifications: require('./notifications/reducers'),
   projects: require('./projects/reducers'),
-  users: require('./users/users'),
+  schedules: require('./schedules/reducers'),
+  auth: require('./auth/reducers'),
 }), initialState)
 //  
 

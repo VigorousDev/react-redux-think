@@ -2,7 +2,7 @@ import _ from 'lodash'
 import {handleActions} from 'redux-actions'
 import {fromJS, List, Map, OrderedMap, Set} from 'immutable'
 
-import {createAsyncHandlers} from '../../core/actions'
+import {createAsyncHandlers} from '../actions'
 
 const initialState = Map({
   initialized: false,

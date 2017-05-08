@@ -1,7 +1,7 @@
 import url from 'url'
-import {createAction, createAsyncAction} from '../../core/actions'
+import {createAction, createAsyncAction} from '../actions'
 import {fetch} from '../../core/http'
-import {ERROR} from '../../notifications/messages/actions'
+import {ERROR} from '../notifications/actions'
 
 const fetchEvents = createAsyncAction('FETCH_PROJECTS', function() {
   return (dispatch) => {

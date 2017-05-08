@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import {handleAction, handleActions} from 'redux-actions'
 import {fromJS, OrderedSet, Map, Set} from 'immutable'
-import {createAsyncHandlers} from '../../core/actions'
+import {createAsyncHandlers} from '../actions'
 
 const initialState = Map({
   loading: Set(),
